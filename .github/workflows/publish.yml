@@ -26,3 +26,4 @@ jobs:
           FOLDER: . # The folder to push (Laravel root)
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MESSAGE: "Laravel Project Push: ({sha}) {msg}"
+
