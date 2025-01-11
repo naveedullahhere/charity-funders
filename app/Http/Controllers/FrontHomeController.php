@@ -23,27 +23,29 @@ class FrontHomeController extends Controller
 
     public function index(Request $request)
     {
-        $data['slug'] = 0;
-
-        if ($request->ajax()) {
-            $events = Event::where("status", 1)->orderBy('created_at', 'desc')->paginate(8); // Adjust the limit as needed
-            // return view('frontend.pages.load-more-events', compact('events'))->render();
-            $isAjax = 1;
-
-            return [
-                "hasMorePages" => $events->hasMorePages(),
-                "output" => view('frontend.pages.load-more-events', compact('events', 'isAjax'))->render()
-            ];
-        }
-
-        $data['allEvents'] = Event::where("status", 1)
-            ->orderBy('created_at', 'desc')->get();
-
-        $data['events'] = Event::where("status", 1)->orderBy('created_at', 'desc')->paginate(8); // Initial load with pagination
-        return view('frontend.pages.home', $data);
+   
+        return view('frontend.pages.home');
     }
 
+    public function about()
+    {
+        return view('frontend.pages.about');
+    }
 
+    public function subscribe()
+    {
+        return view('frontend.pages.subscribe');
+    }
+
+    public function faq()
+    {
+        return view('frontend.pages.faq');
+    }
+
+    public function contact()
+    {
+        return view('frontend.pages.contact');
+    }
 
     public function handleAjaxRequest(Request $request)
     {
@@ -53,32 +55,31 @@ class FrontHomeController extends Controller
 
         $imageData = [
             // "670538edc7300670538edd4a91.png",
-            "672f88b420de1672f88b425f29.JPG",
-            "672f88a543f03672f88a54aeae.JPG",
-            "672f889d06a41672f889dd2218.JPG"
+            '672f88b420de1672f88b425f29.JPG',
+            '672f88a543f03672f88a54aeae.JPG',
+            '672f889d06a41672f889dd2218.JPG',
         ];
 
         return response()->json([
             'success' => true,
             'event_id' => $eventId,
             'event_name' => $searchQuery,
-            'image_data' => $imageData
+            'image_data' => $imageData,
         ]);
     }
 
     public function finalSubmit(Request $request)
     {
         $data['isAjax'] = 0;
-        
-        if ($request->isMethod('get')) {
 
+        if ($request->isMethod('get')) {
             $data['media'] = Media::where('is_thumbnail', 1)->paginate(8);
 
             if ($request->ajax()) {
                 $data['isAjax'] = 1;
                 return response()->json([
                     'output' => view('frontend.pages.gallery.load-more-gallery', $data)->render(),
-                    'hasMorePages' => $data['media']->hasMorePages()
+                    'hasMorePages' => $data['media']->hasMorePages(),
                 ]);
             }
         } elseif ($request->isMethod('post')) {
@@ -88,14 +89,11 @@ class FrontHomeController extends Controller
 
             if (is_array($imageDatas) && count($imageDatas)) {
                 foreach ($imageDatas as $key => $value) {
-                    $imageData[] = "media/mediums/" . $value;
-
+                    $imageData[] = 'media/mediums/' . $value;
                 }
-//dd($imageData);
-              $group_ids =  Media::whereIn('file_path', $imageData)->pluck('group_id')->toArray();
+                //dd($imageData);
+                $group_ids = Media::whereIn('file_path', $imageData)->pluck('group_id')->toArray();
             }
-
-
 
             $query = Media::where('is_thumbnail', 1);
 
@@ -103,11 +101,8 @@ class FrontHomeController extends Controller
                 $query->where('event_id', $eventId);
             }
 
-
-            if (is_array($group_ids) && count($group_ids) != 0 ) {
-
-
-//                dd($imageData);
+            if (is_array($group_ids) && count($group_ids) != 0) {
+                //                dd($imageData);
                 $query->whereIn('group_id', $group_ids);
             }
 
@@ -116,7 +111,7 @@ class FrontHomeController extends Controller
             if ($request->ajax()) {
                 return response()->json([
                     'output' => view('frontend.pages.gallery.load-more-gallery', $data)->render(),
-                    'hasMorePages' => $data['media']->hasMorePages()
+                    'hasMorePages' => $data['media']->hasMorePages(),
                 ]);
             }
         } else {
@@ -125,7 +120,6 @@ class FrontHomeController extends Controller
 
         return view('frontend.pages.gallery', $data);
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -153,7 +147,6 @@ class FrontHomeController extends Controller
 
     public function singleEvent(Request $request, $slug)
     {
-
         $eventdetail = Event::where('slug', $slug)->firstOrFail();
         $data['slug'] = $eventdetail->id;
         $data['eventdetail'] = $eventdetail;
@@ -161,16 +154,22 @@ class FrontHomeController extends Controller
         $data['high_event_price'] = $eventdetail->whole_high_event_price;
 
         if ($request->ajax()) {
-            $gallery = Gallery::where("event_id", $eventdetail->id)->where("status", 1)->pluck('id')->toArray(); // Initial load with pagination
+            $gallery = Gallery::where('event_id', $eventdetail->id)
+                ->where('status', 1)
+                ->pluck('id')
+                ->toArray(); // Initial load with pagination
             $data['media'] = Media::whereIn('gallery_id', $gallery)->where('is_thumbnail', 1)->paginate(8);
 
             return [
-                "hasMorePages" => $data['media']->hasMorePages(),
-                "output" => view('frontend.pages.gallery.load-more-gallery', $data)->render()
+                'hasMorePages' => $data['media']->hasMorePages(),
+                'output' => view('frontend.pages.gallery.load-more-gallery', $data)->render(),
             ];
         }
 
-        $gallery = Gallery::where("event_id", $eventdetail->id)->where("status", 1)->pluck('id')->toArray(); // Initial load with pagination
+        $gallery = Gallery::where('event_id', $eventdetail->id)
+            ->where('status', 1)
+            ->pluck('id')
+            ->toArray(); // Initial load with pagination
         $data['media'] = Media::whereIn('gallery_id', $gallery)->where('is_thumbnail', 1)->paginate(8);
 
         return view('frontend.pages.gallery.gallery', $data);

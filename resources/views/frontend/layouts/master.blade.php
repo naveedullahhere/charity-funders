@@ -1,11 +1,4 @@
-<?php
-use App\Models\Airport;
-use App\Models\Page;
 
-$airport = Airport::where('status', 1)->get();
-$pagesheader = Page::where('status', 1)->where('header', 1)->get();
-$pagesfooter = Page::where('status', 1)->where('footer', 1)->get();
-?>
 @include('frontend/layouts/header')
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- Add this to the <head> section of your layout -->
@@ -15,7 +8,7 @@ $pagesfooter = Page::where('status', 1)->where('footer', 1)->get();
 <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 
-<section class="content main-content">
+<section class="wrapper main-content">
     @yield('content')
 </section>
 

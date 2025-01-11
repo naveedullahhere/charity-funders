@@ -1,0 +1,507 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'amberlysans', sans-serif;
+}
+
+/* <!-- ........................section-1............................... --> */
+
+.Faqs-Banner {
+    background-image: url(images/inner-banner.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center right;
+    height: 380px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Faqs-Banner{
+    text-align: center;
+}
+
+.main-heading h1 {
+    font-size: 80px;
+    font-weight: 500;
+    color: #404040;
+    line-height: 6rem;
+}
+
+.text-line p {
+    font-size: 25px;
+    font-weight: 500;
+    color: #FF7260;
+}
+
+
+/* .................................FAQS......................... */
+.cordion {
+    background-image: url(images/left-bg-shapes.jpg);
+    background-position: center right;
+    background-size: cover;
+    background-color: #fff;
+}
+
+.question h3 {
+    font-size: 25px;
+    font-weight: 600;
+    color: #404040;
+    text-decoration: none !important;
+
+}
+
+.acordion-row {
+    margin: 0px;
+    padding: calc(100% - 95%);
+}
+
+.cardo {
+    padding-bottom: 20px;
+
+}
+
+.card-header {
+    background-color: #f5f5f5;
+    border-bottom: none;
+    cursor: pointer !important;
+}
+
+.card-body {
+    background-color: #fff;
+}
+
+.card-body p {
+    font-size: 20px;
+    font-weight: 400;
+
+
+}
+
+.btn-link:hover {
+
+    text-decoration: none !important;
+}
+
+.btn-link {
+    font-weight: 400;
+    color: #f5f5f5;
+    text-decoration: none;
+}
+
+/* .....................................Responsive(820px)................................ */
+
+@media (max-width: 820px) {
+    .main-row .navmenu ul {
+        display: block;
+        padding: 0px;
+        position: absolute;
+        top: 90px;
+        background: #333;
+        width: 100%;
+        left: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease;
+        gap: 15px !important;
+    }
+
+    .main-row .main-navbar .navmenu .menu-icon {
+        display: block;
+        cursor: pointer;
+    }
+
+    .main-row .navmenu ul li {
+        margin: 15px 0px;
+    }
+
+    .main-row .navmenu ul li a {
+        font-size: 24px !important;
+        padding: 10px 10px 0px 10px;
+        color: #fff;
+    }
+
+    .main-row .logo {
+        display: flex;
+        align-items: center;
+    }
+
+    .row {
+        justify-content: center;
+    }
+
+    .button-main-top .btn-1,
+    .btn-2 {
+        display: none;
+    }
+
+    .main-row .logo {
+        padding: 12px calc(100% - 96%);
+    }
+
+    .main-row .logo .main-logo img {
+        width: 70%;
+    }
+
+
+
+}
+
+/* .....................................Responsive(480px)................................ */
+@media (max-width: 480px) {
+    .main-row .navmenu ul li a {
+        font-size: 18px !important;
+    }
+
+    .main-row .navmenu ul {
+        top: 65px;
+        gap: 10px;
+    }
+
+    .row .anncu-main .phone {
+        display: none;
+    }
+
+    .row .anncu-main .email {
+        gap: 14px;
+    }
+
+    /* ........................Header................................... */
+
+    .main-row .navmenu ul {
+        display: block;
+        padding: 0px;
+        position: absolute;
+        top: 70px;
+        background: #333;
+        width: 100%;
+        left: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease;
+        gap: 15px !important;
+    }
+
+    .main-row .menu-bar .navmenu .menu-icon {
+        display: block;
+        cursor: pointer;
+
+    }
+
+    .main-row .main-navbar .navmenu .menu-icon {
+        width: 28px;
+        margin-top: 10px;
+    }
+
+    .main-row .nav-logo {
+        align-items: center;
+    }
+
+
+    .button-login-sub :is(.btn-nav-1 a, .btn-nav-2 a) {
+        display: none;
+    }
+
+    .main-row .navmenu ul li {
+        margin: 15px 0px;
+    }
+
+    .main-row .navmenu ul li a {
+        font-size: 24px !important;
+        padding: 10px 10px 0px 10px;
+        color: #fff;
+    }
+
+    .main-row .nav-logo img {
+        width: 100%;
+    }
+
+    .main-row .logo {
+        display: flex;
+        align-items: center;
+    }
+
+    .header-row {
+        justify-content: center;
+    }
+
+    .anoucment-btn .btn-1,
+    .btn-2 {
+        display: none;
+    }
+
+    .main-row .logo {
+        padding: 12px calc(100% - 96%);
+    }
+
+    .main-row .logo .anoucment-btn img {
+        width: 70%;
+    }
+
+    .question h3 {
+        font-size: 25px;
+
+    }
+
+    .card-body p {
+        font-size: 18px;
+        font-weight: 400;
+    }
+
+    .card-header img {
+        width: 70%
+    }
+
+    .card-body {
+        padding: 1.0rem;
+    }
+
+    .card-header {
+        padding: 1.0rem;
+    }
+}
+
+
+
+
+
+@media (max-width: 768px) {
+
+    /* ..............Header-section..................... */
+
+    .header-row {
+        justify-content: center;
+    }
+
+    .button-login-sub :is(.btn-nav-1 a, .btn-nav-2 a) {
+        display: none;
+    }
+
+
+    /* ...........................Section-2............................. */
+    .text-with-text-container .width-adjust {
+        width: 100% !important;
+    }
+
+    .text-with-text-container .content-box-wex .text-adjust {
+        font-size: 20px;
+    }
+
+    /* ...........................Section-5............................. */
+
+    .Call-to-action {
+        background-image: url(images/Frame\ 1.png);
+        background-position: center left;
+        height: 525px;
+    }
+
+    .Action {
+        text-align: center;
+    }
+
+
+    /* ...........................Footer-Section............................. */
+
+    .footer {
+        padding: 30px calc(100% - 95%);
+
+    }
+
+    .footer-row {
+        padding-top: 30px !important;
+        flex-wrap: wrap;
+        display: flex;
+    }
+
+    .ft-row {
+        flex-wrap: wrap;
+        row-gap: 20px;
+    }
+
+    .footer-sec-row {
+        flex-wrap: wrap;
+        row-gap: 15px;
+        gap: 15px;
+    }
+
+    .footer .ft-row .foot-divid img {
+        width: 50%;
+    }
+
+    .ft-row .nav {
+        align-items: end !important;
+    }
+
+    .ft-row .nav-1 ul li {
+        margin: 0 15px !important;
+
+    }
+
+    .ft-row .nav-1 ul {
+        padding-left: 0px;
+    }
+
+    .ft-row .nav-1 ul li a {
+        font-size: 24px !important;
+        font-weight: 600;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .footer-row .icon-2 .paragraph-text {
+        font-size: 20px;
+        font-weight: 400;
+        color: #fff;
+    }
+
+    .main-cont {
+        background-color: #404040;
+        padding: 30px calc(100% - 95%);
+    }
+
+    .footer-last-row {
+        padding: 20px calc(100% - 95%);
+        flex-wrap: wrap;
+        row-gap: 10px;
+
+    }
+
+    .footer-last-row .Terms {
+        display: flex;
+        gap: 20px;
+        justify-content: start
+    }
+}
+
+
+@media (max-width:440px) {
+
+    /* ...........................Header-Section............................. */
+ 
+   .main-heading h1 {
+    font-size: 37px !important;
+
+}
+
+.text-line p {
+    font-size: 18px !important;
+
+}
+
+.main-row .nav-logo {
+    padding: 15px calc(100% - 95%);
+    align-items: center;
+
+}
+
+.main-row .navmenu ul {
+    top: 70px;
+
+}
+
+.email-phone-flex .email :is(i, p) {
+    font-size: 18px;
+
+}
+
+.button-login-sub :is(.btn-nav-1 a, .btn-nav-2 a) {
+    display: none;
+}
+
+.main-row .nav-logo img {
+    width: 70%;
+}
+
+.header-row .phone {
+    display: none !important;
+}
+
+.header-row {
+    justify-content: center;
+}
+
+section {
+    padding: calc(100% - 95%);
+}
+
+/* ......................Faqs-Banner........................... */
+
+.Faqs-Banner {
+    background-image: url(images/inner-banner.png);
+    background-position: center right;
+    height: 200px;
+    background-color: rgb(255 255 255 / 55%) !important;
+    background-blend-mode: overlay;
+}
+
+
+
+.footer {
+    padding: 20px calc(100% - 95%);
+}
+
+.footer-row {
+    padding-top: 0px !important;
+
+}
+
+.footer .ft-row .foot-divid img {
+    width: 80%;
+}
+
+.ft-row .nav {
+
+    align-items: start !important;
+    flex-direction: column;
+}
+
+.ft-row .nav-1 ul {
+    flex-direction: column-reverse;
+    top: 80px;
+    left: -100%;
+    text-align: start;
+    transition: all .5s;
+}
+
+.ft-row .nav-1 ul li {
+    margin: 10px 0px !important;
+}
+
+.ft-row .nav-1 ul li a {
+    font-size: 18px !important;
+
+}
+
+.ft-row .nav-1 button {
+    font-size: 18px !important;
+    border-radius: 30px;
+    padding: 10px 25px;
+    display: none;
+}
+
+.footer-row .icon-2 {
+    display: flex;
+    justify-content: start;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-last-row {
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+.footer-last-row .Reserved .paragraph-text {
+    font-size: 18px;
+    text-align: center;
+}
+
+.main-row .navmenu ul li a {
+    font-size: 18px !important;
+    padding: 10px 10px 0px 10px;
+    color: #fff;
+}
+
+
+    
+
+}

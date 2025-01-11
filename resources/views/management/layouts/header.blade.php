@@ -1,276 +1,344 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="loading" lang="en">
+<!-- BEGIN : Head-->
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>@yield('title') - {{ config('app.name') }}</title>
-    <!-- Favicon-->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
-    <!-- Plugins Core Css -->
-    <link href="{{ asset('management/css/app.min.css') }}" rel="stylesheet">
-    <!-- Custom Css -->
-    <!-- Theme style. You can choose a theme from css/themes instead of get all themes -->
-    <link href="{{ asset('management/css/styles/all-themes.css') }}" rel="stylesheet" />
-    <link href="{{ asset('management/css/style.css') }}" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
 
-    <link href="{{ asset('management/css/form.min.css') }}" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/icons.css') }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
-    <link rel="stylesheet" href="//cdn.datatables.net/1.11.2/css/jquery.dataTables.min.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="description"
+        content="Apex admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords"
+        content="admin template, Apex admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="PIXINVENT">
+    <title>@yield('title') - {{config('app.name')}}</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('management') }}/app-assets/img/ico/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('management') }}/app-assets/img/ico/favicon-32.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
-    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
-        rel="stylesheet" />
     <link
-        href="https://cdn.jsdelivr.net/npm/filepond-plugin-media-preview@1.0.11/dist/filepond-plugin-media-preview.css"
-        rel="stylesheet" />
-
-    <!-- FilePond JS -->
-    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/filepond-plugin-media-preview@1.0.11/dist/filepond-plugin-media-preview.js">
-    </script>
-    <script>
-        FilePond.registerPlugin(
-            FilePondPluginFileEncode,
-            FilePondPluginFileValidateSize,
-            FilePondPluginFileValidateType,
-            FilePondPluginImagePreview
-        );
-
-        let uploadedFileIds = [];
-    </script>
+        href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900%7CMontserrat:300,400,500,600,700,800,900"
+        rel="stylesheet">
+    <!-- BEGIN VENDOR CSS-->
+    <!-- font icons-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('management/app-assets/fonts/feather/style.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('management/app-assets/fonts/simple-line-icons/style.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('management/app-assets/fonts/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('management/app-assets/vendors/css/perfect-scrollbar.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('management/app-assets/vendors/css/prism.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('management/app-assets/vendors/css/switchery.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('management/app-assets/vendors/css/chartist.min.css') }}">
+    <!-- END VENDOR CSS-->
+    <!-- BEGIN APEX CSS-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('management/app-assets/css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('management/app-assets/css/bootstrap-extended.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('management/app-assets/css/colors.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('management/app-assets/css/components.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('management/app-assets/css/themes/layout-dark.css') }}">
+    <link rel="stylesheet" href="{{ asset('management/app-assets/css/plugins/switchery.css') }}">
+    <!-- END APEX CSS-->
+    <!-- BEGIN Page Level CSS-->
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('management/app-assets/css/core/menu/horizontal-menu.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('management/app-assets/css/pages/dashboard1.css') }}">
+    <!-- END Page Level CSS-->
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('management/assets/css/style.css') }}">
+    <!-- END: Custom CSS-->
 </head>
-<style>
-    .fw-900 {
-        font-weight: 900 !important;
-    }
+<!-- END : Head-->
 
-    .text-signature {
-        color: #E8BC50;
-    }
+<!-- BEGIN : Body-->
 
-    .bg-signature {
-        background: #E8BC50;
-    }
-</style>
 
-<body class="light">
-    <div style="display: none;" class="loader-container" id="loader-container">
-        <div class="spinner-border " role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div>
-    <div class="overlay"></div>
-    <nav class="navbar">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a href="#" onClick="return false;" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#navbar-collapse" aria-expanded="false"></a>
-                <a href="#" onClick="return false;" class="bars"></a>
-                <a class="navbar-brand" href="/">
-                    <img height="35px" src="{{ asset('/management/images/ajp-logo.png') }}"
-                        alt="{{ config('app.dashboard') }}" />
-                </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar-collapse">
-                <ul class="pull-left">
-                    <li>
-                        <a href="#" onClick="return false;" class="sidemenu-collapse">
-                            <i class="fas fa-align-justify"></i> </a>
+
+<body
+    class="horizontal-layout horizontal-menu horizontal-menu-padding 2-columns  navbar-sticky {{ Cookie::get('layout') === 'dark' ? 'layout-dark' : '' }}"
+    data-open="hover" data-menu="horizontal-menu" data-col="2-columns">
+    <nav class="navbar navbar-expand-lg navbar-light header-navbar navbar-fixed">
+        <div class="container-fluid navbar-wrapper">
+            <div class="navbar-header d-flex">
+                <div class="navbar-toggle menu-toggle d-xl-none d-block float-left align-items-center justify-content-center"
+                    data-toggle="collapse"><i class="ft-menu font-medium-3"></i></div>
+                <ul class="navbar-nav">
+                    <li class="nav-item mr-2 d-none d-lg-block"><a class="nav-link apptogglefullscreen"
+                            id="navbar-fullscreen" href="javascript:;"><i class="ft-maximize font-medium-3"></i></a>
                     </li>
+                     @if (getCurrentCompany())
+                    <li class="nav-item nav-search"><a class="nav-link nav-link-search" href="javascript:"><i
+                                class="ft-search font-medium-3"></i></a>
+                        <div class="search-input">
+                            <div class="search-input-icon"><i class="ft-search font-medium-3"></i></div>
+                            <input class="input" type="text" placeholder="Explore Apex..." tabindex="0"
+                                data-search="template-search">
+                            <div class="search-input-close"><i class="ft-x font-medium-3"></i></div>
+                            <ul class="search-list"></ul>
+                        </div>
+                    </li>
+                    @endif
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-
-                    <li class="dropdown">
-                        <a href="#" onclick="return false;" class="dropdown-toggle" data-bs-toggle="dropdown"
-                            role="button" aria-expanded="false">
-                            <i class="far fa-bell"></i>
-                            <span class="label-count bg-orange"></span>
-                        </a>
-                        <ul class="dropdown-menu pullDown">
-                            <li class="header">NOTIFICATIONS</li>
-                            <li class="body">
-                                <div class="slimScrollDiv"
-                                    style="position: relative; overflow: hidden; width: auto; height: 254px;">
-                                    <ul class="menu" style="overflow: hidden; width: auto; height: 254px;">
-                                        <li>
-                                            <a href="#" onclick="return false;">
-                                                <span class="table-img msg-user">
-                                                    <img src="assets/images/user/user1.jpg" alt="">
-                                                </span>
-                                                <span class="menu-info">
-                                                    <span class="menu-title">Sarah Smith</span>
-                                                    <span class="menu-desc">
-                                                        <i class="material-icons">access_time</i> 14 mins ago
-                                                    </span>
-                                                    <span class="menu-desc">Please check your email.</span>
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" onclick="return false;">
-                                                <span class="table-img msg-user">
-                                                    <img src="assets/images/user/user2.jpg" alt="">
-                                                </span>
-                                                <span class="menu-info">
-                                                    <span class="menu-title">Airi Satou</span>
-                                                    <span class="menu-desc">
-                                                        <i class="material-icons">access_time</i> 22 mins ago
-                                                    </span>
-                                                    <span class="menu-desc">Please check your email.</span>
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" onclick="return false;">
-                                                <span class="table-img msg-user">
-                                                    <img src="assets/images/user/user3.jpg" alt="">
-                                                </span>
-                                                <span class="menu-info">
-                                                    <span class="menu-title">John Doe</span>
-                                                    <span class="menu-desc">
-                                                        <i class="material-icons">access_time</i> 3 hours ago
-                                                    </span>
-                                                    <span class="menu-desc">Please check your email.</span>
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" onclick="return false;">
-                                                <span class="table-img msg-user">
-                                                    <img src="assets/images/user/user4.jpg" alt="">
-                                                </span>
-                                                <span class="menu-info">
-                                                    <span class="menu-title">Ashton Cox</span>
-                                                    <span class="menu-desc">
-                                                        <i class="material-icons">access_time</i> 2 hours ago
-                                                    </span>
-                                                    <span class="menu-desc">Please check your email.</span>
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" onclick="return false;">
-                                                <span class="table-img msg-user">
-                                                    <img src="assets/images/user/user5.jpg" alt="">
-                                                </span>
-                                                <span class="menu-info">
-                                                    <span class="menu-title">Cara Stevens</span>
-                                                    <span class="menu-desc">
-                                                        <i class="material-icons">access_time</i> 4 hours ago
-                                                    </span>
-                                                    <span class="menu-desc">Please check your email.</span>
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" onclick="return false;">
-                                                <span class="table-img msg-user">
-                                                    <img src="assets/images/user/user6.jpg" alt="">
-                                                </span>
-                                                <span class="menu-info">
-                                                    <span class="menu-title">Charde Marshall</span>
-                                                    <span class="menu-desc">
-                                                        <i class="material-icons">access_time</i> 3 hours ago
-                                                    </span>
-                                                    <span class="menu-desc">Please check your email.</span>
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" onclick="return false;">
-                                                <span class="table-img msg-user">
-                                                    <img src="assets/images/user/user7.jpg" alt="">
-                                                </span>
-                                                <span class="menu-info">
-                                                    <span class="menu-title">John Doe</span>
-                                                    <span class="menu-desc">
-                                                        <i class="material-icons">access_time</i> Yesterday
-                                                    </span>
-                                                    <span class="menu-desc">Please check your email.</span>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <div class="slimScrollBar"
-                                        style="background: rgba(0, 0, 0, 0.5); width: 4px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 0px; z-index: 99; right: 1px;">
-                                    </div>
-                                    <div class="slimScrollRail"
-                                        style="width: 4px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 0px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;">
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="footer">
-                                <a href="#" onclick="return false;">View All Notifications</a>
-                            </li>
-                        </ul>
-                    </li>
-
-
-                    <li class="dropdown user_profile py-2 mt-1 mx-4">
-                        <a href="#" onclick="return false;"
-                            class="dropdown-toggle d-flex align-items-center  m-0 p-0 " data-bs-toggle="dropdown"
-                            role="button">
-                            <img src="{{ asset(auth()->user()->profile_image) }}" width="32" height="32"
-                                alt="User">
-                            <div class="ml-2">
-                                {{ auth()->user()->name }}
-                                <small class="d-block">{{ auth()->user()->getRoleNames()->first() }}</small>
-                            </div>
-                        </a>
-                        <ul class="dropdown-menu pullDown">
-                            <li class="body">
-                                <ul class="user_dw_menu">
-                                    <li>
-                                        <a href="{{ route('profile-settings.index') }}">
-                                            <i class="material-icons">person</i>Profile Settings
+                <div class="navbar-brand-center">
+                    <div class="navbar-header">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                @if (getCurrentCompany())
+                                <div class="logo">
+                                        <a class="logo-text" href="{{ url('/') }}">
+                                            <div class="logo-img">
+                                            <img class="logo-img" alt="Apex logo"
+                                                    src="{{ asset(getCurrentCompany()->logo) }}">
+                                            </div>
+                                            <span class="text">{{getCurrentCompany()->prefix}}</span>
                                         </a>
-                                    </li>
-                                    {{--                                    <li> --}}
-                                    {{--                                        <a href="#" onclick="return false;"> --}}
-                                    {{--                                            <i class="material-icons">feedback</i>Feedback --}}
-                                    {{--                                        </a> --}}
-                                    {{--                                    </li> --}}
-                                    {{--                                    <li> --}}
-                                    {{--                                        <a href="#" onclick="return false;"> --}}
-                                    {{--                                            <i class="material-icons">help</i>Help --}}
-                                    {{--                                        </a> --}}
-                                    {{--                                    </li> --}}
-                                    <li>
-                                        <form class="m-0" method="POST" action="{{ route('logout') }}">
-                                            @csrf
-                                            <a href="#"
-                                                onclick="event.preventDefault(); this.closest('form').submit();">
-                                                <i
-                                                    class="material-icons">power_settings_new</i><span>{{ __('Logout') }}</span>
-                                            </a>
-                                        </form>
+                                    </div>
+                                @else
+                                    <div class="logo">
+                                        <a class="logo-text" href="{{ url('/') }}">
+                                            <div class="logo-img"><img class="logo-img" alt="Apex logo"
+                                                    src="{{ asset('management/app-assets/img/innovative-logo.png') }}">
+                                            </div><span class="text">INPL</span>
+                                        </a>
+                                    </div>
+                                @endif
 
-
-                                        {{--                                        <a href="#" onclick="return false;"> --}}
-                                        {{--                                            <i class="material-icons">power_settings_new</i>Logout --}}
-                                        {{--                                        </a> --}}
-                                    </li>
-                                </ul>
                             </li>
                         </ul>
-                    </li>
-                </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BEGIN : Activities Bar-->
+            <div class="navbar-container">
+                <div class="collapse navbar-collapse d-block" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li>
+                            <div class="custom-switch custom-switch-primary custom-control-inline mb-1 mb-xl-0">
+                                <input type="checkbox" class="custom-control-input" id="color-switch-1"
+                                    {{ Cookie::get('layout') === 'dark' ? 'checked' : '' }}>
+                                <label class="custom-control-label mr-1" for="color-switch-1">
+                                    <span>Dark</span>
+                                </label>
+                            </div>
+                        </li>
+                         @if (getCurrentCompany())
+                        <li class="dropdown nav-item"><a
+                                class="nav-link dropdown-toggle dropdown-notification p-0 mt-2" id="dropdownBasic1"
+                                href="javascript:;" data-toggle="dropdown"><i class="ft-bell font-medium-3"></i><span
+                                    class="notification badge badge-pill badge-danger">4</span></a>
+                            <ul
+                                class="notification-dropdown dropdown-menu dropdown-menu-media dropdown-menu-right m-0 overflow-hidden">
+
+
+
+                                <li class="dropdown-menu-header">
+                                    <div
+                                        class="dropdown-header d-flex justify-content-between m-0 px-3 py-2 white bg-primary">
+                                        <div class="d-flex"><i
+                                                class="ft-bell font-medium-3 d-flex align-items-center mr-2"></i><span
+                                                class="noti-title">7 New Notification</span></div><span
+                                            class="text-bold-400 cursor-pointer">Mark all as read</span>
+                                    </div>
+                                </li>
+                                <li class="scrollable-container"><a class="d-flex justify-content-between"
+                                        href="javascript:void(0)">
+                                        <div class="media d-flex align-items-center">
+                                            <div class="media-left">
+                                                <div class="mr-3"><img class="avatar"
+                                                        src="../../../app-assets/img/portrait/small/avatar-s-20.png"
+                                                        alt="avatar" height="45" width="45"></div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="m-0"><span>Kate Young</span><small
+                                                        class="grey lighten-1 font-italic float-right">5 mins
+                                                        ago</small></h6><small class="noti-text">Commented on your
+                                                    photo</small>
+                                                <h6 class="noti-text font-small-3 m-0">Great Shot John! Really enjoying
+                                                    the composition on this piece.</h6>
+                                            </div>
+                                        </div>
+                                    </a><a class="d-flex justify-content-between" href="javascript:void(0)">
+                                        <div class="media d-flex align-items-center">
+                                            <div class="media-left">
+                                                <div class="mr-3"><img class="avatar"
+                                                        src="../../../app-assets/img/portrait/small/avatar-s-11.png"
+                                                        alt="avatar" height="45" width="45"></div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="m-0"><span>Andrew Watts</span><small
+                                                        class="grey lighten-1 font-italic float-right">49 mins
+                                                        ago</small></h6><small class="noti-text">Liked your album:
+                                                    UI/UX Inspo</small>
+                                            </div>
+                                        </div>
+                                    </a><a class="d-flex justify-content-between read-notification"
+                                        href="javascript:void(0)">
+                                        <div class="media d-flex align-items-center py-0 pr-0">
+                                            <div class="media-left">
+                                                <div class="mr-3"><img
+                                                        src="../../../app-assets/img/icons/sketch-mac-icon.png"
+                                                        alt="avatar" height="45" width="45"></div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="m-0">Update</h6><small class="noti-text">MyBook
+                                                    v2.0.7</small>
+                                            </div>
+                                            <div class="media-right">
+                                                <div class="border-left">
+                                                    <div class="px-4 py-2 border-bottom">
+                                                        <h6 class="m-0 text-bold-600">Update</h6>
+                                                    </div>
+                                                    <div class="px-4 py-2 text-center">
+                                                        <h6 class="m-0">Close</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a><a class="d-flex justify-content-between read-notification"
+                                        href="javascript:void(0)">
+                                        <div class="media d-flex align-items-center">
+                                            <div class="media-left">
+                                                <div class="avatar bg-primary bg-lighten-3 mr-3 p-1"><span
+                                                        class="avatar-content font-medium-2">LD</span></div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="m-0"><span>Registration done</span><small
+                                                        class="grey lighten-1 font-italic float-right">6 hrs
+                                                        ago</small></h6>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="cursor-pointer">
+                                        <div class="media d-flex align-items-center justify-content-between">
+                                            <div class="media-left">
+                                                <div class="media-body">
+                                                    <h6 class="m-0">New Offers</h6>
+                                                </div>
+                                            </div>
+                                            <div class="media-right">
+                                                <div class="custom-control custom-switch">
+                                                    <input class="switchery" type="checkbox" checked
+                                                        id="notificationSwtich" data-size="sm">
+                                                    <label for="notificationSwtich"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between cursor-pointer read-notification">
+                                        <div class="media d-flex align-items-center">
+                                            <div class="media-left">
+                                                <div class="avatar bg-danger bg-lighten-4 mr-3 p-1"><span
+                                                        class="avatar-content font-medium-2"><i
+                                                            class="ft-heart text-danger"></i></span></div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="m-0"><span>Application approved</span><small
+                                                        class="grey lighten-1 font-italic float-right">18 hrs
+                                                        ago</small></h6>
+                                            </div>
+                                        </div>
+                                    </div><a class="d-flex justify-content-between read-notification"
+                                        href="javascript:void(0)">
+                                        <div class="media d-flex align-items-center">
+                                            <div class="media-left">
+                                                <div class="mr-3"><img class="avatar"
+                                                        src="{{ asset('management/app-assets/img/portrait/small/avatar-s-6.png') }}"
+                                                        alt="avatar" height="45" width="45"></div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="m-0"><span>Anna Lee</span><small
+                                                        class="grey lighten-1 font-italic float-right">27 hrs
+                                                        ago</small></h6><small class="noti-text">Commented on your
+                                                    photo</small>
+                                                <h6 class="noti-text font-small-3 text-bold-500 m-0">Woah!Loving these
+                                                    colors! Keep it up</h6>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="d-flex justify-content-between cursor-pointer read-notification">
+                                        <div class="media d-flex align-items-center">
+                                            <div class="media-left">
+                                                <div class="avatar bg-info bg-lighten-4 mr-3 p-1">
+                                                    <div class="avatar-content font-medium-2"><i
+                                                            class="ft-align-left text-info"></i></div>
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="m-0"><span>Report generated</span><small
+                                                        class="grey lighten-1 font-italic float-right">35 hrs
+                                                        ago</small></h6>
+                                            </div>
+                                        </div>
+                                    </div><a class="d-flex justify-content-between read-notification"
+                                        href="javascript:void(0)">
+                                        <div class="media d-flex align-items-center">
+                                            <div class="media-left">
+                                                <div class="mr-3"><img class="avatar"
+                                                        src="../../../app-assets/img/portrait/small/avatar-s-7.png"
+                                                        alt="avatar" height="45" width="45"></div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="m-0"><span>Oliver Wright</span><small
+                                                        class="grey lighten-1 font-italic float-right">2 days
+                                                        ago</small></h6><small class="noti-text">Liked your album:
+                                                    UI/UX Inspo</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="dropdown-menu-footer">
+                                    <div
+                                        class="noti-footer text-center cursor-pointer primary border-top text-bold-400 py-1">
+                                        Read All Notifications</div>
+                                </li>
+                            </ul>
+                        </li>
+                        @endif
+                        <li class="dropdown nav-item mr-1"><a
+                                class="nav-link dropdown-toggle user-dropdown d-flex align-items-end"
+                                id="dropdownBasic2" href="javascript:;" data-toggle="dropdown">
+                                <div class="user d-md-flex d-none mr-2">
+                                    <span class="text-right">{{ auth()->user()->name }}</span><span
+                                        class="text-right text-muted font-small-1">{{ auth()->user()->email }}</span>
+                                </div>
+                                <img class="avatar" src="{{ image_path(auth()->user()->profile_image) }}" alt="avatar"
+                                    height="35" width="35">
+                            </a>
+                            <div class="dropdown-menu text-left dropdown-menu-right m-0 pb-0"
+                                aria-labelledby="dropdownBasic2">
+
+                                <a class="dropdown-item" href="{{ url('profile-settings') }}">
+                                    <div class="d-flex align-items-center"><i class="ft-edit mr-2"></i><span>Edit
+                                            Profile</span></div>
+                                </a>
+
+                                <div class="dropdown-divider"></div>
+
+                                <form class="m-0" method="POST" action="{{ route('logouts') }}">
+                                    @csrf
+                                    <a href="#"
+                                        onclick="event.preventDefault(); this.closest('form').submit();">
+                                        <div class="dropdown-item"><i
+                                                class="ft-power mr-2"></i><span>{{ __('Logout') }}</span></div>
+
+                                    </a>
+                                </form>
+
+
+                            </div>
+                        </li>
+                        <li class="nav-item d-none d-lg-block mr-2 mt-1"><a
+                                class="nav-link notification-sidebar-toggle" href="javascript:;"><i
+                                    class="ft-align-right font-medium-3"></i></a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>

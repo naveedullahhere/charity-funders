@@ -7,7 +7,7 @@ use App\Models\User;
 use Faker\Factory as Faker;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-
+use DB;
 class CreateAdminUserSeeder extends Seeder
 {
     /**
@@ -15,13 +15,23 @@ class CreateAdminUserSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;'); 
+
+        DB::table('users')->truncate();
+        DB::table('roles')->truncate();
+        DB::table('role_has_permissions')->truncate();
+        DB::table('model_has_roles')->truncate();
+        DB::table('model_has_permissions')->truncate();
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;'); 
+
         $faker = Faker::create();
 
         $user = User::create([
-            'name' => $faker->name,
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('123456'),
-            'profile_image' => 'images/1711436731.png',
+            'name' => 'Naveed Ullah',
+            'user_type' => 'super-admin',
+            'email' => 'naveed.ullah@innovative-net.com',
+            'password' => bcrypt('12345678'),
         ]);
 
         $role = Role::create(['name' => 'Admin']);

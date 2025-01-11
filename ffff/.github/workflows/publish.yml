@@ -1,0 +1,30 @@
+name: Deploy Laravel Project
+
+on:
+  push:
+    branches:
+      - main # Trigger workflow when pushing to 'main'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy Laravel Code
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Install PHP Dependencies
+        run: |
+          composer install --no-dev --prefer-dist
+          php artisan storage:link # Link storage folder
+
+      - name: Deploy Code to Hostinger
+        run: |
+          # Set up SSH and deploy to Hostinger
+          mkdir -p ~/.ssh
+          echo "${{ secrets.HOSTINGER_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -t rsa your-server-hostname.com >> ~/.ssh/known_hosts
+          
+          # Deploy using git push or rsync
+          git push git@github.com:naveedullahhere/charity-funders.git main 

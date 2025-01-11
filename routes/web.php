@@ -32,6 +32,7 @@ use Illuminate\Support\Facades\Response;
 //    return redirect('/dashboard');
 //});
 
+
 Route::get('/', [App\Http\Controllers\FrontHomeController::class, 'index'])->name('/');
 Route::get('page/{slug}', [App\Http\Controllers\FrontHomeController::class, 'PageSlug'])->name('page');
 Route::get('preview_page/{slug}', [App\Http\Controllers\FrontHomeController::class, 'PageSlugPreview'])->name('preview_page');
@@ -65,6 +66,10 @@ Route::get('adminpanel', function () {
 
 
 Route::get('/athlete-profile/{profile_link}', [AthleteProfileController::class, 'showProfile']);
+Route::get('/about', [FrontHomeController::class, 'about']);
+Route::get('/subscribe', [FrontHomeController::class, 'subscribe']);
+Route::get('/faqs', [FrontHomeController::class, 'faq']);
+Route::get('/contact', [FrontHomeController::class, 'contact']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('search', [ProductController::class, 'getProducts']);
@@ -91,6 +96,18 @@ Route::controller(StripePaymentController::class)->group(function () {
 });
 
 Route::group(['middleware' => ['auth']], function () {
+     Route::post('logouts', function (Request $request) {
+        $user = Auth::user();
+        if ($user) {
+            $user->current_company_id = null;
+            $user->save();
+        }
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
+    })->name('logouts');
 
     Route::post('/baskets', [CartController::class, 'createBasket']);
     Route::post('/baskets/add', [CartController::class, 'addToBasket'])->name('basket.add');

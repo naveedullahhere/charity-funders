@@ -1,0 +1,683 @@
+/* header start */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+.main-content {
+    flex: 1;
+}
+.nav-link {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 30px;
+    /*text-align: center;*/
+}
+.border-right-for-filter{
+    border-right: 4px solid transparent;
+}
+.login {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+    text-align: center;
+    padding: 10px 26px;
+    background-color: #171717;
+    color: white;
+    display: flex;
+    align-items: center;
+    margin-left: 3px !important;
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+.profile {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+    text-align: center;
+    padding: 10px 0px 10px 8px;
+    background-color: #171717;
+    color: white;
+    display: flex;
+    align-items: center;
+    margin-left: 3px !important;
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+.head {
+    max-width: 100% !important;
+}
+
+#function-box {
+    background: url(../images/page-banner.png) no-repeat;
+    height: 65vh;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+}
+#page-banner {
+    background: url(../images/page-banner.png) ;
+    height: 40vh;
+    width: 100%;
+    background-size: cover !important;
+    background-position: center !important;
+    position: relative;
+    background-repeat: no-repeat !important;
+}
+#page-banner:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: black;
+    z-index: 1;
+    opacity: 0.5; /* Optional: Adjust opacity if you want a semi-transparent overlay */
+}
+
+#page-banner .page-content {
+   z-index: 1;
+}
+#page-banner .page-content .page-title {
+    background: #161717;
+    padding: 10px;
+    text-align: center;
+}
+#page-banner .page-content .page-title h2{
+margin: 0;
+}
+.events-heading {
+    font-family: "Roboto", sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 46.88px;
+}
+
+.event-box {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: -0.02em;
+    padding: 8px 35px 8px 3px;
+}
+
+.event-text {
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 0px !important;
+    color: #858383;
+}
+
+.event-heading {
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 23px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #000000;
+}
+
+.load {
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 23.44px;
+    text-align: center;
+    padding: 15px 36px 15px 36px !important;
+    background: white;
+    color: #858383;
+    box-shadow: 4px 4px 10px #858383;
+    border: 1px solid #1E1E1E !important
+}
+
+footer {
+    background: #101112;
+}
+
+.footer-text {
+    color: white;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+}
+
+.terms {
+    border: 3px solid #858383;
+    background: #101112;
+    color: #858383;
+    padding: 6px 10px 6px 10px !important;
+    border-radius: 8px;
+}
+
+.input-group-text {
+    display: flex !important;
+    align-items: center !important;
+    font-size: 22px !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+    color: #858383 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    background-color: #ffffff !important;
+    padding: 20px !important;
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+input.form-control {
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+    box-shadow: none !important;
+}
+
+.form-select {
+    border: none;
+    border-radius: 0 !important;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    /*line-height: 30px;*/
+    letter-spacing: -0.02em;
+    padding: 16px 5px !important;
+}
+
+.camera input {
+    padding: 20px 5px 19px 60px;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 23.44px;
+
+    border-radius: 0 !important
+}
+
+.camera .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    width: 6.375rem;
+    height: 3.765rem;
+    line-height: 2.375rem;
+    padding: 17px 15px !important;
+    pointer-events: none;
+    color: #aaa;
+}
+
+.form-control .search {
+    padding-left: 3.367rem;
+}
+
+@media (max-width: 992px) {
+    .navbar-collapse {
+        position: fixed;
+        top: 0px;
+        left: 0;
+        z-index: 10 !important;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 15px;
+        width: 35% !important;
+        height: 100% !important;
+        background-color: white;
+    }
+
+    .nav-link {
+        font-family: "Roboto", sans-serif;
+        font-size: 12px !important;
+        font-weight: 700;
+        line-height: 25px;
+        letter-spacing: -0.02em;
+        text-align: start !important;
+    }
+
+    .login {
+        font-family: "Roboto", sans-serif;
+        font-size: 12px !important;
+        font-weight: 400 !important;
+        line-height: 25px !important;
+        text-align: start !important;
+        padding: 3px 15px !important;
+        background-color: #171717;
+        color: white !important;
+        margin: 0px auto !important;
+        border: none !important;
+        border-radius: 0 !important;
+    }
+
+    /*.navbar-nav {*/
+    /*    display: flex !important;*/
+    /*    flex-direction: column !important;*/
+    /*    align-items: center !important;*/
+    /*}*/
+
+    form .form-control {
+        width: 100% !important;
+    }
+    .tour-heading h5 {
+        font-size: 24px !important;
+        line-height:25px !important;
+    }
+}
+
+@media (min-width: 300px) and (max-width: 767.98px) {
+    .border-right-for-filter{
+        border-right: unset;
+        border-bottom: 4px solid transparent;
+    }
+
+
+    .camera {
+        margin-top: 10px !important;
+    }
+
+    .events-heading {
+        font-family: "Roboto", sans-serif;
+        font-size: 30px !important;
+        font-weight: 400;
+        line-height: 36.88px;
+
+    }
+
+    form .form-control {
+        border: 1px solid #161717 !important;
+        border-radius: 10px !important;
+        width: 100% !important;
+        font-family: "Roboto", sans-serif;
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 19.92px;
+        color: #161717;
+    }
+    .tour-heading h5 {
+        font-size: 20px !important;
+        line-height:20px !important;
+    }
+}
+
+@media (min-width:300px) and (max-width:580px) {
+    .camera {
+        width: 80% !important;
+        margin: 10px auto !important;
+    }
+
+    .input-group {
+        width: 80% !important;
+        margin: 0px auto !important;
+    }
+
+    .form-select-lg {
+        width: 80% !important;
+        margin: 0px auto !important;
+        padding: 5px 5px !important
+    }
+
+    .objectives {
+        display: flex !important;
+    }
+
+    .camera input {
+        padding: 10px 5px 10px 50px !important
+    }
+
+    .camera .form-control-feedback {
+        position: absolute;
+        z-index: 2;
+        display: flex;
+        width: 6.375rem;
+        height: 2.888rem !important;
+        line-height: 2.375rem;
+        padding: 14px 15px !important;
+        pointer-events: none;
+        color: #aaa;
+    }
+
+    .event-box {
+        font-family: "Roboto", sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 30px;
+        letter-spacing: -0.02em;
+        padding: 4px 35px 4px 5px !important;
+        background: #ffffffab;
+        backdrop-filter: blur(5px); /* Adjust the blur intensity as needed */
+
+    }
+
+    .events-heading {
+        font-family: "Roboto", sans-serif;
+        font-size: 20px !important;
+        font-weight: 700 !important;
+        line-height: 26.88px;
+
+    }
+
+    .profile {
+        font-family: "Roboto", sans-serif;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 25px;
+        text-align: center;
+        padding: 3px 8px;
+        background-color: #171717;
+        color: white;
+        display: flex;
+        align-items: center;
+        margin-left: 3px !important;
+        border: none !important;
+        border-radius: 0 !important;
+    }
+
+    #function-box {
+        height: 75vh !important;
+    }
+
+    #agree {
+        font-size: 14px !important;
+    }
+
+    .create-button {
+        font-size: 14px !important;
+        padding: 10px 10px !important
+    }
+}
+
+.navbar-toggler-icon {
+    background-image: url('../images/nav.png') !important;
+}
+
+@media (max-width:380px) {
+    .event-heading {
+        font-size: 12px !important;
+        line-height: 15px !important;
+    }
+
+    .footer-text {
+        font-size: 12px !important;
+    }
+
+    input {
+        padding: 20px 0px 19px 50px !important;
+        font-size: 12px !important;
+    }
+
+    .form-control {
+        padding: 0px !important;
+    }
+
+    .input-group-text {
+        display: flex !important;
+        align-items: center !important;
+        font-size: 22px !important;
+        font-weight: 400 !important;
+        line-height: 1.5 !important;
+        color: #858383 !important;
+        text-align: center !important;
+        white-space: nowrap !important;
+        background-color: #ffffff !important;
+        padding: 20px 20px 20px 10px !important;
+        border: none !important;
+        border-radius: 0 !important;
+    }
+
+    .camera .form-control-feedback {
+        position: absolute;
+        z-index: 2;
+        display: flex;
+        width: 3.375rem !important;
+        height: 3.765rem;
+        line-height: 13.375rem;
+        padding: 17px 14px !important;
+        pointer-events: none;
+        color: #aaa;
+    }
+
+    form .form-control {
+        padding: 10px 10px !important;
+    }
+
+    #rememberMe {
+        font-size: 12px !important;
+    }
+
+    .forget-password {
+        font-size: 12px !important;
+        margin-top: 4px !important;
+    }
+
+    .account-heading {
+        font-size: 24px !important;
+    }
+
+    .create-button {
+        padding: 10px 10px !important;
+    }
+
+    #agree {
+        font-size: 12px !important;
+    }
+}
+
+@media (max-width:330px) {
+    .navbar-collapse {
+        position: fixed;
+        top: 0px;
+        left: 0;
+        z-index: 10 !important;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 15px;
+        width: 45% !important;
+        height: 100% !important;
+        background-color: white;
+    }
+
+    .events-heading {
+        font-family: "Roboto", sans-serif;
+        font-size: 18px !important;
+        font-weight: 400;
+        line-height: 46.88px !important;
+
+    }
+
+    .event-heading {
+        font-size: 14px !important;
+        line-height: 17px !important;
+    }
+
+    .camera {
+        margin-top: 10px !important;
+    }
+
+    .camera input {
+        padding: 20px 5px 19px 50px !important;
+    }
+
+    .event-box {
+        font-family: "Roboto", sans-serif;
+        font-size: 12px !important;
+        font-weight: 400;
+        line-height: 15px !important;
+        letter-spacing: -0.02em;
+        padding: 8px 5px 8px 5px !important;
+        margin-top: 5px !important;
+    }
+
+    .terms {
+        border: 3px solid #858383;
+        background: #101112;
+        color: #858383;
+        padding: 4px 8px 4px 8px !important;
+        border-radius: 8px;
+        font-size: 12px !important;
+    }
+
+    .footer-text {
+        font-size: 10px !important;
+    }
+}
+
+/* login page start */
+.login-box {
+    display: flex;
+    align-items: center;
+    /* height: 100vh; */
+}
+
+.account-heading {
+    font-family: "Roboto", sans-serif;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 22px;
+}
+
+.campaign-text {
+    font-family: "Roboto", sans-serif;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 19.92px;
+    color: #161717;
+}
+
+form .form-control {
+    border: 1px solid #161717 !important;
+    border-radius: 10px !important;
+    /*width: 50%;*/
+    font-family: "Roboto", sans-serif;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 19.92px;
+    color: #161717;
+}
+.hover-blur-effect:hover {
+    background-color: rgb(243 232 232 / 25%);
+    color: #fff;
+    border-color: transparent;
+    backdrop-filter: blur(5px);
+}
+
+/* .password-container {
+    position: relative;
+}
+.password-container span {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    width: 35.375rem;
+    height: 3.765rem;
+    line-height: 2.375rem;
+    padding: 17px 15px !important;
+    pointer-events: none;
+    color: #aaa;
+    justify-content: flex-end;
+    align-items: center;
+    top: 0;
+} */
+#rememberMe {
+    font-family: "Roboto", sans-serif;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 19.92px;
+    color: #161717;
+}
+
+.forget-password {
+    font-family: "Roboto", sans-serif;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 19.92px;
+    text-decoration: none;
+}
+
+.forget-password :hover {
+    text-decoration: none;
+}
+
+.submit {
+    border: 2px solid #161717;
+    background: #161717;
+    color: #FFFFFF;
+    border-radius: 8px;
+    padding: 8px 50px;
+    width: 50%;
+    font-family: "Roboto", sans-serif;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 22.27px;
+    text-align: center;
+
+}
+
+.registration {
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 19.92px;
+    text-align: left;
+    margin-top: 2.5px;
+}
+
+/* form start */
+
+.identification-box input {
+    width: 24%;
+
+}
+
+
+
+.create-button {
+    border: 2px solid #161717;
+    background: #161717;
+    color: #FFFFFF;
+    border-radius: 8px;
+    padding: 8px 50px;
+    width: 50%;
+    font-family: "Roboto", sans-serif;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 22.27px;
+    text-align: center;
+}
+
+#agree {
+    font-family: "Roboto", sans-serif;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 19.92px;
+    color: #161717;
+}
+
+.tour-heading {
+    background: #161717;
+}
+
+.tour-heading h5 {
+    font-family: "Roboto", sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 35.16px;
+}
+#event2-function-box{
+    background: url(../images/Rectangle\ 9185\ \(1\).png) no-repeat;
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+}

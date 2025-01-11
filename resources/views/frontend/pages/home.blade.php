@@ -4,247 +4,174 @@
 @section('meta_description', 'Home')
 @section('meta_keyword', 'Home')
 @section('content')
-    <style>
-        /*.custom-inp {*/
-        /*    border-radius: 12px !important;*/
-        /*    overflow: hidden;*/
-        /*}*/
-
-        /*.custom-inp :is(.form-select, .form-control),*/
-        /*.custom-inp.form-select {*/
-        /*    padding-block: 8px !important;*/
-        /*}*/
-
-        /*.input-group-text {*/
-        /*    padding-block: 10px !important;*/
-        /*}*/
-    </style>
-    <!-- section one start -->
-    <section id="function-box" class="d-flex align-items-center justify-content-center py-4">
-        <div class="container">
-            <div class="row position-relative" id="formRow">
-                <!-- Loading overlay -->
-                <div id="loadingOverlay"
-                    class="d-none position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
-                    style="background: rgba(255, 255, 255, 0.8); z-index: 10;">
-                    <div class="spinner-border text-primary" role="status">
-                        <span class="sr-only">Loading...</span>
+    
+    <!-- .............................................Section-1......................................... -->
+    <section class="main-banner ">
+        <div class="main-container d-flex pt-5">
+            <div class="row align-items-end  justify-content-between">
+                <div class="col-lg-7  col-md-12 p-0 col-sm-12">
+                    <div class="heading">
+                        <h2>The most cost-effective and comprehensive grant finding service.</h2>
                     </div>
                 </div>
 
-                <!-- Form fields -->
-                <div class="col-md-2 px-md-0">
-                    <select class="form-select h-100 form-select-lg custom-inp" aria-label=".form-select-lg example">
-                        <option value="" selected disabled>Select Event</option>
-                        @foreach ($allEvents as $event)
-                            <option value="{{ $event->id }}">{{ $event->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-md-5 px-md-0">
-                    <div class="input-group h-100 custom-inp">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text h-100" id="basic-addon1">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Find an Event" aria-label="Find an Event"
-                            aria-describedby="Find-a-Event">
+                <div class="col-lg-4  col-md-12 p-0 col-sm-12">
+                    <div class="para">
+                        <p>Charity Funders was developed by a group of Fundraisers with over <b>20 years’ </b>experience
+                            fundraising for the not for profit sector.</p>
+                        <button class="btn-3">
+                            <a href="about">Learn more </a> <i class="fas fa-arrow-up"></i>
+                        </button>
                     </div>
                 </div>
-                <div class="col-md-3 px-md-0">
-                    <div class="form-group camera mx-md-2">
-                        <div class="file-upload" id="file-upload">
-                            <label style="font-size: 10px" for="file-input" class="file-upload-label">
-                                <span>Drag & Drop or Click to Upload Image</span>
-                            </label>
-                            <input type="file" id="file-input" class="form-control-file" accept="image/*">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2 px-md-0">
-                    <button id="submitForm" type="button" class="w-100 btn btn-dark h-100 rounded-0">Submit</button>
-                </div>
-                <form id="hiddenForm" action="{{ route('final-submit') }}" method="POST" style="display:none;">
-                    @csrf
-                    <input type="hidden" name="event_id" id="hiddenEventId">
-                    <input type="hidden" name="event_name" id="hiddenEventName">
-                    <input type="hidden" name="image_data" id="hiddenImageData">
-                </form>
             </div>
         </div>
+
+
     </section>
 
-    <script>
-        document.getElementById('submitForm').addEventListener('click', function() {
-            const selectedEventId = document.querySelector('select').value;
-            const searchQuery = document.querySelector('input[type="text"]').value;
-            const fileInput = document.getElementById('file-input');
+    <!-- ..................................Section-2...................................... -->
 
-            document.getElementById('loadingOverlay').classList.remove('d-none');
-
-            let formData = new FormData();
-            formData.append('event_id', selectedEventId);
-            formData.append('search_query', searchQuery);
-            if (fileInput.files.length > 0) {
-                formData.append('image', fileInput.files[0]);
-            }
-
-            fetch('{{ route('handle-ajax-request') }}', {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        document.getElementById('hiddenEventId').value = data.event_id;
-                        document.getElementById('hiddenEventName').value = data.event_name;
-                        document.getElementById('hiddenImageData').value = JSON.stringify(data.image_data);
-
-                        document.getElementById('hiddenForm').submit();
-                    } else {
-                        alert('An error occurred while processing your request.');
-                    }
-                })
-                .catch(error => console.error('Error:', error))
-                .finally(() => {
-                    document.getElementById('loadingOverlay').classList.add('d-none');
-                });
-        });
-    </script>
-
-    <style>
-        div#formRow {
-            background: #ffffffab;
-            padding: 15px;
-            backdrop-filter: blur(5px); /* Adjust the blur intensity as needed */
-        }
-        #function-box {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        /*.form-select,*/
-        /*.form-control {*/
-        /*    border: 1px solid #ccc;*/
-        /*    border-radius: 5px;*/
-        /*    transition: border-color 0.3s;*/
-        /*}*/
-
-        div#formRow .form-select
-       {
-            border-right: 2px solid #ccc;
-            padding-left: 16px !important;
-        }
-        .form-select:focus,
-        .form-control:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-        }
-
-        /*.input-group {*/
-        /*    border: 1px solid #ccc;*/
-        /*    border-radius: 5px;*/
-        /*}*/
-
-        .file-upload {
-            position: relative;
-            cursor: pointer;
-            text-align: center;
-            border: 2px dashed #000000;
-            /*border-radius: 5px;*/
-            padding: 20px;
-            background-color: #fff;
-            transition: background-color 0.3s;
-        }
-
-        .file-upload:hover {
-            background-color: #f0f8ff;
-        }
-
-        .file-upload img {
-            width: 50px;
-            height: 50px;
-            margin-bottom: 10px;
-        }
-
-        .file-upload span {
-            color: #000000;
-            font-weight: bold;
-        }
-
-        .form-control-file {
-            display: none;
-            /* Hide the default file input */
-        }
-
-        /* Add some responsiveness */
-        @media (max-width: 768px) {
-            #function-box {
-                padding: 15px;
-            }
-        }
-    </style>
-
-    <script>
-        // Drag and drop functionality
-        const fileUpload = document.getElementById('file-upload');
-        const fileInput = document.getElementById('file-input');
-
-        fileUpload.addEventListener('click', function() {
-            fileInput.click();
-        });
-
-        fileUpload.addEventListener('dragover', function(e) {
-            e.preventDefault();
-            fileUpload.style.backgroundColor = '#e0e7ff'; // Light blue on hover
-        });
-
-        fileUpload.addEventListener('dragleave', function() {
-            fileUpload.style.backgroundColor = ''; // Reset to original
-        });
-
-        fileUpload.addEventListener('drop', function(e) {
-            e.preventDefault();
-            fileUpload.style.backgroundColor = ''; // Reset to original
-            const files = e.dataTransfer.files;
-            if (files.length > 0) {
-                fileInput.files = files; // Set the files to the input
-            }
-        });
-    </script>
-
-    <!-- events section start -->
-    <section id="Events" class="my-lg-5 my-md-2">
-        <div class="container mt-lg-5">
+    <section class="section-2 mt-n-25">
+        <div class="main-container">
             <div class="row">
-                <div class="col-12 objectives d-flex justify-content-between">
-                    <h1 class="text-uppercase">All Events</h1>
-                </div>
-            </div>
-            <div class="row" id="event-container">
-                @include('frontend.pages._media', ['media' => $events, 'is_event' => 1])
-            </div>
+                <div class="main-video">
 
-            @if ($events->hasMorePages())
-                <div class="col-md-12 d-flex justify-content-center my-3">
-                    <button type="button" class="load" id="load-more-event-btn" data-page="{{ $events->currentPage() }}">
-                        Load More
-                        <span class="spinner-border spinner-border-sm d-none"></span>
-                    </button>
-                </div>
-            @endif
+                    <img src="{{asset('charity/images/video-img.png')}}" alt="" class="img-fluid">
 
+                    <div id="counter">
+                        <div class="item">
+                            <h1 class="count " data-number="4500" data-speed="100000000"></h1>
+                            <p class="text m-auto">Charitable trusts & foundations</p>
+                        </div>
+                        <div class="item">
+                            <h1 class="count " data-number="500" data-speed="100000000"></h1>
+                            <p class="text m-auto">Corporate foundations</p>
+                        </div>
+                        <div class="item">
+                            <h1 class="count " data-number="4" data-speed="100000000"></h1>
+                            <p class="text m-auto">Registered sources of funding</p>
+                        </div>
+                        <div class="item">
+                            <h1 class="count " data-number="50" data-speed="100000000"></h1>
+                            <p class="text m-auto">Subscription form £50 - a cost effective funding solution</p>
+                        </div>
+                        <div class="item">
+                            <h1 class="count " data-number="40000000" data-speed="100000000"> </h1>
+                            <p class="text m-auto">Two services for the price of one</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
         </div>
     </section>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- ............................................Section-3..................................... -->
 
-    @include('frontend.pages.scripts')
+    <section class="image-with-text">
+        <div class="image-with-text-container">
+            <div class="row m-0 align-items-center">
+                <div class="col-lg-6 col-md-12 col-sm-12 p-0">
+                    <img src="{{asset('charity/images/finance-wealth-banner-with-human-hand-copy-space 1.png')}}" class="img-fluid" alt="Image">
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 p-0">
+                    <div class="content">
+                        <h2 class="mt-md-2">About us</h2>
+                        <p class="mt-lg-3 mb-lg-5"><b>Charity Funders</b> was developed by
+                            <span style="color: #FF7260;"> a group of Fundraisers with over 20 years’ experience </span>
+                            fundraising for the not for profit sector. As Fundraisers ourselves, we know exactly what matters to you and give you
+                            the information you need at your fingertips, helping you save time and energy. We’re the UK’s
+                            most advanced online grant finding service, packed full of innovative and never before seen
+                            features, we make fundraising easier and that’s a promise!</p>
+                        <button class="btn-3">
+                            <a href="about">Read more </a> <i class="fas fa-arrow-up"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    @include('frontend.pages.collections.index')
+    <!-- ...............................................Section-4....................................... -->
+    <section class="icon-with-text-container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="container">
+                    <p class=" ">With subscriptions from just £50, can you afford not to subscribe?</p>
+                </div>
+                <div class="icon-box-container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="icon-box">
+                                <img src="{{asset('charity/images/Expertise.png')}}" alt="" class="img-fluid">
+                                <h3 class="">Expertise</h3>
+                                <p>Developed by fundraising professionals</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="icon-box">
+                                <img src="{{asset('charity/images/Data-driven.png')}}" alt="" class="img-fluid">
+                                <h3 class="">Data-driven</h3>
+                                <p>More information, analysis
+                                    and discussion than anywhere else</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="icon-box">
+                                <img src="{{asset('charity/images/Innovation.png')}}" alt="" class="img-fluid">
+                                <h3 class="">Innovation</h3>
+                                <p>Intuitive navigation, intelligent search options and filters</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="icon-box">
+                                <img src="{{asset('charity/images/Accessibility.png')}}" alt="" class="img-fluid">
+                                <h3 class="">Accessibility</h3>
+                                <p>With flexible subscriptions and free multiple licenses</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="icon-box">
+                                <img src="{{asset('charity/images/Comprehensive.png')}}" alt="">
+                                <h3 class="">Comprehensive</h3>
+                                <p>The largest prospect database</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="icon-box">
+                                <img src="{{asset('charity/images/License.png')}}" alt="">
+                                <h3 class="">License</h3>
+                                <p> Flexible subscriptions and free multiple licenses</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- .....................................Section-5........................................ -->
+    <section class="Call-to-action">
+        <div class="Action-container">
+            <div class="Action">
+                <div class="content">
+                    <h2>Got a question? <br> We’d love to hear from you</h2>
+                </div>
+            </div>
+            <div class="row-eww">
+                <button class="btn-3">
+                    <a href="contact">Contact Us </a> <i class="fas fa-arrow-up"></i>
+                </button>
+                <button class="btn-3">
+                    <a href="faqs">Read FAQS </a> <i class="fas fa-arrow-up"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+
 @endsection

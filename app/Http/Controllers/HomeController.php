@@ -28,17 +28,8 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $orders = Order::when($request->filled('search'), function ($q) use ($request) {
-            $searchTerm = '%' . $request->search . '%';
-            return $q->where(function ($sq) use ($searchTerm) {
-                $sq->where('id', 'like', $searchTerm);
-                $sq->orWhere('email', 'like', $searchTerm);
-                $sq->orWhere('lead_first_name', 'like', $searchTerm);
-                $sq->orWhere('lead_last_name', 'like', $searchTerm);
-            });
-        })->latest()->paginate(5);
-
-        return view('management.dashboard.index', compact('orders'));
+    
+        return view('management.dashboard.index');
     }
 
     public function getCitiesByState(Request $request)
