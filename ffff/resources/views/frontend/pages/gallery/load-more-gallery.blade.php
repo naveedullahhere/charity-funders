@@ -1,1 +1,0 @@
-@include('frontend.pages._media', ['media' => $media, 'isAjax' => $isAjax])
