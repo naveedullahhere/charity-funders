@@ -70,9 +70,12 @@ Route::get('/about', [FrontHomeController::class, 'about']);
 Route::get('/subscribe', [FrontHomeController::class, 'subscribe']);
 Route::get('/faqs', [FrontHomeController::class, 'faq']);
 Route::get('/contact', [FrontHomeController::class, 'contact']);
+Route::get('/search', [FrontHomeController::class, 'search']);
+Route::get('/search-funders', [FrontHomeController::class, 'searchFunders']);
+Route::get('/funder', [FrontHomeController::class, 'showFunder']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('search', [ProductController::class, 'getProducts']);
+// Route::get('search', [ProductController::class, 'getProducts']);
 // Route::get('checkout', [OrderController::class, 'index'])->name("checkout");
 Route::get('checkout/{unique_id}', [CartController::class, 'checkout'])->name("checkout");
 Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');

@@ -47,6 +47,21 @@ class FrontHomeController extends Controller
         return view('frontend.pages.contact');
     }
 
+    public function search()
+    {
+        return view('frontend.pages.search');
+    }
+
+    public function searchFunders()
+    {
+        return view('frontend.pages.searchFunders');
+    }
+   
+    public function showFunder()
+    {
+        return view('frontend.pages.funderSingle');
+    }
+
     public function handleAjaxRequest(Request $request)
     {
         $eventId = $request->input('event_id');

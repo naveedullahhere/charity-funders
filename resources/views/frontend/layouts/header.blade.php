@@ -36,35 +36,181 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('charity/about.css') }}">
 
     <link rel="stylesheet" href="{{ asset('charity/style.css') }}">
-<script>
 
-document.addEventListener("DOMContentLoaded", function () {
-    const counters = document.querySelectorAll(".count");
+    <style>
+        .white-nowrap {
+            white-space: nowrap;
+        }
+        .primaryBtn{
+            background-color: #129793;
+            color: #fff;
+            padding: 10px 25px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 50px;
+            cursor: pointer;
+        }
 
-    counters.forEach(counter => {
-        const updateCount = () => {
-            const target = +counter.getAttribute('data-number');
-            const speed = +counter.getAttribute('data-speed');
-            const count = +counter.innerText;
+        .txt-primary{
+            color: #129793;
+        }
+        .primaryBtn i, .btn-ico {
+            transform: rotate(50deg);
+            margin-left: 5px;
+        }
+        .decoration-none{
+            text-decoration: none
+        }
+        .bg-main{
+            background:#FF7260!important
+        }
 
-            const increment = target / speed * 1;
+        .sidebar .info-item{
+            cursor: pointer
+        }
+    </style>
+    <style>
+        .p-thin {
+  font-family: "Poppins", serif;
+  font-weight: 100;
+  font-style: normal;
+}
 
-            if (count < target) {
-                counter.innerText = Math.ceil(count + increment);
-                setTimeout(updateCount, 100);
-            } else {
-                counter.innerText = target;
-            }
-        };
+.p-extralight {
+  font-family: "Poppins", serif;
+  font-weight: 200;
+  font-style: normal;
+}
 
-        counter.innerText = '0';
-        updateCount();
-    });
-});
+.p-light {
+  font-family: "Poppins", serif;
+  font-weight: 300;
+  font-style: normal;
+}
 
-</script>
+.p-regular {
+  font-family: "Poppins", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.p-medium {
+  font-family: "Poppins", serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.p-semibold {
+  font-family: "Poppins", serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.p-bold {
+  font-family: "Poppins", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.p-extrabold {
+  font-family: "Poppins", serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.p-black {
+  font-family: "Poppins", serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.p-thin-italic {
+  font-family: "Poppins", serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.p-extralight-italic {
+  font-family: "Poppins", serif;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.p-light-italic {
+  font-family: "Poppins", serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.p-regular-italic {
+  font-family: "Poppins", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.p-medium-italic {
+  font-family: "Poppins", serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.p-semibold-italic {
+  font-family: "Poppins", serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.p-bold-italic {
+  font-family: "Poppins", serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.p-extrabold-italic {
+  font-family: "Poppins", serif;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.p-black-italic {
+  font-family: "Poppins", serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const counters = document.querySelectorAll(".count");
+
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-number');
+                    const speed = +counter.getAttribute('data-speed');
+                    const count = +counter.innerText;
+
+                    const increment = target / speed * 1;
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + increment);
+                        setTimeout(updateCount, 100);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+
+                counter.innerText = '0';
+                updateCount();
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -83,13 +229,13 @@ document.addEventListener("DOMContentLoaded", function () {
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 d-flex justify-content-end m-0 p-0 gap-4 button-login-sub">
-                     <!--<div class="btn-nav-1"><a href="company/group"><i class="fa fa-search"></i> Search Funders</a></div>-->
-                     <!--                                                   <div class="btn-nav-1"><a href="my_account"><i class="fa fa-user"></i> My Account</a></div>-->
-                     <!--                                                   <div class="btn-nav-2"><a href="auth/logout"><i class="fa fa-sign-out"></i> Logout</a></div>-->
-                 <div class="btn-nav-1"><a href="{{url('register')}}">Subscribe to database</a></div>
-                                                                        <div class="btn-nav-2"><a href="{{url('my-account')}}">Client Log in</a></div>
-                        
-                       
+                        <!--<div class="btn-nav-1"><a href="company/group"><i class="fa fa-search"></i> Search Funders</a></div>-->
+                        <!--                                                   <div class="btn-nav-1"><a href="my_account"><i class="fa fa-user"></i> My Account</a></div>-->
+                        <!--                                                   <div class="btn-nav-2"><a href="auth/logout"><i class="fa fa-sign-out"></i> Logout</a></div>-->
+                        <div class="btn-nav-1"><a href="{{ url('register') }}">Subscribe to database</a></div>
+                        <div class="btn-nav-2"><a href="{{ url('my-account') }}">Client Log in</a></div>
+
+
                         <!-- <div class="btn-nav-1"><a href="">Subscribe</a></div>
                     <div class="btn-nav-2"><a href="">Login</a></div> -->
                     </div>
