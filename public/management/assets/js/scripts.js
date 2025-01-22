@@ -6,17 +6,11 @@
 // renderLoadingTable("#filteredData table", 12);
 
 function filterationCommon(url, loadmore = false, appenddiv = "filteredData") {
-
   renderLoadingTable("#filteredData table", 10);
 
-  
   var url = url;
   var loadmore = loadmore;
   var appenddiv = appenddiv;
-
-  // $("#" + appenddiv).html(
-  //   `<div class="text-center spinnerparent"><div class="spinner-border" role="status"></div></div>`
-  // );
 
   // Initialize Daterangepicker
   initializeDaterangepicker();
@@ -27,54 +21,54 @@ function filterationCommon(url, loadmore = false, appenddiv = "filteredData") {
     },
   });
 
-
-
-
-
   // Debounce function to optimize input change handling
   function debounce(func, delay) {
     let timer;
     return function (...args) {
-        clearTimeout(timer);
-        timer = setTimeout(() => func.apply(this, args), delay);
+      clearTimeout(timer);
+      timer = setTimeout(() => func.apply(this, args), delay);
     };
-}
+  }
 
-$("#filterForm input, #filterForm select")
+  // Handle form input changes
+  $("#filterForm input, #filterForm select")
     .off("change keyup")
     .on(
-        "change keyup",
-        debounce(function (event) {
-            var $this = $(this);
+      "change keyup",
+      debounce(function (event) {
+        var $this = $(this);
 
-            // If the input has the class 'only-keypress', skip change event
-          // Check if input type is 'text' and event is not 'keyup'
-          if ($this.attr("type") === "text" && event.type !== "keyup") {
-            return; 
+        // If the input has the class 'only-keypress', skip change event
+        if ($this.attr("type") === "text" && event.type !== "keyup") {
+          return;
         }
 
-            renderLoadingTable("#filteredData table", 12);
-            var formData = $("#filterForm").serialize();
-            fetch_data(formData);
-        }, 300) // Debounce with a 300ms delay
+        renderLoadingTable("#filteredData table", 12);
+        var formData = $("#filterForm").serialize();
+        updateUrlParams(formData);
+        fetch_data(formData);
+      }, 300)
     );
 
-
-
-
-
-
+  // Handle pagination
   $(document).on("click", "#paginationLinks a", function (e) {
-    // $("#" + appenddiv).html(
-    //   `<div class="text-center spinnerparent"><div class="spinner-border" role="status"></div></div>`
-    // );
     renderLoadingTable("#filteredData table", 12);
     e.preventDefault();
     var page = $(this).attr("href").split("page=")[1];
     var formData = $("#filterForm").serialize() + "&page=" + page;
+    updateUrlParams(formData);
+    fetch_data(formData);
+  });
+  $(document).on("change", "#per_page ", function (e) {
+    renderLoadingTable("#filteredData table", 12);
+    e.preventDefault();
+    var page = $(this).val();
+    var formData = $("#filterForm").serialize() + "&per_page=" + page;
+    updateUrlParams(formData);
     fetch_data(formData);
   });
 
+  // Fetch data with AJAX
   function fetch_data(formData) {
     $.ajax({
       url: url,
@@ -88,8 +82,8 @@ $("#filterForm input, #filterForm select")
       },
       error: function (xhr, status, error) {
         console.error(error);
+        handleAjaxError(xhr, status, error);
 
-        // Display SweetAlert for the error
         Swal.fire({
           icon: "error",
           title: "Error",
@@ -100,12 +94,38 @@ $("#filterForm input, #filterForm select")
     });
   }
 
+  // Update URL parameters
+  function updateUrlParams(formData) {
+    const urlParams = new URLSearchParams(formData);
+    const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+    window.history.pushState(null, "", newUrl);
+  }
+
+  // // Load filter values from URL on page load
+  // function loadFiltersFromUrl() {
+  //   const urlParams = new URLSearchParams(window.location.search);
+  //   urlParams.forEach((value, key) => {
+  //     const $field = $(`[name="${key}"]`);
+  //     if ($field.length) {
+  //       if ($field.is(":checkbox")) {
+  //         $field.prop("checked", value === "true");
+  //       } else if ($field.is(":radio")) {
+  //         $field.filter(`[value="${value}"]`).prop("checked", true);
+  //       } else {
+  //         $field.val(value).trigger("change");
+  //       }
+  //     }
+  //   });
+  // }
+
+  // Initialize filters on page load
+  // loadFiltersFromUrl();
   fetch_data($("#filterForm").serialize());
 
+  // Initialize Daterangepicker
   function initializeDaterangepicker() {
     try {
       if ($("#date_range").length) {
-        // Ensure element exists before initializing
         var currentDate = moment().add(1, "days");
         var startDate = moment().subtract(28, "days");
 
@@ -124,30 +144,25 @@ $("#filterForm input, #filterForm select")
             currentDate.format("YYYY-MM-DD")
         );
 
-        // Handle date range selection
         $("#date_range").on("apply.daterangepicker", function (ev, picker) {
-          $("#" + appenddiv).html(
-            `<div class="text-center spinnerparent"><div class="spinner-border" role="status"></div></div>`
-          );
           $(this).val(
             picker.startDate.format("YYYY-MM-DD") +
               " - " +
               picker.endDate.format("YYYY-MM-DD")
           );
-          fetch_data($("#filterForm").serialize());
+          var formData = $("#filterForm").serialize();
+          updateUrlParams(formData);
+          fetch_data(formData);
         });
 
-        // Handle clear selection
         $("#date_range").on("cancel.daterangepicker", function (ev, picker) {
-          $("#" + appenddiv).html(
-            `<div class="text-center spinnerparent"><div class="spinner-border" role="status"></div></div>`
-          );
           $(this).val("");
-          fetch_data($("#filterForm").serialize());
+          var formData = $("#filterForm").serialize();
+          updateUrlParams(formData);
+          fetch_data(formData);
         });
       }
     } catch (error) {
-      // Catch and display any initialization or runtime errors
       console.error(error);
       Swal.fire({
         icon: "error",
@@ -160,6 +175,7 @@ $("#filterForm input, #filterForm select")
     }
   }
 }
+
 
 $(document).on("submit", "#ajaxSubmit", function (e) {
   var formhunyr = $(this);
@@ -259,6 +275,7 @@ $(document).on("submit", "#ajaxSubmit", function (e) {
     error: function (xhr, status, error) {
       Swal.close(); // Close loader
       console.log(xhr.responseJSON.errors);
+      
       if (xhr.responseJSON && xhr.responseJSON.errors) {
         var validationErrors = xhr.responseJSON.errors;
 

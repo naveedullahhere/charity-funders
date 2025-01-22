@@ -1,4 +1,4 @@
-    {!! Form::open(['route' => 'users.store', 'method' => 'POST', 'id' => 'subm']) !!}
+    {!! Form::open(['route' => 'users.store', 'method' => 'POST', 'id' => 'ajaxSubmit']) !!}
     <input type="hidden" id="url" value="{{ route('users.index') }}" />
 
     <div class="row">

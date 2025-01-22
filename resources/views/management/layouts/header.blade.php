@@ -13,8 +13,8 @@
         content="admin template, Apex admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
     <title>@yield('title') - {{config('app.name')}}</title>
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('management') }}/app-assets/img/ico/favicon.ico">
-    <link rel="shortcut icon" type="image/png" href="{{ asset('management') }}/app-assets/img/ico/favicon-32.png">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/favicon.ico') }}">
+   
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -103,8 +103,8 @@
                                     <div class="logo">
                                         <a class="logo-text" href="{{ url('/') }}">
                                             <div class="logo-img"><img class="logo-img" alt="Apex logo"
-                                                    src="{{ asset('management/app-assets/img/innovative-logo.png') }}">
-                                            </div><span class="text">INPL</span>
+                                                    src="{{ asset('management/app-assets/img/charity-logo.png') }}">
+                                            </div>
                                         </a>
                                     </div>
                                 @endif
@@ -334,7 +334,7 @@
 
                             </div>
                         </li>
-                        <li class="nav-item d-none d-lg-block mr-2 mt-1"><a
+                        <li class="nav-item d-none d-lg-blok mr-2 mt-1"><a
                                 class="nav-link notification-sidebar-toggle" href="javascript:;"><i
                                     class="ft-align-right font-medium-3"></i></a></li>
                     </ul>

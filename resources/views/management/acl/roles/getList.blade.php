@@ -27,7 +27,7 @@
                                 </a>
                             @else
                                 <a class="info p-1 text-center mr-2 position-relative "
-                                    onclick="openModal(this,'{{ route('roles.edit', $role->id) }}','Edit Role')"> <i
+                                    onclick="openModal(this,'{{ route('roles.edit', $role->id) }}','View Role (Viewonly)',true)"> <i
                                         class="ft-eye font-medium-3"></i></a>
                             @endif
                         @endcan
@@ -76,11 +76,7 @@
 
 
 <div class="row d-flex" id="paginationLinks">
-    <div class="col-md-6">
-        <p> Showing {{ $roles->firstItem() }} to {{ $roles->lastItem() }} of {{ $roles->total() }}
-            entries</p>
-    </div>
-    <div class="col-md-6 text-right">
+    <div class="col-md-12 text-right">
         <div id="">
             {{ $roles->links() }}
         </div>

@@ -232,8 +232,16 @@
                         <!--<div class="btn-nav-1"><a href="company/group"><i class="fa fa-search"></i> Search Funders</a></div>-->
                         <!--                                                   <div class="btn-nav-1"><a href="my_account"><i class="fa fa-user"></i> My Account</a></div>-->
                         <!--                                                   <div class="btn-nav-2"><a href="auth/logout"><i class="fa fa-sign-out"></i> Logout</a></div>-->
+                        @auth
+                        <div class="btn-nav-1"><a href="{{ url('search-funders') }}"><i class="fa fa-search me-2"></i>Search Funders</a></div>
+                        
+                       
+                        <div class="btn-nav-2"><a href="{{ url('my-account') }}"><i class="fa-solid fa-arrow-right-from-bracket  me-2"></i> Logout</a></div>
+                        @endauth
+                        @guest
                         <div class="btn-nav-1"><a href="{{ url('register') }}">Subscribe to database</a></div>
                         <div class="btn-nav-2"><a href="{{ url('my-account') }}">Client Log in</a></div>
+                        @endguest
 
 
                         <!-- <div class="btn-nav-1"><a href="">Subscribe</a></div>

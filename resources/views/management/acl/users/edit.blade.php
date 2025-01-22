@@ -2,6 +2,23 @@
 <input type="hidden" id="url" value="{{ route('users.index') }}" />
 
 <div class="row">
+<div class="col-md-12 -auto">
+                                                <div class="avatar-upload">
+                                                    <div class="avatar-edit">
+                                                        <input type='file' id="imageUpload" name="profile_image"
+                                                            accept=".png, .jpg, .jpeg" />
+                                                        <label for="imageUpload">
+                                                           <i class="ft-camera"></i>
+                                                        </label>
+                                                    </div>
+                                                    <div class="avatar-preview">
+                                                        <div id="imagePreview"
+                                                            style="background-image: url('{{ image_path(auth()->user()->profile_image) }}');">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="text-center mt-2">{{'@'.auth()->user()->username}}</p>
+                                            </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <label>Name:</label>
@@ -46,33 +63,8 @@
         </div>
     </div>
 </div>
-<div class="card border-1">
-<div class="card-body">
-<div class="row">
-    <div class="col-xs-5 col-sm-5 col-md-5">
-        <div class="form-group">
-            <label>Company:</label>
-            <select name="per_page" class="form-control">
-                <option value="25">25 / Page</option>
-                <option value="50">50 / Page</option>
-                <option value="100">100 / Page</option>
-            </select>
-        </div>
-    </div>
-    <div class="col-xs-5 col-sm-5 col-md-5">
-        <div class="form-group">
-            <label>Role:</label>
-            <select name="per_page" class="form-control">
-                @foreach ($roles as $roleId => $roleName)
-                    <option value="{{ $roleId }}">{{ $roleName }}</option>
-                @endforeach
 
-            </select>
-        </div>
-    </div>
-</div>
-</div>
-</div>
+
 <div class="row bottom-button-bar">
     <div class="col-12">
         <a type="button" class="btn btn-danger modal-sidebar-close position-relative top-1 closebutton">Close</a>

@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Observers\CompanyObserver;
 use App\Models\User;
 use App\Observers\UserObserver;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Paginator::useBootstrapFive(); 
                 Company::observe(CompanyObserver::class);
         User::observe(UserObserver::class);
     }
