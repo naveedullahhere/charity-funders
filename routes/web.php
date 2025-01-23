@@ -3,6 +3,7 @@
 use App\Http\Controllers\FrontHomeController;
 
 use App\Http\Controllers\TypeController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\WorkAreaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -89,23 +90,7 @@ Route::group(['middleware' => ['auth']], function () {
         return redirect('/');
     })->name('logouts');
 
-    Route::post('/baskets', [CartController::class, 'createBasket']);
-    Route::post('/baskets/add', [CartController::class, 'addToBasket'])->name('basket.add');
-    Route::get('/baskets/checkout/{uniq_id}', [CartController::class, 'checkout']);
-
-    Route::get('collections', [CollectionController::class, 'index'])->name('collections.index');
-    Route::post('collections/store', [CollectionController::class, 'store'])->name('collections.store');
-    Route::post('collections/make', [CollectionController::class, 'storeCollection'])->name('collections.make');
-    Route::post('collections/get-media-prices', [CollectionController::class, 'getPrices'])->name('collections.add_media');
-    Route::post('collections/remove-media-prices', [CollectionController::class, 'removeMediaPrices'])->name('collections.remove_media');
-    Route::post('collections/remove-event-prices', [CollectionController::class, 'removeMediaPrices'])->name('collections.remove_media');
-    Route::get('collections/get-selected-media', [CollectionController::class, 'getSelectedMedia'])->name('collections.get_selected_media');
-
-    Route::get('/collections/{id}', [CollectionController::class, 'single'])->name('collections.single');
-
-    Route::get('/media/{id}', [GalleryController::class, 'show'])->name('collections.single');
-    Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
-    Route::delete('/cart/remove/{id}', [CartController::class, 'removeItem'])->name('cart.remove');
+    
 
     Route::get('my-account', [App\Http\Controllers\CustomerDashboardController::class, 'MyProfile'])->name('my-account');
     Route::get('my-drive', [App\Http\Controllers\CustomerDashboardController::class, 'MyDrive'])->name('my-drive');
@@ -120,6 +105,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('types', TypeController::class);
         Route::post('/get-types', [TypeController::class, 'getList'])->name('get.types');
 
+        Route::resource('category', CategoryController::class);
+        Route::post('/get-category', [CategoryController::class, 'getList'])->name('get.category');
+
+
         Route::resource('newsletter', NewsletterController::class);
         Route::post('/get-newsletter', [NewsletterController::class, 'getTable'])->name('get.newsletter');
         Route::get('/export-newsletter', [App\Http\Controllers\NewsletterController::class, 'exportToExcel'])->name('export-newsletter');
@@ -132,42 +121,4 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
     });
 });
-Route::get('/t/{slug}', [App\Http\Controllers\BusinessProfileController::class, 'PublicView'])->name('PublicView');
 
-Route::get('/migrate-refresh', function () {
-    // Rollback migrations
-    Artisan::call('migrate:fresh');
-
-    // Seed the database with specific seeders
-    Artisan::call('db:seed', ['--class' => 'PermissionTableSeeder']);
-    Artisan::call('db:seed', ['--class' => 'CreateAdminUserSeeder']);
-    Artisan::call('db:seed', ['--class' => 'CompanyCategorySeeder']);
-    Artisan::call('db:seed', ['--class' => 'CompanySeeder']);
-    Artisan::call('db:seed', ['--class' => 'ContactTypeSeeder']);
-    Artisan::call('db:seed', ['--class' => 'ContactsSeeder']);
-    Artisan::call('db:seed', ['--class' => 'leadSourceSeeder']);
-    Artisan::call('db:seed', ['--class' => 'LeadStagesSeeder']);
-    Artisan::call('db:seed', ['--class' => 'LeadTagSeeder']);
-    Artisan::call('db:seed', ['--class' => 'CountrySeeder']);
-    Artisan::call('db:seed', ['--class' => 'StatesSeeder']);
-    //    Artisan::call('db:seed', ['--class' => 'CitySeeder']);
-
-    return 'Migrations rolled back and seeders executed successfully.';
-});
-
-Route::get('/migrate-specific/{id}', function ($id) {
-    // Run a specific migration
-    $migrationPath = 'database/migrations/' . $id;
-    Artisan::call('migrate', [
-        '--path' => $migrationPath,
-    ]);
-
-    return 'Migration executed successfully.';
-});
-
-Route::get('/seeder-specific/{id}', function ($id) {
-    // You can also run seeders if needed
-    Artisan::call('db:seed', ['--class' => $id]);
-
-    return 'Migration executed successfully.';
-});
