@@ -1,3 +1,87 @@
+<style>
+    .newsletter-section {
+        background-color: #9bd7d542;
+        padding: 30px 0;
+        margin-top: 30px;
+    }
+
+    .newsletter-container {
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .newsletter-title {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    .newsletter-description {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    .newsletter-form {
+        display: flex;
+        justify-content: center;
+    }
+
+    .newsletter-input {
+        width: 70%;
+        padding: 12px 15px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 4px 0 0 4px;
+    }
+
+    .newsletter-button {
+        padding: 12px 20px;
+        font-size: 16px;
+        background-color: #129793;
+        color: white;
+        border: none;
+        border-radius: 0 4px 4px 0;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .newsletter-button:hover {
+        background-color: #0f7a76;
+    }
+
+    .newsletter-message {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+    .error-message {
+        color: #d9534f;
+    }
+
+    .success-message {
+        color: #5cb85c;
+    }
+</style>
+
+<div class="newsletter-section">
+    <div class="newsletter-container">
+        <h2 class="newsletter-title">Stay Updated with Charity Funders</h2>
+        <p class="newsletter-description">
+            Subscribe to our newsletter and stay updated on the latest developments and special offers!
+        </p>
+        <form id="newsletterForm" class="newsletter-form">
+            @csrf
+            <input type="email" name="email" class="newsletter-input" placeholder="Enter your email address" required>
+            <button type="submit" id="subscribeButton" class="newsletter-button">
+                Subscribe
+            </button>
+        </form>
+        <div id="emailError" class="newsletter-message error-message"></div>
+        <div id="successMessage" class="newsletter-message success-message"></div>
+    </div>
+</div>
 <div class="footer">
     <div class="container-fuild">
         <div class="ft-row">
@@ -64,135 +148,38 @@
 </div>
 
 
-<script src="assets/lib/plugins/select2/select2.min.js"></script>
-
 <script>
-    jQuery(window).on('scroll', function() {
-        if (jQuery(this).scrollTop() > 100) {
-            jQuery('.scrollup').fadeIn();
-        } else {
-            jQuery('.scrollup').fadeOut();
-        }
-    });
+    $(document).ready(function() {
+        $('#newsletterForm').on('submit', function(e) {
+            e.preventDefault();
+            $('#emailError').text('');
+            $('#successMessage').text('');
+            $('#subscribeButton').prop('disabled', true).text('Subscribing...');
 
-    function validateEmail(sEmail) {
-        var filter = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
-        if (filter.test(sEmail)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    jQuery('.scrollup').on('click', function() {
-        jQuery("html, body").animate({
-            scrollTop: 0
-        }, 700);
-        return false;
-    });
-
-    $(window).scroll(function() {
-        if ($(this).scrollTop() > 41) {
-            $('header').addClass('sticky');
-        } else {
-            $('header').removeClass('sticky');
-        }
-    });
-
-    (function($) {
-        $.fn.menumaker = function(options) {
-            var cssmenu = $(this),
-                settings = $.extend({
-                    format: "dropdown",
-                    sticky: false
-                }, options);
-            return this.each(function() {
-                $(this).find(".button").on('click', function() {
-                    $(this).toggleClass('menu-opened');
-                    var mainmenu = $(this).next('ul');
-                    if (mainmenu.hasClass('open')) {
-                        mainmenu.slideToggle().removeClass('open');
-                    } else {
-                        mainmenu.slideToggle().addClass('open');
-                        if (settings.format === "dropdown") {
-                            mainmenu.find('ul').show();
-                        }
+            $.ajax({
+                url: '{{ route('newsletter.subscribe') }}',
+                method: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    if (response.success) {
+                        $('#successMessage').text(response.message);
+                        $('#newsletterForm')[0].reset();
                     }
-                });
-                cssmenu.find('li ul').parent().addClass('has-sub');
-                multiTg = function() {
-                    cssmenu.find(".has-sub").prepend('<span class="submenu-button"></span>');
-                    cssmenu.find('.submenu-button').on('click', function() {
-                        $(this).toggleClass('submenu-opened');
-                        if ($(this).siblings('ul').hasClass('open')) {
-                            $(this).siblings('ul').removeClass('open').slideToggle();
-                        } else {
-                            $(this).siblings('ul').addClass('open').slideToggle();
-                        }
-                    });
-                };
-                if (settings.format === 'multitoggle')
-                    multiTg();
-                else
-                    cssmenu.addClass('dropdown');
-                if (settings.sticky === true)
-                    cssmenu.css('position', 'fixed');
-                resizeFix = function() {
-                    var mediasize = 1000;
-                    if ($(window).width() > mediasize) {
-                        cssmenu.find('ul').show();
-                    }
-                    if ($(window).width() <= mediasize) {
-                        cssmenu.find('ul').hide().removeClass('open');
-                    }
-                };
-                resizeFix();
-                return $(window).on('resize', resizeFix);
-            });
-        };
-    })(jQuery);
-
-    (function($) {
-        $(document).ready(function() {
-            $("#cssmenu").menumaker({
-                format: "multitoggle"
-            });
-        });
-    })(jQuery);
-
-
-    // $('.select2')?.select2();
-
-    jQuery(".btn_subscribe").click(function(event) {
-        event.preventDefault();
-        var email = jQuery("#newsletter_email").val();
-        var error = 0;
-
-        if (validateEmail(email) == false || !email) {
-            jQuery('#newsletter-msg').html('Invalid Email').show();
-            error = 1;
-        } else {
-            jQuery('#newsletter-msg').hide();
-        }
-
-        if (error == 0) {
-            jQuery.ajax({
-                type: "POST",
-                url: "newsletter_subscriber/Newsletter_subscriber_frontview/create_action_ajax",
-                dataType: 'json',
-                data: {
-                    email: email
                 },
-                success: function(jsonData) {
-                    jQuery('#msg').html(jsonData.Msg).slideDown('slow');
-                    if (jsonData.Status === 'OK') {
-                        jQuery('#msg').delay(2000).slideUp('slow');
-                        jQuery("#newsletter_email").val('');
+                error: function(xhr) {
+                    if (xhr.status === 422) {
+                        const errors = xhr.responseJSON.errors;
+                        for (let error in errors) {
+                            $(`#${error}Error`).text(errors[error][0]);
+                        }
                     } else {
-                        jQuery('#msg').delay(5000).slideUp('slow');
+                        $('#emailError').text('An error occurred. Please try again.');
                     }
-                    //console.log( jsonData );
+                },
+                complete: function() {
+                    $('#subscribeButton').prop('disabled', false).text('Subscribe');
                 }
             });
-        }
+        });
     });
 </script>

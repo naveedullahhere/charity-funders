@@ -7,8 +7,10 @@ namespace App\Http\Controllers;
 use App\Models\Space;
 use Illuminate\Http\Request;
 use App\Models\Newsletter;
+use App\Models\NewsletterSubscriber;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Illuminate\Support\Facades\Validator;
 
 class NewsletterController extends Controller
 {
@@ -27,14 +29,25 @@ class NewsletterController extends Controller
 
     public function subscribe(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:newsletters,email',
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|unique:newsletter_subscribers,email',
         ]);
 
-        Newsletter::create($request->only('name', 'email'));
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors(),
+            ], 422);
+        }
 
-        return response()->json(['success' => 'You have been successfully subscribed to our newsletter!']);
+        NewsletterSubscriber::create([
+            'email' => $request->email,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Thank you for subscribing to our newsletter!',
+        ]);
     }
 
     public function getTable(Request $request)
@@ -78,5 +91,4 @@ class NewsletterController extends Controller
 
         return response()->download($fileName)->deleteFileAfterSend(true);
     }
-
 }
