@@ -5,14 +5,14 @@
 <body>
 <table cellspacing="0">
     <tbody>
+        <h2>New Contact Form Submission</h2>
     <tr>
-        <td>
-            <br>
-            <strong>From:</strong> {{$user['contactName']}} <span><a href="mailto:{{$user['contactEmail']}}">{{$user['contactEmail']}}</a></span>
-            <br>
-            <strong>Subject:</strong> {{$user['contactSubject']}}
-            <br>
-            <strong>Message:</strong> {{$user['contactMessage']}}
+        <td> 
+            <p><strong>Name:</strong> {{ $contactData['first_name'] }} {{$contactData['last_name']}}</p>
+            <p><strong>Email:</strong> {{ $contactData['email'] }}</p>
+            <p><strong>Phone:</strong> {{ $contactData['phone'] }}</p>
+            <p><strong>Message:</strong></p>
+            <p>{{ $contactData['message'] }}</p>
         </td>
     </tr>
     </tbody>

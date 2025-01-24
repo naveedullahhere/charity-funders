@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use Illuminate\Http\{Request, JsonResponse};
 use App\Http\Requests\ContactRequest;
+use App\Mail\ContactMail;
 
 class ContactController extends Controller
 {
@@ -26,13 +27,13 @@ class ContactController extends Controller
             $searchTerm = '%' . $request->search . '%';
             return $q->where(function ($sq) use ($searchTerm) {
                 $sq->where('first_name', 'like', $searchTerm)
-                   ->orWhere('last_name', 'like', $searchTerm)
-                   ->orWhere('email', 'like', $searchTerm)
-                   ->orWhere('phone', 'like', $searchTerm);
+                    ->orWhere('last_name', 'like', $searchTerm)
+                    ->orWhere('email', 'like', $searchTerm)
+                    ->orWhere('phone', 'like', $searchTerm);
             });
         })
-        ->latest()
-        ->paginate(request('per_page', 25));
+            ->latest()
+            ->paginate(request('per_page', 25));
 
         return view('management.contacts.getList', compact('contacts'));
     }
@@ -52,6 +53,8 @@ class ContactController extends Controller
     {
         $data = $request->validated();
         $contact = Contact::create($data);
+
+        \Mail::to('wearekodrz@gmail.com')->send(new ContactMail($data));
 
         return response()->json(['success' => 'Contact created successfully.', 'data' => $contact], 201);
     }

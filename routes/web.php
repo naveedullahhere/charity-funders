@@ -3,7 +3,7 @@
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FrontHomeController;
 
-use App\Http\Controllers\{FunderController,TypeController,CategoryController,WorkAreaController};
+use App\Http\Controllers\{FunderController,TypeController,CategoryController, SubscriptionController, WorkAreaController};
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -32,6 +32,7 @@ Route::get('page/{slug}', [App\Http\Controllers\FrontHomeController::class, 'Pag
 Route::get('preview_page/{slug}', [App\Http\Controllers\FrontHomeController::class, 'PageSlugPreview'])->name('preview_page');
 Route::get('airport/{slug}', [App\Http\Controllers\FrontHomeController::class, 'AirportSlug'])->name('airport');
 Route::get('/event/{slug}', [App\Http\Controllers\FrontHomeController::class, 'singleEvent'])->name('event');
+Route::post('/subscription', [SubscriptionController::class, 'store'])->name('subscription.store');
 
 Route::get('/file/{filename}', function ($filename) {
     //    dd($filename);

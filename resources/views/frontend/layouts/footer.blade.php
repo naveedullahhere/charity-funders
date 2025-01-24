@@ -5,7 +5,7 @@
                 <a href="/"><img src="{{ asset('charity/images/footer-logo.png') }}" class="img-fluid"
                         alt=""></a>
             </div>
-            
+
             <div class="col-md-8 col-sm-12 nav-1">
                 <div class="nav">
                     <ul class="m-0">
@@ -160,7 +160,7 @@
     })(jQuery);
 
 
-    $('.select2').select2();
+    // $('.select2')?.select2();
 
     jQuery(".btn_subscribe").click(function(event) {
         event.preventDefault();

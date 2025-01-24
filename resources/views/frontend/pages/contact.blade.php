@@ -4,67 +4,31 @@
 @section('meta_description', 'Home')
 @section('meta_keyword', 'Home')
 @section('content')
-    
+
     <link rel="stylesheet" href="{{ asset('charity/contacts.css') }}">
 
-<style>
-    .required {
-        border: 1px solid red !important;
-    }
-</style>
-<!--Banner section Start -->
-<!-- <div class="container-fluid inner-pages-banner contact-banner">
-    <img class="img-responsive" src="assets/theme/images/contact-new.jpg"/>
-</div> -->
-<!--Banner section End -->
-<!--Medil section Start -->
-<!-- <div class="innerpage-main-content-section contactpage">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 contactleft">
-                    <h2>
-                       Contact us via e-mail here
-                    </h2>
-                    <p>Fields marked with * are required fields</p>
-                    <div id="contact_page_ajax_respond"></div>
+    <style>
+        .required {
+            border: 1px solid red !important;
+        }
 
-                <form id="C_sendMail" method="post" onsubmit="return SendContactMail(event);">
-                    <label>Name <sup>*</sup><br>
-                        <input id="C_SendMail_name" name="name" placeholder="" type="text"></input>
-                    </label>
-                    <br>
-                    <label>Email <sup>*</sup><br>
-                        <input id="C_SendMail_email" name="email" placeholder="" type="email"></input>
-                        </label>
-                        <br>
-                        <label>Phone number <sup>*</sup><br>
-                        <input id="C_SendMail_contact_no" name="contact" placeholder="" type="tel">
-                        </input>
-                        </label>
-                        <br>
-                        <label>Enquiry<br>
-                        <textarea id="C_SendMail_message" name="message" placeholder="Message">
-                        </textarea>
-                        </label>
-                        <br>
-                        <input class="button" type="submit" value="send message"></input>
-                </form>
-            </div>
-            <div class="col-md-6">
-                <div class="contact-details">
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
 
-                    <?php  //echo $cms['content']; ?>
+        .loading {
+            display: none;
+            font-size: 16px;
+            color: #129793;
+        }
 
-                </div>
-
-
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-</div> -->
-
-    <!-- ............................Contact-Bannner.............................. -->
+        input.error,
+        textarea.error {
+            border-color: 2px solid red;
+        }
+    </style>
     <section class="Contact-Banner">
         <div class="main-container">
             <div class="contact-container">
@@ -78,39 +42,68 @@
         </div>
     </section>
 
-
-    <!-- ....................................Form-section-1....................................... -->
     <section class="Form-section">
         <div class="row get-touch align-items-center">
             <div class="col-lg-6 col-sm-12 p-0">
-                <div class="form d-flex flex-row flex-wrap gap-4">
-                    <input type="text" id="name" name="Name" placeholder="First Name">
-                    <input type="text" id="name" name="Name" placeholder="Last Name">
-                    <input type="text" id="name" name="Name" placeholder="Email">
-                    <input type="text" id="name" name="Name" placeholder="Phone">
-                    <textarea id="subject" name="subject" placeholder="Message.." style="height:200px"></textarea>
-                </div>
-                <div class="row col-lg-12 d-flex align-items-center check-box pt-4">
-
-                    <div class="col-lg-6 d-flex gap-2 col-md-6 col-sm-12">
-                        <input class="form-check-input mt-0" type="checkbox" value=""
-                            aria-label="Checkbox for following text input">
-                        <p class="mb-0">I Accept Privacy Policy</p>
+                <form id="contactForm">
+                    @csrf
+                    <div class="form d-flex flex-row flex-wrap gap-4">
+                        <div class="row mx-auto w-100">
+                            <div class="my-2 col-md-6">
+                                <div class="form-group">
+                                    <input type="text" id="first_name" name="first_name" class="w-100"
+                                        placeholder="First Name">
+                                    <span class="error-message" id="first_nameError"></span>
+                                </div>
+                            </div>
+                            <div class="my-2 col-md-6">
+                                <div class="form-group">
+                                    <input type="text" id="last_name" name="last_name" class="w-100"
+                                        placeholder="Last Name">
+                                    <span class="error-message" id="last_nameError"></span>
+                                </div>
+                            </div>
+                            <div class="my-2 col-md-6">
+                                <div class="form-group">
+                                    <input type="text" id="email" name="email" class="w-100" placeholder="Email">
+                                    <span class="error-message" id="emailError"></span>
+                                </div>
+                            </div>
+                            <div class="my-2 col-md-6">
+                                <div class="form-group">
+                                    <input type="text" id="phone" name="phone" class="w-100" placeholder="Phone">
+                                    <span class="error-message" id="phoneError"></span>
+                                </div>
+                            </div>
+                            <div class="my-2 col-12">
+                                <div class="form-group">
+                                    <textarea id="message" name="message" class="w-100" placeholder="Message.." style="height:200px"></textarea>
+                                    <span class="error-message" id="messageError"></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-lg-6 col-md-6 justify-content-end d-flex col-sm-12">
-                        <button class="btn-contact">
-                            <a href="">Submit </a>
-                            <i class="fas fa-arrow-up"></i>
-                        </button>
+                    <div class="row col-lg-12 d-flex align-items-center check-box pt-4">
+                        <div class="col-lg-6 d-flex gap-2 col-md-6 col-sm-12">
+                            <input class="form-check-input mt-0" type="checkbox" name="privacy_policy" id="privacy_policy">
+                            <p class="mb-0">I Accept Privacy Policy</p>
+                            <span class="error-message" id="privacy_policyError"></span>
+                        </div>
+                        <div class="col-lg-6 col-md-6 justify-content-end d-flex col-sm-12">
+                            <button type="submit" class="btn-contact">
+                                Submit <i class="fas fa-arrow-up"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
-
+                    <div class="loading" id="loading">Sending...</div>
+                    <div class="success-message" id="successMessage" style="display: none; color: green;"></div>
+                </form>
             </div>
             <div class="col-lg-6 icon-box-container">
                 <h2 class="mb-0">Get In Touch</h2>
                 <div class="main-icon-box mt-3">
                     <div class="col-md-12 d-flex gap-3">
-                        <img src="{{asset('charity/images/Phone call.svg')}}" alt="" class="img-fliud">
+                        <img src="{{ asset('charity/images/Phone call.svg') }}" alt="" class="img-fliud">
                         <div class="box">
                             <h4 class="mb-0">Telephone</h4>
                             <p class="mb-0">020 3740 2750</p>
@@ -119,17 +112,16 @@
                 </div>
                 <div class="main-icon-box mt-3">
                     <div class="col-md-12 d-flex  gap-3">
-                        <img src="{{asset('charity/images/sms.svg')}}" alt="" class="img-fliud">
+                        <img src="{{ asset('charity/images/sms.svg') }}" alt="" class="img-fliud">
                         <div class="box">
                             <h4 class="mb-0">Email</h4>
                             <p class="mb-0">info@charityfunders.com</p>
                         </div>
                     </div>
-
                 </div>
                 <div class="main-icon-box mt-3">
                     <div class="col-md-12 d-flex align-items-start gap-3">
-                        <img src="{{asset('charity/images/location.svg')}}" alt="" class="img-fliud">
+                        <img src="{{ asset('charity/images/location.svg') }}" alt="" class="img-fliud">
                         <div class="box">
                             <h4 class="mb-0">Registered address</h4>
                             <p class="mb-0">Londoneast-UK Business & Technical <br>
@@ -140,21 +132,15 @@
                 <div class="col-lg-12 d-flex gap-2 mt-3 icon-2">
                     <div class="youtube-icon">
                         <i class="fa-brands fa-youtube"></i>
-
                     </div>
                     <div class="twitter-icon">
                         <i class="fa-brands fa-x-twitter"></i>
-
                     </div>
                 </div>
-
             </div>
         </div>
-
     </section>
 
-
-    <!-- .......................Section-2.......................... -->
     <section class="Call-to-action">
         <div class="Action-container">
             <div class="Action">
@@ -162,75 +148,43 @@
                     <h2>We are a fully remote working <br> organisation so please call or <br> email our team.</h2>
                 </div>
             </div>
-
         </div>
     </section>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#contactForm').on('submit', function(e) {
+                e.preventDefault();
 
+                $('.error-message').text('');
+                $('#loading').show();
+                $('#successMessage').hide();
 
-<!--Medil section End -->
-<script>
-    function SendContactMail(e) {
-        e.preventDefault();
+                $.ajax({
+                    url: '{{ route('contact-us.store') }}',
+                    method: 'POST',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        $('#loading').hide();
+                        $('#successMessage').text(response.message).show();
+                        $('#contactForm')[0].reset();
+                    },
+                    error: function(xhr) {
+                        $('#loading').hide();
+                        const errors = xhr.responseJSON.errors;
+                        for (let error in errors) {
+                            $(`#${error}Error`).text(errors[error][0]);
+                            const inputField = document.querySelector(`[name="${error}"]`);
 
-        var formData = jQuery('#C_sendMail').serialize();
-
-        var error = 0;
-
-        var name = jQuery('#C_SendMail_name').val();
-        if (!name) {
-            jQuery('#C_SendMail_name').addClass('required');
-            error = 1;
-        } else {
-            jQuery('#C_SendMail_name').removeClass('required');
-        }
-
-        var email = jQuery('#C_SendMail_email').val();
-        if (!email) {
-            jQuery('#C_SendMail_email').addClass('required');
-            error = 1;
-        } else {
-            jQuery('#C_SendMail_email').removeClass('required');
-        }
-
-        var contact_no = jQuery('#C_SendMail_contact_no').val();
-        if (!contact_no) {
-            jQuery('#C_SendMail_contact_no').addClass('required');
-            error = 1;
-        } else {
-            jQuery('#C_SendMail_contact_no').removeClass('required');
-        }
-
-        var message = jQuery('#C_SendMail_message').val();
-        if (!message) {
-            jQuery('#C_SendMail_message').addClass('required');
-            error = 1;
-        } else {
-            jQuery('#C_SendMail_message').removeClass('required');
-        }
-
-        if (!error) {
-            jQuery.ajax({
-                type: "POST",
-                url: "mail/send_a_message_contact_us",
-                dataType: 'json',
-                data: formData,
-
-                beforeSend: function () {
-                    jQuery('#contact_page_ajax_respond').html('<p class="ajax_processing">Sending...</p>');
-                },
-                success: function (jsonData) {
-                    jQuery('#contact_page_ajax_respond').html(jsonData.Msg);
-                    if (jsonData.Status === 'OK') {
-                        document.getElementById("C_sendMail").reset();
-                        setTimeout(function () {
-                            $('#contact_page_ajax_respond').slideUp('slow') }, 2000);
+                            if (inputField) {
+                                inputField.classList.add('error');
+                            }
+                        }
                     }
-                }
+                });
             });
-        }
-    }
-</script>
-
+        });
+    </script>
 
 @endsection
