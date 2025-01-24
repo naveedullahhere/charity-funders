@@ -258,11 +258,11 @@
                     <div class="col-lg-8 col-sm-6 d-flex pt-2 justify-content-end main-navbar">
                         <div class="navmenu">
                             <ul id="MenuItems">
-                                <li><a href="/">Home</a></li>
-                                <li><a href="about">About us</a></li>
-                                <li><a href="subscribe">Subscriptions</a></li>
-                                <li><a href="faqs">FAQs</a></li>
-                                <li><a href="contact">Contact us</a></li>
+                                <li><a href="{{url('/')}}">Home</a></li>
+                                <li><a href="{{url('about')}}">About us</a></li>
+                                <li><a href="{{url('subscribe')}}">Subscriptions</a></li>
+                                <li><a href="{{url('faqs')}}">FAQs</a></li>
+                                <li><a href="{{url('contact-us')}}">Contact us</a></li>
                             </ul>
                             <img src="assets/pages/images/menu.png" class="menu-icon" onclick="menutoggle()">
                         </div>

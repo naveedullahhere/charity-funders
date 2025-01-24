@@ -21,6 +21,7 @@
                 <input type="text" name="name" placeholder="Name" class="form-control" autocomplete="off" />
             </div>
         </div>
+
     </div>
     <div class="row bottom-button-bar">
         <div class="col-12">

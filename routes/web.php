@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FrontHomeController;
 
 use App\Http\Controllers\{FunderController,TypeController,CategoryController,WorkAreaController};
@@ -57,7 +58,8 @@ Route::get('adminpanel', function () {
 Route::get('/about', [FrontHomeController::class, 'about']);
 Route::get('/subscribe', [FrontHomeController::class, 'subscribe']);
 Route::get('/faqs', [FrontHomeController::class, 'faq']);
-Route::get('/contact', [FrontHomeController::class, 'contact']);
+Route::get('/contact-us', [FrontHomeController::class, 'contact']);
+Route::post('/contact-us', [ContactController::class, 'store'])->name('contact-us.store');
 Route::get('/search', [FrontHomeController::class, 'search']);
 Route::get('/search-funders', [FrontHomeController::class, 'searchFunders']);
 Route::get('/funder', [FrontHomeController::class, 'showFunder']);
@@ -105,6 +107,9 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::resource('funder', FunderController::class);
         Route::post('/get-funder', [FunderController::class, 'getList'])->name('get.funder');
+
+        Route::resource('contact', FunderController::class);
+        Route::post('/get-contact', [FunderController::class, 'getList'])->name('get.contact');
 
 
         Route::resource('newsletter', NewsletterController::class);
