@@ -12,6 +12,7 @@ class TypesTableSeeder extends Seeder
      */
     public function run(): void
     {
+           DB::table('types')->truncate();
         DB::table('types')->insert([
             ['name' => 'Trust and Foundation', 'description' => 'Trust and Foundation', 'status' => 1],
             ['name' => 'Corporate Foundation ', 'description' => 'Corporate Foundation', 'status' => 1],

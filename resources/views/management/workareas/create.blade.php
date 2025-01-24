@@ -12,7 +12,7 @@
 
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group ">
-            <label>Address <small>(Optional)</small>:</label>
+            <label>Description <small>(Optional)</small>:</label>
             <textarea name="description" row="2" class="form-control" placeholder="Description"></textarea>
         </div>
     </div>

@@ -69,12 +69,12 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-
+    $user->assignRole('Subscriber');
         if (isset($data['profile_id'])) {
             $user->athlete_profile_id = $data['profile_id']; // Save the profile ID
             $user->save();
 
-            $user->assignRole('athlete');
+            $user->assignRole('Subscriber');
 
         }
 

@@ -27,7 +27,7 @@
                                 </a>
                             @else
                                 <a class="info p-1 text-center mr-2 position-relative "
-                                    onclick="openModal(this,'{{ route('roles.edit', $role->id) }}','View Role (Viewonly)',true)"> <i
+                                    onclick="openModal(this,'{{ route('roles.edit', $role->id) }}','View Role (Viewonly)',false)"> <i
                                         class="ft-eye font-medium-3"></i></a>
                             @endif
                         @endcan

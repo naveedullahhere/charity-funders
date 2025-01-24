@@ -48,7 +48,7 @@
                                     <thead>
                                         <tr>
                                             <th class="col-sm-4">Name</th>
-                                            <th class="col-sm-4">Address</th>
+                                            <th class="col-sm-4">Description</th>
                                             <th class="col-sm-2">Status</th>
                                             <th class="col-sm-2">Action</th>
                                         </tr>
