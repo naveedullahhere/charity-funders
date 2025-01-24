@@ -67,6 +67,8 @@ Route::get('/funder', [FrontHomeController::class, 'showFunder']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
+
 Route::group(['middleware' => ['auth']], function () {
     Route::post('/set-layout-cookie', function (Illuminate\Http\Request $request) {
         $layout = $request->input('layout', 'light');

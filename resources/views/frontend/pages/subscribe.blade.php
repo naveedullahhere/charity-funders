@@ -25,9 +25,9 @@
         <div class="row justify-content-center">
             <div class="col-lg-10 md-12 sm-12">
                 <div class="progress">
-                    <div class="progress-bar" style="width: 33.33%; ">Step 1 - select your price plan</div>
-                    <div class="progress-bar text-light" style="width: 33.33%">Step 2 - organisation details</div>
-                    <div class="progress-bar text-light" style="width: 33.34%">Step 3 - payment</div>
+                    <div class="progress-bar" style="width: 33.33%; ">Step 1 - Select your Price plan</div>
+                    <div class="progress-bar text-light" style="width: 33.33%">Step 2 - Organisation details</div>
+                    <div class="progress-bar text-light" style="width: 33.34%">Step 3 - Payment</div>
                 </div>
             </div>
         </div>
