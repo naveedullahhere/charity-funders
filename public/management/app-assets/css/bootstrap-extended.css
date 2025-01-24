@@ -539,12 +539,12 @@ nav.navbar.header-navbar {
       text-align: left;
       font-weight: 400; }
     .navbar .navbar-brand-center .navbar-header .logo .logo-img {
-      width: 150px;
+      width: 50px;
       display: inline-block;
       max-height: 30px;
       margin-right: 0;
       object-fit: contain;
-      object-position: center;
+      object-position: right;
     
     }
   .navbar .navbar-nav {

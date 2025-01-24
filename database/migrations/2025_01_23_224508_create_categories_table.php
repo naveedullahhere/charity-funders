@@ -10,7 +10,7 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('parent_id')->default(0); // Parent ID (default 0)
+            $table->unsignedBigInteger('parent_id')->default(0)->nullable(); // Parent ID (default 0)
             $table->string('name'); // Category name
             $table->timestamps(); // Created at and updated at
         });

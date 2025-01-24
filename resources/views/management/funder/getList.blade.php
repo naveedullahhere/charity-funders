@@ -7,8 +7,8 @@
         </tr>
     </thead>
     <tbody>
-        @if (count($categories) != 0)
-            @foreach ($categories as $key => $row)
+        @if (count($funders) != 0)
+            @foreach ($funders as $key => $row)
                 <tr>
                     <td>
                         <p class="m-0">
@@ -71,6 +71,6 @@
 
 <div class="row d-flex" id="paginationLinks">
     <div class="col-md-12 text-right">
-            {{ $categories->links() }}
+            {{ $funders->links() }}
     </div>
 </div>

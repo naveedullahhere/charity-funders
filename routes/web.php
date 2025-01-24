@@ -2,16 +2,11 @@
 
 use App\Http\Controllers\FrontHomeController;
 
-use App\Http\Controllers\TypeController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\WorkAreaController;
+use App\Http\Controllers\{FunderController,TypeController,CategoryController,WorkAreaController};
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsletterController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Artisan;
 
 use Illuminate\Support\Facades\File;
@@ -107,6 +102,9 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::resource('category', CategoryController::class);
         Route::post('/get-category', [CategoryController::class, 'getList'])->name('get.category');
+
+        Route::resource('funder', FunderController::class);
+        Route::post('/get-funder', [FunderController::class, 'getList'])->name('get.funder');
 
 
         Route::resource('newsletter', NewsletterController::class);

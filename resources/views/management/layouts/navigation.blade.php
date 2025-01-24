@@ -13,26 +13,27 @@
             </li>
 
             <!-- Manage Company -->
-            <li class="dropdown nav-item {{ Request::is('workareas*') || Request::is('types*') ? 'active' : '' }}" data-menu="dropdown">
+            <li class="dropdown nav-item {{ Route::is('category*') || Route::is('funder*') ? 'active' : '' }}" data-menu="dropdown">
                 <a class="dropdown-toggle nav-link d-flex align-items-center" href="javascript:;"
                     data-toggle="dropdown"><i class="ft-box"></i>
-                    <span data-i18n="Apps">Manage Company</span>
+                    <span data-i18n="Apps">Manage Funders</span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li data-menu="">
-                        <a class="dropdown-item d-flex align-items-center {{ Route::is('workareas.index') ? 'active' : '' }}"
-                            href="{{ route('workareas.index') }}" data-toggle="dropdown">
+                <li data-menu="">
+                        <a class="dropdown-item d-flex align-items-center {{ Route::is('funder*') ? 'active' : '' }}"
+                            href="{{ route('funder.index') }}" data-toggle="dropdown">
                             <i class="ft-arrow-right submenu-icon"></i>
-                            <span data-i18n="Email">Work Areas</span>
+                            <span data-i18n="Email">Funders</span>
                         </a>
                     </li>
                     <li data-menu="">
-                        <a class="dropdown-item d-flex align-items-center {{ Route::is('types.index') ? 'active' : '' }}"
-                            href="{{ route('types.index') }}" data-toggle="dropdown">
+                        <a class="dropdown-item d-flex align-items-center {{ Route::is('category.index') ? 'active' : '' }}"
+                            href="{{ route('category.index') }}" data-toggle="dropdown">
                             <i class="ft-arrow-right submenu-icon"></i>
-                            <span data-i18n="Email">Types</span>
+                            <span data-i18n="Email">Categories</span>
                         </a>
                     </li>
+                    
                 </ul>
             </li>
 

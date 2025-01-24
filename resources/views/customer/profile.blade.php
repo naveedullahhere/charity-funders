@@ -5,9 +5,7 @@
 @section('content')
 
     <div class="cont">
-        <div class="mb-4">
-            <h1 class="mb-0 h3">Hey, {{auth()->user()->name}}! Welcome to {{config('app.name')}}.</h1>
-        </div>
+        
 
         <div class="card border-0 shadow-sm mb-4">
             <div class="card-body p-lg-5">

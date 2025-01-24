@@ -1,6 +1,6 @@
 @extends('management.layouts.master')
 @section('title')
-Category
+Funder
 @endsection
 @section('content')
 <div class="content-wrapper">
@@ -8,12 +8,12 @@ Category
     <section id="extended">
         <div class="row w-100 mx-auto">
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <h2 class="page-title"> Category</h2>
+                <h2 class="page-title"> Funders</h2>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
-                <button onclick="openModal(this,'{{ route('category.create') }}','Add Category')" type="button"
+                <button onclick="openModal(this,'{{ route('funder.create') }}','Add Funder')" type="button"
                     class="btn btn-primary position-relative ">
-                    Create Category
+                    Create Funder
                 </button>
             </div>
         </div>
@@ -72,7 +72,7 @@ Category
 @section('script')
 <script>
     $(document).ready(function () {
-        filterationCommon(`{{ route('get.category') }}`)
+        filterationCommon(`{{ route('get.funder') }}`)
     });
 </script>
 @endsection

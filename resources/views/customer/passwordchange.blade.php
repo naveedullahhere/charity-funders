@@ -4,17 +4,15 @@
 @endsection
 @section('content')
     <div class="cont">
-        <div class="mb-4">
-            <h1 class="mb-0 h3">Hey, {{auth()->user()->name}}! Welcome to {{config('app.name')}}.</h1>
-        </div>
+    
         <form class="form-l" id="subm" method="post" action="{{route('updatePassword',auth()->user()->id)}}">
             @csrf
             @method('PUT')
             <div class="card border-0 mb-4 shadow-sm">
                 <div class="card-body p-lg-5">
-                    <div class="mb-5">
+                    <div class="mb-4">
                         <h4 class="mb-1">Change Password</h4>
-                        <p class="mb-0 fs-6">We will email you a confirmation when changing your password, so please expect that email after submitting.</p>
+                        {{-- <p class="mb-0 fs-6">We will email you a confirmation when changing your password, so please expect that email after submitting.</p> --}}
                     </div>
                     <form class="row gy-3 needs-validation" novalidate>
                         <div class="col-lg-7">

@@ -84,12 +84,12 @@ function filterationCommon(url, loadmore = false, appenddiv = "filteredData") {
         console.error(error);
         handleAjaxError(xhr, status, error);
 
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "Something went wrong: " + xhr.status + " " + error,
-          confirmButtonColor: "#3085d6",
-        });
+        // Swal.fire({
+        //   icon: "error",
+        //   title: "Error",
+        //   text: "Something went wrong: " + xhr.status + " " + error,
+        //   confirmButtonColor: "#3085d6",
+        // });
       },
     });
   }
@@ -175,7 +175,6 @@ function filterationCommon(url, loadmore = false, appenddiv = "filteredData") {
     }
   }
 }
-
 
 $(document).on("submit", "#ajaxSubmit", function (e) {
   var formhunyr = $(this);
@@ -275,7 +274,6 @@ $(document).on("submit", "#ajaxSubmit", function (e) {
     error: function (xhr, status, error) {
       Swal.close(); // Close loader
       console.log(xhr.responseJSON.errors);
-      
       if (xhr.responseJSON && xhr.responseJSON.errors) {
         var validationErrors = xhr.responseJSON.errors;
 
