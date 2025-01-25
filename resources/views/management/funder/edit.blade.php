@@ -253,18 +253,18 @@
                             </div>
                             <div class="tab-pane fade" id="people" role="tabpanel">
                                 <div id="trustees-container">
-                                    <div class="trustee-row">
-                                        <div class="form-group">
+                                    <div class="trustee-row row w-100 mx-auto mb-3">
+                                        <div class="input-group col-md-3">
                                             <label for="trustee_boards[0][name]">Trustee Name</label>
                                             <input type="text" name="trustee_boards[0][name]" class="form-control"
                                                 required>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="input-group col-md-3">
                                             <label for="trustee_boards[0][position]">Position</label>
                                             <input type="text" name="trustee_boards[0][position]" class="form-control"
                                                 required>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="input-group col-md-3">
                                             <label for="trustee_boards[0][status]">Status</label>
                                             <select name="trustee_boards[0][status]" class="form-control" required>
                                                 <option value="up-to-date">Up-to-date</option>

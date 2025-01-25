@@ -210,7 +210,7 @@ div#filteredData {
 border-radius: 0 !important;
 }
 
-.remove-donation, .remove-financial {
+.remove-donation, .remove-financial, .remove-trustee {
     display: flex;
     height: 100%;
     align-items: center;

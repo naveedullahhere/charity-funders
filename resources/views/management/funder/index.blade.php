@@ -11,10 +11,10 @@ Funder
                 <h2 class="page-title"> Funders</h2>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
-                <button onclick="openModal(this,'{{ route('funder.create') }}','Add Funder')" type="button"
+                <a href="{{ route('funder.create') }}" 
                     class="btn btn-primary position-relative ">
                     Create Funder
-                </button>
+                </a>
             </div>
         </div>
         <div class="row">

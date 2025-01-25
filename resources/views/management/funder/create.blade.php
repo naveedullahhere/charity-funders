@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="row w-100 mx-auto">
-                <div class="col-8 mx-auto">
+                <div class="col-md-8 ">
                     <form id="ajaxSubmit" action="{{ route('funders.store') }}" method="post">
                         @csrf
                         <div class="">
