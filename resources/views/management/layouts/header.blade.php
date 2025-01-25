@@ -57,11 +57,6 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlWLuEzszKgldMmuo9JjtKLxe9MGk75_k&libraries=places&callback=initAutocomplete"
         defer></script>
 </head>
-<!-- END : Head-->
-
-<!-- BEGIN : Body-->
-
-
 
 <body
     class="horizontal-layout horizontal-menu horizontal-menu-padding 2-columns  navbar-sticky {{ Cookie::get('layout') === 'dark' ? 'layout-dark' : '' }}"
