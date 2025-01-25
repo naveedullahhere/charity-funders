@@ -17,13 +17,13 @@ class NewsletterController extends Controller
 
     function __construct()
     {
-        $this->middleware('permission:newsletter-list', ['only' => ['index']]);
+       // $this->middleware('permission:newsletter-list', ['only' => ['index']]);
     }
 
     public function index()
     {
 
-        $newsletters = Newsletter::get();
+        $newsletters = NewsletterSubscriber::get();
         return view('management.newsletter.index', compact('newsletters'));
     }
 
@@ -52,11 +52,10 @@ class NewsletterController extends Controller
 
     public function getTable(Request $request)
     {
-        $newsletters = Newsletter::when($request->filled('search'), function ($q) use ($request) {
+        $newsletters = NewsletterSubscriber::when($request->filled('search'), function ($q) use ($request) {
             $searchTerm = '%' . $request->search . '%';
             return $q->where(function ($sq) use ($searchTerm) {
-                $sq->where('name', 'like', $searchTerm)
-                    ->orWhere('email', 'like', $searchTerm);
+                $sq->where('email', 'like', $searchTerm);
             });
         })->latest()->paginate(10);
 

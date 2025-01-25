@@ -13,7 +13,7 @@
             </li>
 
             <!-- Manage Company -->
-            <li class="dropdown nav-item {{ Route::is('category*') || Route::is('funder*') ? 'active' : '' }}" data-menu="dropdown">
+            <li class="dropdown nav-item {{ Route::is('category*') || Route::is('funder*') || Route::is('workareas*')  || Route::is('types*') ? 'active' : '' }}" data-menu="dropdown">
                 <a class="dropdown-toggle nav-link d-flex align-items-center" href="javascript:;"
                     data-toggle="dropdown"><i class="ft-box"></i>
                     <span data-i18n="Apps">Manage Funders</span>
@@ -33,25 +33,44 @@
                             <span data-i18n="Email">Categories</span>
                         </a>
                     </li>
+                    <li data-menu="">
+                        <a class="dropdown-item d-flex align-items-center {{ Route::is('workareas.index') ? 'active' : '' }}"
+                            href="{{ route('workareas.index') }}" data-toggle="dropdown">
+                            <i class="ft-arrow-right submenu-icon"></i>
+                            <span data-i18n="Email">Work Areas</span>
+                        </a>
+                    </li>
+                    <li data-menu="">
+                        <a class="dropdown-item d-flex align-items-center {{ Route::is('types.index') ? 'active' : '' }}"
+                            href="{{ route('types.index') }}" data-toggle="dropdown">
+                            <i class="ft-arrow-right submenu-icon"></i>
+                            <span data-i18n="Email">Types</span>
+                        </a>
+                    </li>
+
+                    
                     
                 </ul>
             </li>
 
-            <!-- Work Areas -->
-            <li class="nav-item {{ Route::is('workareas.index') ? 'active' : '' }}" data-menu="dropdown">
-                <a class="dropdown-toggle nav-link d-flex align-items-center" href="{{ route('workareas.index') }}"
-                    data-toggle="dropdown"><i class="ft-home"></i>
-                    <span data-i18n="Dashboard">Work Areas</span>
-                </a>
-            </li>
+          
+
 
             <!-- Types -->
-            <li class="nav-item {{ Route::is('types.index') ? 'active' : '' }}" data-menu="dropdown">
-                <a class="dropdown-toggle nav-link d-flex align-items-center" href="{{ route('types.index') }}"
-                    data-toggle="dropdown"><i class="ft-home"></i>
-                    <span data-i18n="Dashboard">Types</span>
+            <li class="nav-item {{ Route::is('newsletter.index') ? 'active' : '' }}" data-menu="dropdown">
+                <a class="dropdown-toggle nav-link d-flex align-items-center" href="{{ route('newsletter.index') }}"
+                    data-toggle="dropdown"><i class="ft-mail"></i>
+                    <span data-i18n="Dashboard">Newsletter Subscribers</span>
                 </a>
             </li>
+            <!-- Types -->
+            <li class="nav-item {{ Route::is('contact.index') ? 'active' : '' }}" data-menu="dropdown">
+                <a class="dropdown-toggle nav-link d-flex align-items-center" href="{{ route('contact.index') }}"
+                    data-toggle="dropdown"><i class="ft-mail"></i>
+                    <span data-i18n="Dashboard">Contacts</span>
+                </a>
+            </li>
+         
 
             <!-- Access Control -->
             <li class="dropdown nav-item {{ Request::is('roles*') || Request::is('users*') ? 'active' : '' }}" data-menu="dropdown">

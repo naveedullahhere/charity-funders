@@ -15,7 +15,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return view('management.contacts.index');
+        return view('management.contact.index');
     }
 
     /**
@@ -35,7 +35,7 @@ class ContactController extends Controller
             ->latest()
             ->paginate(request('per_page', 25));
 
-        return view('management.contacts.getList', compact('contacts'));
+        return view('management.contact.getList', compact('contacts'));
     }
 
     /**
@@ -65,7 +65,7 @@ class ContactController extends Controller
     public function edit($id)
     {
         $contact = Contact::findOrFail($id);
-        return view('management.contacts.edit', compact('contact'));
+        return view('management.contact.edit', compact('contact'));
     }
 
     /**
