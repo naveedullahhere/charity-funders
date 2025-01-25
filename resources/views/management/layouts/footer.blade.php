@@ -377,13 +377,29 @@
 
             updateSummernoteTheme();
 
-
             const switchElement = $("#color-switch-1");
 
             switchElement.on("change", function() {
                 updateSummernoteTheme();
             });
         });
+
+        function initAutocomplete() {
+            let input = document.getElementById('location');
+            let autocomplete = new google.maps.places.Autocomplete(input);
+
+            autocomplete.setComponentRestrictions({
+                // 'country': ['us']
+            });
+
+            autocomplete.addListener('place_changed', function() {
+                let place = autocomplete.getPlace();
+
+                if (place.geometry) {
+                    console.log('Location details:', place);
+                }
+            });
+        }
     </script>
 
     </html>

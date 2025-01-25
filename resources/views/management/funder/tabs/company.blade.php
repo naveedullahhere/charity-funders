@@ -32,6 +32,10 @@
         <input type="text" name="location" id="location" value="{{ $funder->location }}" class="form-control"
             required>
     </div>
+    
+    <input type="hidden" name="lat">
+    <input type="hidden" name="lng">
+
     <h3>Contact Person Details</h3>
     <div class="form-group">
         <label for="contact_person_name">Full Name</label>

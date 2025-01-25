@@ -80,7 +80,7 @@ class Funder extends Model
         return $this->belongsToMany(WorkArea::class, 'areas_of_work', 'funder_id', 'work_area_id');
     }
 
-     public function workAreas()
+    public function workAreas()
     {
         return $this->belongsToMany(WorkArea::class, 'areas_of_work', 'funder_id', 'work_area_id');
     }
