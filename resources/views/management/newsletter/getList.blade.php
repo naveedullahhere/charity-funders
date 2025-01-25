@@ -1,57 +1,45 @@
 <table class="table m-0">
     <thead>
         <tr>
-            <th class="col-sm-1">Image</th>
-            <th class="col-sm-3">Name/Email</th>
-            <th class="col-sm-3">Role</th>
-            <th class="col-sm-3">Companies Assign</th>
+            <th class="col-sm-8">Email</th>
+            <th class="col-sm-2">Created</th>
             <th class="col-sm-2">Action</th>
         </tr>
     </thead>
     <tbody>
-        @if (count($users) != 0)
-            @foreach ($users as $key => $user)
+        @if (count($newsletters) != 0)
+            @foreach ($newsletters as $key => $row)
                 <tr>
-                  <td>
-                    <img src="{{ image_path($user->profile_image) }}" class="avatar lisiavatarlogo"/>
-                    </td>
+
                     <td>
-                        <p>
-                            {{ $user->name }} <br />
-                            <small>{{ $user->email }}</small>
+                        <p class="m-0">
+                            {{ $row->email }} <br>
                         </p>
                     </td>
                     <td>
-                        @if (!empty($user->getRoleNames()))
-                            @foreach ($user->getRoleNames() as $v)
-                                <label class="badge badge-success">{{ $v }}</label>
-                            @endforeach
-                        @endif
+                        <p class="m-0">
+                            {{ \Carbon\Carbon::parse($row->created_at)->format('Y-m-d') }} <br>
+
+                        </p>
                     </td>
                     <td>
-                        @if (!empty($user->getRoleNames()))
-                            @foreach ($user->getRoleNames() as $v)
-                                <label class="badge badge-success">{{ $v }}</label>
-                            @endforeach
-                        @endif
-                    </td>
-                     <td>
-                        @can('user-edit')
-                            <a onclick="openModal(this,'{{ route('users.edit', $user->id) }}','Edit User')"
-                                class="info p-1 text-center mr-2 position-relative ">
-                                <i class="ft-edit-2 font-medium-3"></i>
-                            </a>
-                        @endcan
-                        @can('user-delete')
-                            <a onclick="deletemodal('{{ route('users.destroy', $user->id) }}','{{ route('get.users') }}')"
+                        {{-- @can('role-edit')
+                        <a onclick="openModal(this,'{{ route('workareas.edit', $row->id) }}','Edit Work Areas')"
+                            class="info p-1 text-center mr-2 position-relative ">
+                            <i class="ft-edit-2 font-medium-3"></i>
+                        </a>
+                        @endcan --}}
+                        @can('role-delete')
+                            <a onclick="deletemodal('{{ route('newsletter.destroy', $row->id) }}','{{ route('get.newsletter') }}')"
                                 class="danger p-1 text-center mr-2 position-relative ">
+
                                 <i class="ft-x font-medium-3"></i>
                             </a>
                         @endcan
                     </td>
                 </tr>
             @endforeach
-            @else
+        @else
             <tr class="ant-table-placeholder">
                 <td colspan="11" class="ant-table-cell text-center">
                     <div class="my-5">
@@ -83,10 +71,10 @@
 
 
 <div class="row d-flex" id="paginationLinks">
-  
+
     <div class="col-md-12 text-right">
         <div id="">
-            {{ $users->links() }}
+            {{ $newsletters->links() }}
         </div>
     </div>
 </div>

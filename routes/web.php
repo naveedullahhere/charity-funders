@@ -111,8 +111,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('funder', FunderController::class);
         Route::post('/get-funder', [FunderController::class, 'getList'])->name('get.funder');
 
-        Route::resource('contact', FunderController::class);
-        Route::post('/get-contact', [FunderController::class, 'getList'])->name('get.contact');
+        Route::resource('contact', ContactController::class);
+        Route::post('/get-contact', [ContactController::class, 'getList'])->name('get.contact');
 
 
         Route::resource('newsletter', NewsletterController::class);
