@@ -104,7 +104,7 @@
 
 
 
-<div class="row d-flex" id="paginationLinks">
+<div class="row d-flex w-100 mx-auto" id="paginationLinks" style="background: #f3f3f3;">
 
     <div class="col-md-12 text-right">
         <div id="">

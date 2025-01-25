@@ -162,7 +162,7 @@
                             Search for a specific prospect
                         </h3>
                         <div class="search ms-3 w-100 d-flex align-items-center justify-content-center bg-white">
-                            <input type="text" name="search" placeholder="Search funders..."
+                            <input type="text" name="search" value="{{request('search','')}}" placeholder="Search funders..."
                                 class="form-control shadow-none border-0 rounded-0 d-inline-block w-100 fxh">
                             <div class="px-2">
                                 <svg width="24" height="24" viewBox="0 0 30 30" fill="none"
@@ -206,7 +206,7 @@
                                 <ul class="list-unstyled">
                                     @foreach ($types as $type)
                                         <li>
-                                            <input {{ in_array($type->id, request('type', [])) ? 'checked' : '' }} type="checkbox" id="type{{$type->id}}" name="type[]" value="{{$type->id}}" />
+                                            <input {{ $type->id == request('type') ? 'checked' : '' }} type="radio" id="type{{$type->id}}" name="type" value="{{$type->id}}" />
                                             <label for="type{{$type->id}}">
                                                 {{$type->name}}
                                             </label>
