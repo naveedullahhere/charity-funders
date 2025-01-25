@@ -335,12 +335,55 @@
     <!-- BEGIN: Custom CSS-->
     <script src="{{ asset('management/assets/js/scripts.js') }}"></script>
     <!-- END: Custom CSS-->
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote/dist/summernote-lite.min.js"></script>
+
     <script>
         var baseUrl = "{{ url('/') }}";
         var loginUrl = "{{ url('login') }}";
     </script>
     @yield('script')
     </body>
-    <!-- END : Body-->
+    <script>
+        $(document).ready(function() {
+            $('#content, #company_description').summernote({
+                placeholder: 'Write your blog content here...',
+                tabsize: 2,
+                height: 300,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontname', ['fontname']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
+
+            function updateSummernoteTheme() {
+                if ($('body').hasClass('layout-dark')) {
+                    $('#content, #company_description').summernote('code', $('#content, #company_description')
+                        .summernote('code'));
+                    $('.note-editor').addClass('note-editor-dark');
+                } else {
+                    $('#content, #company_description').summernote('code', $('#content, #company_description')
+                        .summernote('code'));
+                    $('.note-editor').removeClass('note-editor-dark');
+                }
+            }
+
+            updateSummernoteTheme();
+
+
+            const switchElement = $("#color-switch-1");
+
+            switchElement.on("change", function() {
+                updateSummernoteTheme();
+            });
+        });
+    </script>
 
     </html>

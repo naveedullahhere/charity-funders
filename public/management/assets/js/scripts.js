@@ -583,16 +583,15 @@ $(document).ready(function () {
   });
 });
 
-
 function DegitOnly(e) {
   var unicode = e.charCode ? e.charCode : e.keyCode;
-  if (unicode != 8 && unicode != 9)//Excepting the backspace and tab keys
-  {
-      if (unicode < 46 || unicode > 57 || unicode == 47) //If not a number or decimal point
-          return false //Disable key press
+  if (unicode != 8 && unicode != 9) {
+    //Excepting the backspace and tab keys
+    if (unicode < 46 || unicode > 57 || unicode == 47)
+      //If not a number or decimal point
+      return false; //Disable key press
   }
 }
-
 
 (function (window, undefined) {
   "use strict";

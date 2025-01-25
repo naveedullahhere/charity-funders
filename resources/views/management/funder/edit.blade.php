@@ -3,6 +3,7 @@
     Funder - Edit
 @endsection
 @section('content')
+    
     <div class="content-wrapper">
         <section id="extended">
             <div class="row w-100 mx-auto">
