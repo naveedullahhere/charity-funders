@@ -14,12 +14,14 @@ class Funder extends Model
         'sub_category_id',
         'name',
         'charity_no',
+        'application_procedure',
         'p_name',
         'web',
         'phone',
         'email',
         'address_line1',
         'address_line2',
+        'type_id',
         'region',
         'city',
         'postcode',
@@ -48,36 +50,36 @@ class Funder extends Model
         'status' => 'string',
     ];
 
-    // Relationship: Category
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-    // Relationship: Sub Category
     public function subCategory()
     {
         return $this->belongsTo(Category::class, 'sub_category_id');
     }
 
-    // Relationship: Country
     public function country()
     {
-        return $this->belongsTo(Country::class, 'country_id');
+        return $this->belongsTo(Countries::class, 'country_id');
     }
+
     public function financialDetails()
     {
         return $this->hasMany(FinancialDetail::class, 'funder_id');
     }
+
     public function trusteeBoards()
     {
         return $this->hasMany(TrusteeBoard::class, 'funder_id');
     }
-     public function areasOfWork()
+
+    public function areasOfWork()
     {
-        return $this->hasMany(AreaOfWork::class, 'funder_id');
+        return $this->belongsToMany(WorkArea::class, 'area_of_works', 'funder_id', 'work_area_id');
     }
-      // Relationship: Donation Applications
+
     public function donationApplications()
     {
         return $this->hasMany(DonationApplication::class, 'funder_id');

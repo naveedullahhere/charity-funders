@@ -64,9 +64,6 @@ Route::post('/contact-us', [ContactController::class, 'store'])->name('contact-u
 Route::get('/search', [FrontHomeController::class, 'search']);
 Route::get('/search-funders', [FrontHomeController::class, 'searchFunders']);
 Route::get('/funder', [FrontHomeController::class, 'showFunder']);
-// Route::post('/funder/create', [FrontHomeController::class, 'store'])->name('funders.store');
-// Route::put('/funder/update', [FrontHomeController::class, 'update'])->name('funders.update');
-// Route::delete('/funder/delete', [FrontHomeController::class, 'destroy'])->name('funders.destroy');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -75,10 +72,8 @@ Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])
 
 Route::group(['middleware' => ['auth']], function () {
     Route::prefix('funders')->group(function () {
-        // Route::get('/create', [FunderController::class, 'create'])->name('funders.create');
-        // Route::get('/edit', [FunderController::class, 'edit'])->name('funders.edit');
         Route::post('/create', [FunderController::class, 'storeGeneral'])->name('funders.store');
-        Route::post('/store-general', [FunderController::class, 'storeGeneral'])->name('funders.store.general');
+        Route::post('/store-general/{funder}', [FunderController::class, 'updateGeneral'])->name('funders.store.general');
         Route::post('/store-company/{funder}', [FunderController::class, 'storeCompany'])->name('funders.store.company');
         Route::post('/store-financials/{funder}', [FunderController::class, 'storeFinancials'])->name('funders.store.financials');
         Route::post('/store-donations/{funder}', [FunderController::class, 'storeDonations'])->name('funders.store.donations');
@@ -91,7 +86,7 @@ Route::group(['middleware' => ['auth']], function () {
         $layout = $request->input('layout', 'light');
         return response()
             ->json(['message' => 'Cookie set'])
-            ->cookie('layout', $layout, 60 * 24 * 30); // 30 days
+            ->cookie('layout', $layout, 60 * 24 * 30);
     });
 
     Route::post('logouts', function (Request $request) {

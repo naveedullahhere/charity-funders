@@ -151,6 +151,29 @@ class FunderController extends Controller
         return response()->json(['success' => 'General information saved successfully', 'funder_id' => $funder->id, 'redirect_url' => route('funder.edit', ['funder' => $funder->id])]);
     }
 
+    public function updateGeneral(Request $request, Funder $funder)
+    {
+        $validator = Validator::make($request->all(), [
+            'category_id' => 'required|exists:categories,id',
+            'sub_category_id' => 'nullable|exists:categories,id',
+            'type_id' => 'required|exists:types,id',
+            'name' => 'required|string|max:255',
+            'charity_no' => 'required|string|max:255',
+            'phone' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'status' => 'required|in:Publish,Draft',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $funder->update($validator->validated());
+
+        return response()->json(['message' => 'General information saved successfully']);
+    }
+
+
     public function storeCompany(Request $request, Funder $funder)
     {
         $validator = Validator::make($request->all(), [
@@ -195,8 +218,8 @@ class FunderController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $funder->financials()->delete();
-        $funder->financials()->createMany($request->financials);
+        $funder->financialDetails()->delete();
+        $funder->financialDetails()->createMany($request->financials);
 
         return response()->json(['message' => 'Financial information saved successfully']);
     }
@@ -225,7 +248,7 @@ class FunderController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'trustee_boards' => 'required|array',
-            'trustee_boards.*.name' => 'required|string|max:255',
+            'trustee_boards.*.trustee' => 'required|string|max:255',
             'trustee_boards.*.position' => 'required|string|max:255',
             'trustee_boards.*.status' => 'required|in:up-to-date,recently,registered',
         ]);
@@ -251,7 +274,7 @@ class FunderController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $funder->workAreas()->sync($request->work_areas);
+        $funder->areasOfWork()->sync($request->work_areas);
 
         return response()->json(['message' => 'Work areas saved successfully']);
     }

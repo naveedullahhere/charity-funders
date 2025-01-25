@@ -11,6 +11,8 @@ class AreaOfWork extends Model
         'work_area_id',
     ];
 
+    protected $table = "areas_of_work";
+
     // Relationship: Funder
     public function funder()
     {

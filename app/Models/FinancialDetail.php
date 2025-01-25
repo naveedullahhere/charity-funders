@@ -13,6 +13,8 @@ class FinancialDetail extends Model
         'spend',
     ];
 
+    protected $table = 'financials_details';
+
     // Relationship: Funder
     public function funder()
     {

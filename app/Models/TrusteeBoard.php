@@ -13,6 +13,8 @@ class TrusteeBoard extends Model
         'status',
     ];
 
+    protected $table = 'trustee_board';
+
     // Relationship: Funder
     public function funder()
     {

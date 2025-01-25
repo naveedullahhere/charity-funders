@@ -9,6 +9,8 @@ class WorkArea extends Model
 {
     use HasFactory;
 
+    protected $table = "work_areas";
+
     /**
      * The attributes that are mass assignable.
      */
