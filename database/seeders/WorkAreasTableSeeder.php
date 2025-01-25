@@ -12,12 +12,16 @@ class WorkAreasTableSeeder extends Seeder
      */
     public function run(): void
     {
+                DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('work_areas')->truncate();
+                DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         DB::table('work_areas')->insert([
             ['name' => 'Children, young people and families', 'description' => 'Description for Children, young people and families', 'status' => 1],
             ['name' => 'General charitable purposes', 'description' => 'Description for General charitable purposes', 'status' => 1],
             ['name' => 'Older people', 'description' => 'Description for Older people', 'status' => 1],
-            ['name' => 'Health', 'description' => 'Description for Religion', 'status' => 1],
+            ['name' => 'Housing', 'description' => 'Description for Housing', 'status' => 1],
+            ['name' => 'Health', 'description' => 'Description for Health', 'status' => 1],
+            ['name' => 'Employment', 'description' => 'Description for Employment', 'status' => 1],
             ['name' => 'Disability', 'description' => 'Description for Disability', 'status' => 1],
             ['name' => 'Unemployed', 'description' => 'Description for Unemployed', 'status' => 1],
             ['name' => 'Physical disabilities', 'description' => 'Description for Physical disabilities', 'status' => 1],
