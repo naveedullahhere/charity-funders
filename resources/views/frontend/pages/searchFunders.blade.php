@@ -200,51 +200,31 @@
                             <div class="filter-group">
                                 <h4 class="fw-bold">Prospect Type</h4>
                                 <ul class="list-unstyled">
-                                    <li><input type="checkbox" id="trusts" /> <label for="trusts">Trusts &
-                                            foundations</label></li>
-                                    <li><input type="checkbox" id="corporate" /> <label for="corporate">Corporate
-                                            foundations</label></li>
-                                    <li><input type="checkbox" id="competitors" /> <label
-                                            for="competitors">Competitors</label>
-                                    </li>
+                                @foreach ($types as $type)
+                                      <li>
+                                      <input type="checkbox" id="trusts" value=" {{$type->id}}" /> 
+                                      <label for="trusts">
+                                      {{$type->name}}
+                                      </label>
+                                            </li>
+                                @endforeach
                                 </ul>
                             </div>
 
-                            <!-- Funding Focus -->
-                            <div class="filter-group">
-                                <h4 class="fw-bold">Funding Focus</h4>
-                                <ul class="list-unstyled">
-                                    <li><input type="checkbox" id="animals" /> <label for="animals">Animals</label></li>
-                                    <li><input type="checkbox" id="arts" /> <label for="arts">Arts, culture and
-                                            heritage</label></li>
-                                    <li><input type="checkbox" id="education" /> <label for="education">Education and
-                                            training</label></li>
-                                    <li><input type="checkbox" id="emergency" /> <label for="emergency">Emergency
-                                            response/relief</label></li>
-                                    <li><input type="checkbox" id="environment" /> <label
-                                            for="environment">Environment</label>
-                                    </li>
-                                    <li><input type="checkbox" id="health" /> <label for="health">Health</label></li>
-                                    <li><input type="checkbox" id="housing" /> <label for="housing">Housing and
-                                            homelessness</label></li>
-                                    <li><input type="checkbox" id="human-rights" /> <label for="human-rights">Human
-                                            rights</label></li>
-                                    <li><input type="checkbox" id="poverty" /> <label for="poverty">Poverty
-                                            relief</label>
-                                    </li>
-                                    <li><input type="checkbox" id="social-welfare" /> <label for="social-welfare">Social
-                                            welfare</label></li>
-                                    <li><input type="checkbox" id="sports" /> <label for="sports">Sports and
-                                            recreation</label></li>
-                                    <li><input type="checkbox" id="youth-development" /> <label
-                                            for="youth-development">Youth
-                                            development</label></li>
-                                </ul>
-                            </div>
+                           
                         </div>
                         <div class="col-md-3 col-sm-6 col-12">
+                         <div class="filter-group">
+                                <h4 class="fw-bold">Funding Focus</h4>
+                                <ul class="list-unstyled">
+                                  @foreach ($workAreas as $workArea)
+                                    <li><input type="checkbox" id="animals" value="{{$workArea->id}}"/> <label for="animals">{{$workArea->name}}</label></li>
+                                     @endforeach
+                                    
+                                </ul>
+                            </div>
                             <!-- Beneficiary Group -->
-                            <div class="filter-group">
+                            <div class="filter-group d-none">
                                 <h4 class="fw-bold">Beneficiary Group</h4>
                                 <ul class="list-unstyled">
                                     <li><input type="checkbox" id="children" /> <label for="children">Children, young
@@ -332,6 +312,10 @@
 
     <section class="mt-3">
         <div class="container">
+
+
+            <div class="" id="filteredData">
+            </div>
             <div class="searchHeader d-flex justify-content-between align-items-center">
                 <div>334 results</div>
                 <div class="d-flex align-items-center gap-3">
@@ -450,4 +434,12 @@
             $("#filters").slideToggle();
         });
     </script>
+
+
+
+    <script>
+    $(document).ready(function () {
+        filterationCommon(`{{ route('get.searchFundersList') }}`)
+    });
+</script>
 @endsection

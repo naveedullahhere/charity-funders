@@ -8,8 +8,8 @@
                 <label>Parent Category <small>(Optional)</small></label>
                 <select class="form-control" name="parent_id">
                     <option value="">Select Parent Category</option>
-                    @foreach ($categories as $category)
-                        <option {{$category->parent_id == $category->id ? 'selected' : ''}} value="{{$category->id}}">{{$category->name}}</option>
+                    @foreach ($categories as $row)
+                        <option {{$row->id == $category->parent->id ? 'selected' : ''}} value="{{$row->id}}">{{$row->name}}</option>
                     @endforeach
 
                 </select>

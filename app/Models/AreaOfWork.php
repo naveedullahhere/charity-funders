@@ -24,4 +24,6 @@ class AreaOfWork extends Model
     {
         return $this->belongsTo(WorkArea::class, 'work_area_id');
     }
+
+    
 }
