@@ -251,3 +251,13 @@ div#paginationLinks {
 .layout-dark #formSteps .nav-link.active {
   border-color: white;
 }
+
+.note-editor-dark .note-editable {
+  background-color: #333;
+  color: #fff;
+}
+
+.note-editor-dark .note-toolbar {
+  background-color: #444;
+  border-color: #555;
+}

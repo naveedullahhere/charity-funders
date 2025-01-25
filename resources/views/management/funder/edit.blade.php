@@ -268,6 +268,8 @@
                 <button type="button" class="btn btn-danger remove-trustee">Remove</button>
             </div>
         `;
+
+                document.querySelector('[name="trustee_board_man_power"]').value = index;
                 document.querySelector('#trustees-container').insertAdjacentHTML('beforeend', newRow);
             });
 
@@ -285,6 +287,7 @@
                 if (e.target.classList.contains('remove-trustee')) {
                     if (document.querySelectorAll('.trustee-row').length > 1) {
                         e.target.closest('.trustee-row').remove();
+                        document.querySelector('[name="trustee_board_man_power"]').value = document.querySelectorAll('.trustee-row').length-1;
                     }
                 }
                 // if (e.target.classList.contains('received') || e.target.classList.contains('successful')) {
@@ -295,6 +298,11 @@
                 //     row.querySelector('.rate').value = isNaN(rate) ? 0 : rate;
                 // }
             });
+
+            const updateTrusteeLength = () => {
+                document.querySelector('[name="trustee_board_man_power"]').value = document.querySelectorAll(
+                    '.trustee-row').length;
+            }
 
             $(document).on('input', '.received, .successful', function() {
                 let row = $(this).closest('.donation-row');

@@ -1,10 +1,18 @@
 <div class="tab-pane fade" id="people" role="tabpanel">
     <div id="trustees-container">
+        <div class="trustee-row row w-100 mx-auto mb-3">
+            <div class="input-group col-md-4">
+                <label for="trustee_board_man_power">Trustee Man Power</label>
+                <input type="text" name="trustee_board_man_power" value="{{ $funder->trusteeBoards->count() ?? 1 }}"
+                    class="form-control" value="" required>
+            </div>
+        </div>
         @if ($funder->trusteeBoards->isEmpty())
             <div class="trustee-row row w-100 mx-auto mb-3">
                 <div class="input-group col-md-3">
                     <label for="trustee_boards[0][trustee]">Trustee Name</label>
-                    <input type="text" name="trustee_boards[0][trustee]" class="form-control" value="" required>
+                    <input type="text" name="trustee_boards[0][trustee]" class="form-control" value=""
+                        required>
                 </div>
                 <div class="input-group col-md-3">
                     <label for="trustee_boards[0][position]">Position</label>
