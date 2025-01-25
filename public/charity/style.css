@@ -1084,3 +1084,92 @@ nav ul li a {
         text-align: center;
     }
 }
+
+
+.pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: 0.35rem; }
+  
+  .page-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #27489a;
+    background-color: #F5F5F5;
+    border: 1px solid #E0E0E0; }
+    .page-link:hover {
+      z-index: 2;
+      color: #129793;
+      text-decoration: none;
+      background-color: #EEEEEE;
+      border-color: #E0E0E0; }
+    .page-link:focus {
+      z-index: 3;
+      outline: 0;
+      box-shadow: 0; }
+  
+  .page-item:first-child .page-link {
+    margin-left: 0;
+    border-top-left-radius: 0.35rem;
+    border-bottom-left-radius: 0.35rem; }
+  
+  .page-item:last-child .page-link {
+    border-top-right-radius: 0.35rem;
+    border-bottom-right-radius: 0.35rem; }
+  
+  .page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #129793;
+    border-color: #129793; }
+  
+  .page-item.disabled .page-link {
+    color: #757575;
+    pointer-events: none;
+    cursor: auto;
+    background-color: #E0E0E0;
+    border-color: #E0E0E0; }
+  
+  .pagination-lg .page-link {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.25rem;
+    line-height: 1.5; }
+  
+  .pagination-lg .page-item:first-child .page-link {
+    border-top-left-radius: 0.6rem;
+    border-bottom-left-radius: 0.6rem; }
+  
+  .pagination-lg .page-item:last-child .page-link {
+    border-top-right-radius: 0.6rem;
+    border-bottom-right-radius: 0.6rem; }
+  
+  .pagination-sm .page-link {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5; }
+  
+  .pagination-sm .page-item:first-child .page-link {
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem; }
+  
+  .pagination-sm .page-item:last-child .page-link {
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem; }
+
+    .pagination select#per_page {
+        background: #E0E0E0;
+    }
+    li.page-item a, li.page-item span {
+        border-radius: 5px !important;
+    }
+    .pagination li.page-item {
+        margin-inline: 2px;
+        border-radius: 5px !important;
+    }
+    ul.pagination {
+        margin-block: 10px;
+    }

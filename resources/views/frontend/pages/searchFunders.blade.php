@@ -4,58 +4,56 @@
 @section('meta_description', 'Home')
 @section('meta_keyword', 'Home')
 @section('content')
-    <style>
-        .Call-to-action {
-            background: white;
-            background-image: url(charity/images/question.png);
-            filter: brightness(1.1);
-        }
+<style>
+    .Call-to-action {
+        background: white;
+        background-image: url(charity/images/question.png);
+        filter: brightness(1.1);
+    }
 
-        .search-items {
-            background: #d8d8d8;
-            padding: 2rem;
-            text-align: center;
-        }
+    .search-items {
+        background: #d8d8d8;
+        padding: 2rem;
+        text-align: center;
+    }
 
-        #filtersAction {
-            cursor: pointer;
-        }
+    #filtersAction {
+        cursor: pointer;
+    }
 
-        .Filter-Banner {
-            background: #F8F8F8;
-            padding-block: 1rem
-        }
+    .Filter-Banner {
+        background: #F8F8F8;
+        padding-block: 1rem
+    }
 
-        .search-items svg {
-            width: 46%
-        }
+    .search-items svg {
+        width: 46%
+    }
 
-        .searchBar {
-            background: #129793
-        }
+    .searchBar {
+        background: #129793
+    }
 
-        .fxh {
-            height: 45px;
-        }
+    .fxh {
+        height: 45px;
+    }
 
-        .fxw {
-            width: 65px;
-        }
+    .fxw {
+        width: 65px;
+    }
 
-        .filter-group h4 {
+    .filter-group h4 {
 
-            color: #404040
-        }
+        color: #404040
+    }
 
-        .filter-group label {
-            color: #616161
-        }
+    .filter-group label {
+        color: #616161
+    }
 
-        .list-unstyled>li {
-            margin-block: 6px;
-        }
-
-
+    .list-unstyled>li {
+        margin-block: 6px;
+    }
 
 
 
@@ -64,101 +62,107 @@
 
 
 
-        .searchHeader {
-            background-color: #505B67;
-            color: white;
-            padding: 15px 20px;
-        }
 
+
+    .searchHeader {
+        background-color: #505B67;
+        color: white;
+        padding: 15px 20px;
+    }
+
+    .result-card {
+        border-bottom: 2px solid #b5b5b5;
+        padding: 30px 20px;
+    }
+
+    .charity-number {
+        color: #FF6B6B;
+        font-size: 0.9rem;
+        margin-block: 10px;
+    }
+
+    .read-more {
+        color: #00A19C;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .read-more:hover {
+        color: #008783;
+    }
+
+    .funding-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .funding-list li {
+        margin-bottom: 10px;
+        color: #505B67;
+    }
+
+    .more-link {
+        color: #00A19C;
+        text-decoration: none;
+    }
+
+    .add-favourite {
+        background-color: #00A19C;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .add-favourite:hover {
+        background-color: #008783;
+        color: white;
+    }
+
+    @media (max-width: 768px) {
         .result-card {
-            border-bottom: 2px solid #b5b5b5;
-            padding: 30px 20px;
+            padding: 20px 15px;
         }
 
-        .charity-number {
-            color: #FF6B6B;
-            font-size: 0.9rem;
-            margin-block: 10px;
+        .annual-spending {
+            margin-top: 15px;
         }
+    }
 
-        .read-more {
-            color: #00A19C;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
+    .container p {
+        all: unset
+    }
 
-        .read-more:hover {
-            color: #008783;
-        }
+    .funding-list li:not(.link) {
+        margin-bottom: 10px;
+        color: #505B67;
+        padding-bottom: 8px;
+        border-bottom: 1px solid;
+        font-size: 18px;
+        font-weight: 600;
+    }
+</style>
+<form id="filterForm" class="form">
+    <input type="hidden" name="page" value="{{ request('page', 1) }}">
 
-        .funding-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .funding-list li {
-            margin-bottom: 10px;
-            color: #505B67;
-        }
-
-        .more-link {
-            color: #00A19C;
-            text-decoration: none;
-        }
-
-        .add-favourite {
-            background-color: #00A19C;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .add-favourite:hover {
-            background-color: #008783;
-            color: white;
-        }
-
-        @media (max-width: 768px) {
-            .result-card {
-                padding: 20px 15px;
-            }
-
-            .annual-spending {
-                margin-top: 15px;
-            }
-        }
-
-        .container p {
-            all: unset
-        }
-
-        .funding-list li:not(.link) {
-            margin-bottom: 10px;
-            color: #505B67;
-            padding-bottom: 8px;
-            border-bottom: 1px solid;
-            font-size: 18px;
-            font-weight: 600;
-        }
-    </style>
 
     <section class="Filter-Banner">
         <div class="container">
             <div class="row mx-auto w-100">
                 <div class="col-12 px-0">
+
                     <div class="searchBar p-4 text-white d-flex gap-3 align-items-center">
                         <h3 class="mb-0 white-nowrap fw-bold">
                             Search for a specific prospect
                         </h3>
                         <div class="search ms-3 w-100 d-flex align-items-center justify-content-center bg-white">
-                            <input type="text" placeholder="Search funders..."
+                            <input type="text" name="search" placeholder="Search funders..."
                                 class="form-control shadow-none border-0 rounded-0 d-inline-block w-100 fxh">
                             <div class="px-2">
                                 <svg width="24" height="24" viewBox="0 0 30 30" fill="none"
@@ -200,27 +204,28 @@
                             <div class="filter-group">
                                 <h4 class="fw-bold">Prospect Type</h4>
                                 <ul class="list-unstyled">
-                                @foreach ($types as $type)
-                                      <li>
-                                      <input type="checkbox" id="trusts" value=" {{$type->id}}" /> 
-                                      <label for="trusts">
-                                      {{$type->name}}
-                                      </label>
-                                            </li>
-                                @endforeach
+                                    @foreach ($types as $type)
+                                        <li>
+                                            <input {{ in_array($type->id, request('type', [])) ? 'checked' : '' }} type="checkbox" id="type{{$type->id}}" name="type[]" value="{{$type->id}}" />
+                                            <label for="type{{$type->id}}">
+                                                {{$type->name}}
+                                            </label>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
 
-                           
+
                         </div>
                         <div class="col-md-3 col-sm-6 col-12">
-                         <div class="filter-group">
+                            <div class="filter-group">
                                 <h4 class="fw-bold">Funding Focus</h4>
                                 <ul class="list-unstyled">
-                                  @foreach ($workAreas as $workArea)
-                                    <li><input type="checkbox" id="animals" value="{{$workArea->id}}"/> <label for="animals">{{$workArea->name}}</label></li>
-                                     @endforeach
-                                    
+                                    @foreach ($workAreas as $workArea)
+                                        <li><input type="checkbox" {{ in_array($workArea->id, request('workarea', [])) ? 'checked' : '' }} id="workarea{{$workArea->id}}" name="workarea[]" value="{{$workArea->id}}" /> <label
+                                                for="workarea{{$workArea->id}}">{{$workArea->name}}</label></li>
+                                    @endforeach
+
                                 </ul>
                             </div>
                             <!-- Beneficiary Group -->
@@ -259,7 +264,8 @@
                                             Midlands</label></li>
                                     <li><input type="checkbox" id="east-england" /> <label for="east-england">East of
                                             England</label></li>
-                                    <li><input type="checkbox" id="greater-london" /> <label for="greater-london">Greater
+                                    <li><input type="checkbox" id="greater-london" /> <label
+                                            for="greater-london">Greater
                                             London</label></li>
                                     <li><input type="checkbox" id="north-east" /> <label for="north-east">North East
                                             England</label></li>
@@ -309,135 +315,26 @@
             </div>
         </div>
     </section>
+</form>
+<section class="mt-3">
+    <div class="container">
 
-    <section class="mt-3">
-        <div class="container">
 
-
-            <div class="" id="filteredData">
-            </div>
-            <div class="searchHeader d-flex justify-content-between align-items-center">
-                <div>334 results</div>
-                <div class="d-flex align-items-center gap-3">
-                    <div>Sort:</div>
-                    <select name="" id="" class="form-select text-left">
-                        <option value="">Relevance</option>
-                    </select>
-                    <select name="" id="" class="form-select text-left">
-                        <option value=""> 30 per page</option>
-                    </select>
-                </div>
-            </div>
-
-            <div>
-                <div class="result-card">
-                    <div class="row align-items-start">
-                        <!-- Prospect Column -->
-                        <div class="col-md-3">
-                            <h3 class="h5 mb-4 fw-bold">Prospect</h3>
-
-                            <h2 class="h5 mb-0">Henry Smith</h2>
-                            <div class="charity-number">Charity no: 230102</div>
-                            <p class="mb-2 fs-6 d-block">The trust was established in 1973 and makes grants to
-                                organisations within 25-mile radius of York. The trust's areas of support include:</p>
-                            <a href="#" class="read-more">
-                                Read more
-                                <i class="fas fa-arrow-up txt-primary btn-ico"></i>
-                            </a>
-                        </div>
-
-                        <!-- Funding Focus Column -->
-                        <div class="col-md-3">
-                            <h3 class="h5 mb-4 fw-bold">Funding focus</h3>
-                            <ul class="funding-list">
-                                <li class="">Art, culture & heritage</li>
-                                <li class="">Social welfare</li>
-                                <li class="">Natural sciences</li>
-                                <li class="link"><a href="#" class="more-link">3 more...</a></li>
-                            </ul>
-                        </div>
-
-                        <!-- Geographic Preferences Column -->
-                        <div class="col-md-3">
-                            <h3 class="h5 mb-4 fw-bold">Geographic preferences</h3>
-                            <div>North Yorkshire</div>
-                        </div>
-
-                        <!-- Annual Spending Column -->
-                        <div class="col-md-3 text-md-end">
-                            <div class="annual-spending">
-                                <h3 class="h5 mb-4 fw-bold">Annual spending</h3>
-                                <div class="h5 mb-0">£279,800</div>
-                                <div class="text-muted">(2021/22)</div>
-                                <div class="mt-3">
-
-                                    <button class="primaryBtn">Add to favourites <i class="fas fa-arrow-up"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Results -->
-                <div class="result-card">
-                    <div class="row align-items-start">
-                        <!-- Prospect Column -->
-                        <div class="col-md-3">
-                            <h3 class="h5 mb-4 fw-bold">Prospect</h3>
-
-                            <h2 class="h5 mb-0">Henry Smith</h2>
-                            <div class="charity-number">Charity no: 230102</div>
-                            <p class="mb-2 fs-6 d-block">The trust was established in 1973 and makes grants to
-                                organisations within 25-mile radius of York. The trust's areas of support include:</p>
-                            <a href="#" class="read-more">
-                                Read more
-                                <i class="fas fa-arrow-up txt-primary btn-ico"></i>
-                            </a>
-                        </div>
-
-                        <!-- Funding Focus Column -->
-                        <div class="col-md-3">
-                            <h3 class="h5 mb-4 fw-bold">Funding focus</h3>
-                            <ul class="funding-list">
-                                <li class="">Art, culture & heritage</li>
-                                <li class="">Social welfare</li>
-                                <li class="">Natural sciences</li>
-                                <li class="link"><a href="#" class="more-link">3 more...</a></li>
-                            </ul>
-                        </div>
-
-                        <!-- Geographic Preferences Column -->
-                        <div class="col-md-3">
-                            <h3 class="h5 mb-4 fw-bold">Geographic preferences</h3>
-                            <div>North Yorkshire</div>
-                        </div>
-
-                        <!-- Annual Spending Column -->
-                        <div class="col-md-3 text-md-end">
-                            <div class="annual-spending">
-                                <h3 class="h5 mb-4 fw-bold">Annual spending</h3>
-                                <div class="h5 mb-0">£279,800</div>
-                                <div class="text-muted">(2021/22)</div>
-                                <div class="mt-3">
-
-                                    <button class="primaryBtn">Add to favourites <i class="fas fa-arrow-up"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="" id="filteredData">
         </div>
-    </section>
 
-    <script>
-        $("#filtersAction").click(function() {
-            $("#filters").slideToggle();
-        });
-    </script>
+    </div>
+</section>
+
+<script>
+    $("#filtersAction").click(function () {
+        $("#filters").slideToggle();
+    });
+</script>
 
 
 
-    <script>
+<script>
     $(document).ready(function () {
         filterationCommon(`{{ route('get.searchFundersList') }}`)
     });
