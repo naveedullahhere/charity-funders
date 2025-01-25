@@ -147,6 +147,7 @@
 
 </div>
 
+    <script src="{{ asset('management/assets/js/scripts.js') }}"></script>
 
 <script>
     $(document).ready(function() {

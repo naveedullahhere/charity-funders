@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AreaOfWork extends Model
 {
+   protected  $table = 'areas_of_work';
     protected $fillable = [
         'funder_id',
         'work_area_id',
@@ -22,4 +23,6 @@ class AreaOfWork extends Model
     {
         return $this->belongsTo(WorkArea::class, 'work_area_id');
     }
+
+    
 }

@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Airport;
-use App\Models\Collection;
-use App\Models\cr;
-use App\Models\Event;
-use App\Models\Gallery;
+use App\Models\{WorkArea, Type};
+
+use App\Models\Funder;
 use App\Models\Media;
 use App\Models\Page;
 use Illuminate\Http\Request;
@@ -23,7 +21,7 @@ class FrontHomeController extends Controller
 
     public function index(Request $request)
     {
-   
+
         return view('frontend.pages.home');
     }
 
@@ -54,9 +52,22 @@ class FrontHomeController extends Controller
 
     public function searchFunders()
     {
-        return view('frontend.pages.searchFunders');
+        $types = Type::all();
+        $workAreas = WorkArea::all();
+
+        return view('frontend.pages.searchFunders', compact('types', 'workAreas'));
     }
-   
+    public function searchFundersList(Request $request)
+    {
+       
+        $types = Type::all();
+        $workAreas = WorkArea::all();
+        $funders = Funder::where('status','Publish')->get();
+
+
+        return view('frontend.funders.searchFundersList', compact('types', 'workAreas','funders'));
+    }
+
     public function showFunder()
     {
         return view('frontend.pages.funderSingle');

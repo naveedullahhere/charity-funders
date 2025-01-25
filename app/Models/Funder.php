@@ -77,6 +77,11 @@ class Funder extends Model
     {
         return $this->hasMany(AreaOfWork::class, 'funder_id');
     }
+
+     public function workAreas()
+    {
+        return $this->belongsToMany(WorkArea::class, 'areas_of_work', 'funder_id', 'work_area_id');
+    }
       // Relationship: Donation Applications
     public function donationApplications()
     {

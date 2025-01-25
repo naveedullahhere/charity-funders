@@ -62,6 +62,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::findOrFail($id);
+       
         $categories = Category::where('id', '!=', $id)->get(); // Exclude current category from parent list
         return view('management.category.edit', compact('category', 'categories'));
     }
@@ -69,10 +70,11 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoryRequest $request, Category $category): JsonResponse
+    public function update(CategoryRequest $request, $id): JsonResponse
     {
         $data = $request->validated();
-        $category->update($data);
+        $category = Category::findOrFail($id);
+        $category->update($request->all());
 
         return response()->json(['success' => 'Category updated successfully.', 'data' => $category], 200);
     }
