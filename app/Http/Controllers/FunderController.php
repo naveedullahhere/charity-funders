@@ -6,89 +6,270 @@ use App\Http\Controllers\Controller;
 use App\Models\Funder;
 use Illuminate\Http\{Request, JsonResponse};
 use App\Http\Requests\Funder\FunderRequest;
+use App\Models\Category;
+use App\Models\Type;
+use App\Models\WorkArea;
+use Illuminate\Support\Facades\Validator;
 
 class FunderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return view('management.funder.index');
     }
 
-    /**
-     * Get list of funders.
-     */
+
     public function getList(Request $request)
     {
         $funders = Funder::when($request->filled('search'), function ($q) use ($request) {
             $searchTerm = '%' . $request->search . '%';
             return $q->where(function ($sq) use ($searchTerm) {
                 $sq->where('name', 'like', $searchTerm)
-                   ->orWhere('charity_no', 'like', $searchTerm);
+                    ->orWhere('charity_no', 'like', $searchTerm);
             });
         })
-        ->latest()
-        ->paginate(request('per_page', 25));
+            ->latest()
+            ->paginate(request('per_page', 25));
 
         return view('management.funder.getList', compact('funders'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
-        return view('management.funder.create');
+        $categories = Category::all();
+        $types = Type::all();
+        $workAreas = WorkArea::all();
+
+        return view('management.funder.create', compact('categories', 'types', 'workAreas'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(FunderRequest $request)
-    {
-        $data = $request->validated();
 
-        // Handle logo upload
-        if ($request->hasFile('logo')) {
-            $data['logo'] = $request->file('logo')->store('logos', 'public');
+    public function store(Request $request)
+    {
+        $request->validate([
+            'category_id' => 'required|exists:categories,id',
+            'sub_category_id' => 'nullable|exists:categories,id',
+            'type_id' => 'required|exists:types,id',
+            'company_name' => 'required|string|max:255',
+            'charity_no' => 'required|string|max:255',
+            'phone' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'status' => 'required|in:Publish,Draft',
+        ]);
+
+        $funder = Funder::create($request->all());
+
+        // if ($request->has('financials')) {
+        //     foreach ($request->financials as $financial) {
+        //         $funder->financialDetails()->create($financial);
+        //     }
+        // }
+
+        // if ($request->has('donation_applications')) {
+        //     foreach ($request->donation_applications as $application) {
+        //         $funder->donationApplications()->create($application);
+        //     }
+        // }
+
+        // if ($request->has('trustee_boards')) {
+        //     foreach ($request->trustee_boards as $trustee) {
+        //         $funder->trusteeBoards()->create($trustee);
+        //     }
+        // }
+
+        // if ($request->has('work_areas')) {
+        //     $funder->areasOfWork()->sync($request->work_areas);
+        // }
+
+        return response()->json(['success' => true, 'message' => 'Funder created successfully']);
+    }
+
+    public function update(Request $request, Funder $funder)
+    {
+        $request->validate([
+            'category_id' => 'required',
+            'sub_category_id' => 'required',
+            'type_id' => 'required',
+            'company_name' => 'required',
+            'charity_no' => 'required',
+            'phone' => 'required',
+            'email' => 'required|email',
+            'status' => 'required',
+        ]);
+
+        $funder->update($request->all());
+
+        $funder->financialDetails()->delete();
+        if ($request->has('financials')) {
+            foreach ($request->financials as $financial) {
+                $funder->financialDetails()->create($financial);
+            }
         }
 
-        $funder = Funder::create($data);
+        $funder->donationApplications()->delete();
+        if ($request->has('donation_applications')) {
+            foreach ($request->donation_applications as $application) {
+                $funder->donationApplications()->create($application);
+            }
+        }
 
-        return response()->json(['success' => 'Funder created successfully.', 'data' => $funder], 201);
+        $funder->trusteeBoards()->delete();
+        if ($request->has('trustee_boards')) {
+            foreach ($request->trustee_boards as $trustee) {
+                $funder->trusteeBoards()->create($trustee);
+            }
+        }
+
+        if ($request->has('work_areas')) {
+            $funder->areasOfWork()->sync($request->work_areas);
+        }
+
+        return response()->json(['success' => true, 'message' => 'Funder updated successfully']);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
+    public function storeGeneral(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'category_id' => 'required|exists:categories,id',
+            'sub_category_id' => 'nullable|exists:categories,id',
+            'type_id' => 'required|exists:types,id',
+            'company_name' => 'required|string|max:255',
+            'charity_no' => 'required|string|max:255',
+            'phone' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'status' => 'required|in:Publish,Draft',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $funder = Funder::create($validator->validated());
+
+        return response()->json(['success' => 'General information saved successfully', 'funder_id' => $funder->id, 'redirect_url' => route('funder.edit', ['funder' => $funder->id])]);
+    }
+
+    public function storeCompany(Request $request, Funder $funder)
+    {
+        $validator = Validator::make($request->all(), [
+            'address_line1' => 'nullable|string|max:255',
+            'address_line2' => 'nullable|string|max:255',
+            'region' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:255',
+            'postcode' => 'nullable|string|max:255',
+            'website' => 'nullable|url',
+            'location' => 'required|string',
+            'contact_person_name' => 'nullable|string|max:255',
+            'contact_person_designation' => 'nullable|string|max:255',
+            'contact_person_phone' => 'nullable|string|max:255',
+            'contact_person_email' => 'nullable|email|max:255',
+            'facebook' => 'nullable|url',
+            'twitter' => 'nullable|url',
+            'google_plus' => 'nullable|url',
+            'company_description' => 'nullable|string',
+            'application_procedure' => 'nullable|string',
+            'charity_url' => 'nullable|url',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $funder->update($validator->validated());
+
+        return response()->json(['message' => 'Company information saved successfully']);
+    }
+
+    public function storeFinancials(Request $request, Funder $funder)
+    {
+        $validator = Validator::make($request->all(), [
+            'financials' => 'required|array',
+            'financials.*.year' => 'required|integer',
+            'financials.*.income' => 'required|numeric',
+            'financials.*.spend' => 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $funder->financials()->delete();
+        $funder->financials()->createMany($request->financials);
+
+        return response()->json(['message' => 'Financial information saved successfully']);
+    }
+
+    public function storeDonations(Request $request, Funder $funder)
+    {
+        $validator = Validator::make($request->all(), [
+            'donation_applications' => 'required|array',
+            'donation_applications.*.year' => 'required|integer',
+            'donation_applications.*.received' => 'required|integer',
+            'donation_applications.*.successful' => 'required|integer',
+            'donation_applications.*.rate' => 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $funder->donationApplications()->delete();
+        $funder->donationApplications()->createMany($request->donation_applications);
+
+        return response()->json(['message' => 'Donation applications saved successfully']);
+    }
+
+    public function storePeople(Request $request, Funder $funder)
+    {
+        $validator = Validator::make($request->all(), [
+            'trustee_boards' => 'required|array',
+            'trustee_boards.*.name' => 'required|string|max:255',
+            'trustee_boards.*.position' => 'required|string|max:255',
+            'trustee_boards.*.status' => 'required|in:up-to-date,recently,registered',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $funder->trusteeBoards()->delete();
+        $funder->trusteeBoards()->createMany($request->trustee_boards);
+
+        return response()->json(['message' => 'Trustee board information saved successfully']);
+    }
+
+    public function storeAreas(Request $request, Funder $funder)
+    {
+        $validator = Validator::make($request->all(), [
+            'work_areas' => 'required|array',
+            'work_areas.*' => 'exists:work_areas,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $funder->workAreas()->sync($request->work_areas);
+
+        return response()->json(['message' => 'Work areas saved successfully']);
+    }
+
+
+
     public function edit($id)
     {
         $funder = Funder::findOrFail($id);
-        return view('management.funder.edit', compact('funder'));
+
+        $categories = Category::all();
+        $types = Type::all();
+        $workAreas = WorkArea::all();
+
+        return view('management.funder.edit', compact('funder', 'categories', 'types', 'workAreas'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(FunderRequest $request, Funder $funder): JsonResponse
-    {
-        $data = $request->validated();
 
-        // Handle logo upload
-        if ($request->hasFile('logo')) {
-            $data['logo'] = $request->file('logo')->store('logos', 'public');
-        }
-
-        $funder->update($data);
-
-        return response()->json(['success' => 'Funder updated successfully.', 'data' => $funder], 200);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Funder $funder): JsonResponse
     {
         $funder->delete();

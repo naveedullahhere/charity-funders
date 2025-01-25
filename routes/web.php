@@ -3,7 +3,7 @@
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FrontHomeController;
 
-use App\Http\Controllers\{FunderController,TypeController,CategoryController, SubscriptionController, WorkAreaController};
+use App\Http\Controllers\{FunderController, TypeController, CategoryController, SubscriptionController, WorkAreaController};
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -64,12 +64,29 @@ Route::post('/contact-us', [ContactController::class, 'store'])->name('contact-u
 Route::get('/search', [FrontHomeController::class, 'search']);
 Route::get('/search-funders', [FrontHomeController::class, 'searchFunders']);
 Route::get('/funder', [FrontHomeController::class, 'showFunder']);
+// Route::post('/funder/create', [FrontHomeController::class, 'store'])->name('funders.store');
+// Route::put('/funder/update', [FrontHomeController::class, 'update'])->name('funders.update');
+// Route::delete('/funder/delete', [FrontHomeController::class, 'destroy'])->name('funders.destroy');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
 
+
 Route::group(['middleware' => ['auth']], function () {
+    Route::prefix('funders')->group(function () {
+        // Route::get('/create', [FunderController::class, 'create'])->name('funders.create');
+        // Route::get('/edit', [FunderController::class, 'edit'])->name('funders.edit');
+        Route::post('/create', [FunderController::class, 'storeGeneral'])->name('funders.store');
+        Route::post('/store-general', [FunderController::class, 'storeGeneral'])->name('funders.store.general');
+        Route::post('/store-company/{funder}', [FunderController::class, 'storeCompany'])->name('funders.store.company');
+        Route::post('/store-financials/{funder}', [FunderController::class, 'storeFinancials'])->name('funders.store.financials');
+        Route::post('/store-donations/{funder}', [FunderController::class, 'storeDonations'])->name('funders.store.donations');
+        Route::post('/store-people/{funder}', [FunderController::class, 'storePeople'])->name('funders.store.people');
+        Route::post('/store-areas/{funder}', [FunderController::class, 'storeAreas'])->name('funders.store.areas');
+        Route::delete('/delete', [FrontHomeController::class, 'destroy'])->name('funders.destroy');
+    });
+
     Route::post('/set-layout-cookie', function (Illuminate\Http\Request $request) {
         $layout = $request->input('layout', 'light');
         return response()
@@ -90,7 +107,7 @@ Route::group(['middleware' => ['auth']], function () {
         return redirect('/');
     })->name('logouts');
 
-    
+
 
     Route::get('my-account', [App\Http\Controllers\CustomerDashboardController::class, 'MyProfile'])->name('my-account');
     Route::get('my-drive', [App\Http\Controllers\CustomerDashboardController::class, 'MyDrive'])->name('my-drive');
@@ -127,4 +144,3 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
     });
 });
-

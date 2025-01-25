@@ -2,7 +2,6 @@
 //   renderLoadingTable("#filteredData table", 10);
 // }
 
-
 // renderLoadingTable("#filteredData table", 12);
 
 function filterationCommon(url, loadmore = false, appenddiv = "filteredData") {
@@ -179,9 +178,6 @@ function filterationCommon(url, loadmore = false, appenddiv = "filteredData") {
 $(document).on("submit", "#ajaxSubmit", function (e) {
   var formhunyr = $(this);
 
-
-
-
   e.preventDefault(); // Avoid executing the actual submit of the form.
 
   // Clear previous errors and success messages
@@ -249,7 +245,7 @@ $(document).on("submit", "#ajaxSubmit", function (e) {
             var url = form.find("#url").val();
             var listRefresh = form.find("#listRefresh").val();
             var ajaxLoadFlag = form.find("#ajaxLoadFlag").val();
-            $(formhunyr).parents('.modal-sidebar').removeClass('open');
+            $(formhunyr).parents(".modal-sidebar").removeClass("open");
             $(".main-content").css("cursor", "auto");
             console.log(listRefresh);
 
@@ -263,6 +259,9 @@ $(document).on("submit", "#ajaxSubmit", function (e) {
             }
             if (ajaxLoadFlag == 1) {
               getAjaxDataOnEditColumns();
+            }
+            if (data.redirect_url) {
+              window.location.href = data.redirect_url;
             }
           }
         });
@@ -291,7 +290,7 @@ $(document).on("submit", "#ajaxSubmit", function (e) {
             var lastField = fields.last(); // Select the last field
             lastField.addClass("is-invalid");
 
-          if (lastField.hasClass("select2")) {
+            if (lastField.hasClass("select2")) {
               lastField
                 .parent()
                 .find(".select2-container")
@@ -415,22 +414,15 @@ function openModal(button, url, title, viewonly = false) {
       $button.prop("disabled", false).html(originalText); // Reset button
     },
     error: function (xhr, status, error) {
-      handleAjaxError(xhr,status,error);
+      handleAjaxError(xhr, status, error);
       $(".loader-container").hide();
       $button.prop("disabled", false).html(originalText); // Reset button
     },
   });
 }
 
-
-
-
 //Handles Errors
-function handleAjaxError(
-  xhr,
-  status,
-  error,
-){
+function handleAjaxError(xhr, status, error) {
   console.error("Error loading content:", status);
   console.error("Error loading content:", xhr.status);
 
@@ -493,113 +485,103 @@ function handleAjaxError(
   }
 }
 
-
-
-
-
-
 function renderLoadingTable(tableId, rows) {
   // Select the table by ID
   const table = $(tableId);
   if (table.length === 0) {
-      console.error("Table not found!");
-      return;
+    console.error("Table not found!");
+    return;
   }
 
   // Find thead and count columns
   const thead = table.find("thead");
   if (thead.length === 0) {
-      console.error("Thead not found! Please define <thead> with columns.");
-      return;
+    console.error("Thead not found! Please define <thead> with columns.");
+    return;
   }
 
   const columns = thead.find("th").length; // Count the <th> elements
   if (columns === 0) {
-      console.error("No columns found in <thead>!");
-      return;
+    console.error("No columns found in <thead>!");
+    return;
   }
 
   // Clear tbody if it exists
   let tbody = table.find("tbody");
   if (tbody.length === 0) {
-      tbody = $("<tbody class='shimmer-table'></tbody>");
-      table.append(tbody);
+    tbody = $("<tbody class='shimmer-table'></tbody>");
+    table.append(tbody);
   } else {
-      tbody.empty();
-      tbody.addClass('shimmer-table')
+    tbody.empty();
+    tbody.addClass("shimmer-table");
   }
 
   // Generate rows and cells with loading-shimmer
   for (let i = 0; i < rows; i++) {
-      const tr = $("<tr></tr>");
-      for (let j = 0; j < columns; j++) {
-        // const td = $(`<td colspan="${columns}">-<span class="loading-shimmer">Loading</span></td>`); // Add shimmer class
-        const td = $(`<td >-<span class="loading-shimmer">Loading</span></td>`); 
-        tr.append(td);
-      }
-      tbody.append(tr);
+    const tr = $("<tr></tr>");
+    for (let j = 0; j < columns; j++) {
+      // const td = $(`<td colspan="${columns}">-<span class="loading-shimmer">Loading</span></td>`); // Add shimmer class
+      const td = $(`<td >-<span class="loading-shimmer">Loading</span></td>`);
+      tr.append(td);
+    }
+    tbody.append(tr);
   }
 }
 
-
-
-
 $(document).ready(function () {
-  const body = $('body');
-  const switchElement = $('#color-switch-1');
+  const body = $("body");
+  const switchElement = $("#color-switch-1");
 
   // Check initial state from Laravel rendered class
-  if (switchElement.is(':checked')) {
-      body.addClass('layout-dark');
+  if (switchElement.is(":checked")) {
+    body.addClass("layout-dark");
   }
 
   // On switch toggle
-  switchElement.on('change', function () {
-      if ($(this).is(':checked')) {
-          body.addClass('layout-dark');
-          saveTheme('dark');
-      } else {
-          body.removeClass('layout-dark');
-          saveTheme('light');
-      }
+  switchElement.on("change", function () {
+    if ($(this).is(":checked")) {
+      body.addClass("layout-dark");
+      saveTheme("dark");
+    } else {
+      body.removeClass("layout-dark");
+      saveTheme("light");
+    }
   });
 
   // Function to save the theme in cookies
   function saveTheme(theme) {
     $.ajax({
-        url: '/set-layout-cookie',
-        method: 'POST',
-        data: { layout: theme },
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-        },
-        success: function () {
-            console.log('Cookie saved successfully');
-        },
-        error: function () {
-            console.error('Failed to save cookie');
-        },
+      url: "/set-layout-cookie",
+      method: "POST",
+      data: { layout: theme },
+      headers: {
+        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+      },
+      success: function () {
+        console.log("Cookie saved successfully");
+      },
+      error: function () {
+        console.error("Failed to save cookie");
+      },
     });
-}
+  }
 });
-
-
-
-
 
 $(document).ready(function () {
-    $('body').change('#imageUpload',function (event) {
-        var file = event.target.files[0]; // Get the selected file
-        if (file) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#imagePreview').css('background-image', 'url(' + e.target.result + ')'); // Set the blob URL
-            };
-            reader.readAsDataURL(file); // Read the file as a Data URL
-        }
-    });
+  $("body").change("#imageUpload", function (event) {
+    var file = event.target.files[0]; // Get the selected file
+    if (file) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $("#imagePreview").css(
+          "background-image",
+          "url(" + e.target.result + ")"
+        ); // Set the blob URL
+      };
+      reader.readAsDataURL(file); // Read the file as a Data URL
+    }
+  });
 });
-
 
 (function (window, undefined) {
   "use strict";

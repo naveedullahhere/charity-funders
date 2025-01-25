@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\{Request, JsonResponse};
 use App\Http\Requests\CategoryRequest;
+use App\Models\Type;
 
 class CategoryController extends Controller
 {
@@ -28,9 +29,9 @@ class CategoryController extends Controller
                 $sq->where('name', 'like', $searchTerm);
             });
         })
-        ->with('parent') // Eager load parent category
-        ->latest()
-        ->paginate(request('per_page', 25));
+            ->with('parent') // Eager load parent category
+            ->latest()
+            ->paginate(request('per_page', 25));
 
         return view('management.category.getList', compact('categories'));
     }
@@ -40,7 +41,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = Category::all(); // Fetch all categories for parent dropdown
+        $categories = Category::all();
         return view('management.category.create', compact('categories'));
     }
 
