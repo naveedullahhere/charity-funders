@@ -12,7 +12,7 @@ class WorkAreasTableSeeder extends Seeder
      */
     public function run(): void
     {
-   DB::table('work_areas')->truncate();
+        DB::table('work_areas')->truncate();
         DB::table('work_areas')->insert([
             ['name' => 'Children, young people and families', 'description' => 'Description for Children, young people and families', 'status' => 1],
             ['name' => 'General charitable purposes', 'description' => 'Description for General charitable purposes', 'status' => 1],

@@ -70,5 +70,5 @@
         <label for="charity_url">Charity URL (charitycommission.gov.uk)</label>
         <input type="url" name="charity_url" id="charity_url" value="{{ $funder->charity_url }}" class="form-control" placeholder="https://www.example.com/">
     </div>
-    <button type="button" class="btn btn-primary" id="save-company">Save Company Info</button>
+    <button type="button" class="btn btn-primary" id="save-company">Save</button>
 </div>

@@ -1,6 +1,6 @@
-body{
-    background-color: black;
+.white-nowrap {
+  white-space: nowrap;
 }
-.white-nowrap{
-    white-space: nowrap;
+.layout-dark .input-group label {
+  background: #292929;
 }

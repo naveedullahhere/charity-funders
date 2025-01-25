@@ -56,6 +56,5 @@
             </option>
         </select>
     </div>
-    <button type="button" class="btn btn-primary" id="save-general">Save General
-        Info</button>
+    <button type="button" class="btn btn-primary" id="save-general">Save </button>
 </div>

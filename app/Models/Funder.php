@@ -77,7 +77,7 @@ class Funder extends Model
 
     public function areasOfWork()
     {
-        return $this->belongsToMany(WorkArea::class, 'area_of_works', 'funder_id', 'work_area_id');
+        return $this->belongsToMany(WorkArea::class, 'areas_of_work', 'funder_id', 'work_area_id');
     }
 
      public function workAreas()
