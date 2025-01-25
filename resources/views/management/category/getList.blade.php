@@ -1,9 +1,9 @@
 <table class="table m-0">
     <thead>
         <tr>
-            <th class="col-sm-4">Name </th>
-            <th class="col-sm-4">Parent Category</th>
-            <th class="col-sm-2">Action</th>
+            <th class="col-sm-2">Name </th>
+            <th class="col-sm-9">Parent Category</th>
+            <th class="col-sm-1">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -17,7 +17,7 @@
                     </td>
                     <td>
                         <p class="m-0">
-                            <small> {{ $row->parent->name ?? '--' }}</small>
+                            <small> {{ $row->parent->name ?? 'No Parent' }}</small>
                         </p>
                     </td>
                   

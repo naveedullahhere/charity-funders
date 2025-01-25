@@ -47,9 +47,9 @@ Contact (Inquiry)
                                     <tr>
                                         <th class="col-sm-2">Name</th>
                                         <th class="col-sm-2">Email/Phone</th>
-                                        <th class="col-sm-4">Message</th>
-                                        <th class="col-sm-2">Created</th>
-                                        <th class="col-sm-2">Action</th>
+                                        <th class="col-sm-6">Message</th>
+                                        <th class="col-sm-1">Created</th>
+                                        <th class="col-sm-1">Action</th>
                                     </tr>
                                 </thead>
 

@@ -59,29 +59,29 @@ class FrontHomeController extends Controller
     }
     public function searchFundersList(Request $request)
     {
-       
+
         $types = Type::all();
         $workAreas = WorkArea::all();
-$funders = Funder::where('status', 'Publish')->with('workAreas')
-    ->when($request->filled('search'), function ($q) use ($request) {
-        $searchTerm = '%' . $request->search . '%';
-        return $q->where(function ($sq) use ($searchTerm) {
-            $sq->where('name', 'like', $searchTerm)
-               ->orWhere('charity_no', 'like', $searchTerm);
-        });
-    })
-    ->when($request->filled('type'), function ($q) use ($request) {
-        return $q->where('type_id', $request->type); // Filter by 'type'
-    })
-    ->when($request->filled('workarea'), function ($q) use ($request) {
-        return $q->whereHas('workAreas', function ($wq) use ($request) {
-            $wq->whereIn('work_areas.id', $request->workarea); // Filter by workarea IDs
-        });
-    })->paginate(1);
+        $funders = Funder::where('status', 'Publish')->with('workAreas')
+            ->when($request->filled('search'), function ($q) use ($request) {
+                $searchTerm = '%' . $request->search . '%';
+                return $q->where(function ($sq) use ($searchTerm) {
+                    $sq->where('name', 'like', $searchTerm)
+                        ->orWhere('charity_no', 'like', $searchTerm);
+                });
+            })
+            ->when($request->filled('type'), function ($q) use ($request) {
+                return $q->where('type_id', $request->type); // Filter by 'type'
+            })
+            ->when($request->filled('workarea'), function ($q) use ($request) {
+                return $q->whereHas('workAreas', function ($wq) use ($request) {
+                    $wq->whereIn('work_areas.id', $request->workarea); // Filter by workarea IDs
+                });
+            })->paginate(1);
 
 
 
-        return view('frontend.funders.searchFundersList', compact('types', 'workAreas','funders'));
+        return view('frontend.funders.searchFundersList', compact('types', 'workAreas', 'funders'));
     }
 
     public function showFunder()

@@ -23,16 +23,9 @@ Category
                     <div class="card-header">
                         <form id="filterForm" class="form">
                             <div class="row ">
-                                <div class="col-md-1 my-1">
-                                    <label for="customers" class="form-label">Show Entries</label>
-                                    <select name="per_page" class="form-control">
-                                        <option value="25">25 / Page</option>
-                                        <option value="50">50 / Page</option>
-                                        <option value="100">100 / Page</option>
-                                    </select>
-                                </div>
+                               
 
-                                <div class="col-md-11 my-1 ">
+                                <div class="col-md-12 my-1 ">
                                     <div class="row justify-content-end text-right">
                                         <div class="col-md-2">
                                             <label for="customers" class="form-label">Search</label>
@@ -52,9 +45,9 @@ Category
                             <table class="table m-0">
                                 <thead>
                                     <tr>
-                                        <th class="col-sm-4">Name </th>
-                                        <th class="col-sm-4">Parent Category </th>
-                                        <th class="col-sm-2">Action</th>
+            <th class="col-sm-2">Name </th>
+            <th class="col-sm-9">Parent Category</th>
+            <th class="col-sm-1">Action</th>
                                     </tr>
                                 </thead>
 

@@ -17,4 +17,9 @@ class Type extends Model
         'description',
         'status',
     ];
+
+        public function funders()
+    {
+        return $this->hasMany(Funder::class, 'type_id');
+    }
 }

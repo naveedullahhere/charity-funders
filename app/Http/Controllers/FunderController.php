@@ -15,7 +15,10 @@ class FunderController extends Controller
 {
     public function index()
     {
-        return view('management.funder.index');
+          $categories = Category::all();
+        $types = Type::all();
+          $workAreas = WorkArea::all();
+        return view('management.funder.index', compact('categories', 'types', 'workAreas'));
     }
 
 
@@ -25,9 +28,17 @@ class FunderController extends Controller
             $searchTerm = '%' . $request->search . '%';
             return $q->where(function ($sq) use ($searchTerm) {
                 $sq->where('name', 'like', $searchTerm)
+                    ->orWhere('email', 'like', $searchTerm)
+                    ->orWhere('phone', 'like', $searchTerm)
                     ->orWhere('charity_no', 'like', $searchTerm);
             });
         })
+         ->when($request->filled('type'), function ($q) use ($request) {
+                return $q->where('type_id', $request->type); // Filter by 'type'
+            })
+         ->when($request->filled('category'), function ($q) use ($request) {
+                return $q->where('category_id', $request->category)->orWhere('sub_category_id',$request->category); 
+            })
             ->latest()
             ->paginate(request('per_page', 25));
 

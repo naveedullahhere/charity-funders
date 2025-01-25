@@ -1,9 +1,14 @@
 <table class="table m-0">
     <thead>
         <tr>
-            <th class="col-sm-4">Name </th>
-            <th class="col-sm-4">Parent Category</th>
-            <th class="col-sm-2">Action</th>
+            <th class="col-sm-1">Charity No </th>
+            <th class="col-sm-2">Name</th>
+            <th class="col-sm-2">Email/Phone</th>
+            <th class="col-sm-2">Type</th>
+            <th class="col-sm-2">Category</th>
+            <th class="col-sm-1">created</th>
+            <th class="col-sm-1">Status</th>
+            <th class="col-sm-1">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -12,25 +17,62 @@
                 <tr>
                     <td>
                         <p class="m-0">
+                            #{{ $row->charity_no }} <br>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="m-0">
                             {{ $row->name }} <br>
                         </p>
                     </td>
                     <td>
                         <p class="m-0">
-                            <small> {{ $row->parent->name ?? '--' }}</small>
+                            <a href="mailto:{{ $row->email }}">{{ $row->email }}</a>
+                            <br>
+                            <small> {{ $row->phone }}</small>
                         </p>
                     </td>
-                  
+                    <td>
+                        <p class="m-0">
+                            {{ $row->type->name }} <br>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="m-0">
+                            <small> {{ $row->category->name ?? 'No Parent' }}</small>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="m-0">
+                            {{ \Carbon\Carbon::parse($row->created_at)->format('Y-m-d') }} <br>
+                            {{ \Carbon\Carbon::parse($row->created_at)->format('H:i A') }} <br>
+
+                        </p>
+                    </td>
+                    <td>
+                        @if($row->status == 'Publish')
+                            <label for="" class="badge badge-success">Publish</label>
+                        @else
+                            <label for="" class="badge badge-secondary">Draft</label>
+
+                        @endif
+                    </td>
+
+
                     <td>
                         @can('role-edit')
-                            <a onclick="openModal(this,'{{ route('category.edit', $row->id) }}','Edit Category')"
-                                class="info p-1 text-center mr-2 position-relative ">
+                            <a href="{{ route('funder.edit', $row->id) }}" class="info p-1 text-center mr-1 position-relative ">
                                 <i class="ft-edit-2 font-medium-3"></i>
+                            </a>
+                        @endcan
+                        @can('role-edit')
+                            <a href="{{ route('funder.edit', $row->id) }}" class="info p-1 text-center mr-1 position-relative ">
+                                <i class="ft-eye font-medium-3"></i>
                             </a>
                         @endcan
                         @can('role-delete')
                             <a onclick="deletemodal('{{ route('category.destroy', $row->id) }}','{{ route('get.category') }}')"
-                                class="danger p-1 text-center mr-2 position-relative ">
+                                class="danger p-1 text-center mr-1 position-relative ">
 
                                 <i class="ft-x font-medium-3"></i>
                             </a>
@@ -71,6 +113,6 @@
 
 <div class="row d-flex" id="paginationLinks">
     <div class="col-md-12 text-right">
-            {{ $funders->links() }}
+        {{ $funders->links() }}
     </div>
 </div>

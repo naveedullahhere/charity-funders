@@ -69,6 +69,10 @@ class Funder extends Model
     {
         return $this->hasMany(FinancialDetail::class, 'funder_id');
     }
+    public function type()
+    {
+        return $this->belongsTo(Type::class, 'type_id');
+    }
 
     public function trusteeBoards()
     {

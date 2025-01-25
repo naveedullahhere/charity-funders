@@ -36,7 +36,7 @@
     </div>
     <div class="form-group">
         <label for="charity_no">Charity No *</label>
-        <input type="text" name="charity_no" value="{{ $funder->charity_no }}" id="charity_no" class="form-control"
+        <input type="text" name="charity_no" value="{{ $funder->charity_no }}" onkeypress="return DegitOnly(event);" id="charity_no" class="form-control"
             required>
     </div>
     <div class="form-group">

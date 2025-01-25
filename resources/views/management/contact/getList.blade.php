@@ -3,9 +3,9 @@
         <tr>
             <th class="col-sm-2">Name</th>
             <th class="col-sm-2">Email/Phone</th>
-            <th class="col-sm-4">Message</th>
-            <th class="col-sm-2">Created</th>
-            <th class="col-sm-2">Action</th>
+            <th class="col-sm-6">Message</th>
+            <th class="col-sm-1">Created</th>
+            <th class="col-sm-1">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -15,12 +15,12 @@
 
                     <td>
                         <p class="m-0">
-                            {{ $row->first_name.' '.$row->last_name }} <br>
+                            {{ $row->first_name . ' ' . $row->last_name }} <br>
                         </p>
                     </td>
                     <td>
                         <p class="m-0">
-                            {{ $row->email }} <br>
+                            <a href="mailto:{{ $row->email }}">{{ $row->email }}</a> <br>
                             <small>{{ $row->phone }}</small>
                         </p>
                     </td>
@@ -32,15 +32,16 @@
                     <td>
                         <p class="m-0">
                             {{ \Carbon\Carbon::parse($row->created_at)->format('Y-m-d') }} <br>
+                            {{ \Carbon\Carbon::parse($row->created_at)->format('H:i A') }} <br>
 
                         </p>
                     </td>
                     <td>
                         @can('role-edit')
-                        <a onclick="openModal(this,'{{ route('contact.edit', $row->id) }}','View Contact',true)"
-                            class="info p-1 text-center mr-2 position-relative ">
-                            <i class="ft-eye font-medium-3"></i>
-                        </a>
+                            <a onclick="openModal(this,'{{ route('contact.edit', $row->id) }}','View Contact',true)"
+                                class="info p-1 text-center mr-2 position-relative ">
+                                <i class="ft-eye font-medium-3"></i>
+                            </a>
                         @endcan
                         @can('role-delete')
                             <a onclick="deletemodal('{{ route('newsletter.destroy', $row->id) }}','{{ route('get.newsletter') }}')"

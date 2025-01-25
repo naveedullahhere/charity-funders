@@ -9,7 +9,7 @@
                 <select class="form-control" name="parent_id">
                     <option value="">Select Parent Category</option>
                     @foreach ($categories as $row)
-                        <option {{$row->id == $category->parent->id ? 'selected' : ''}} value="{{$row->id}}">{{$row->name}}</option>
+                        <option {{$category->parent && $row->id == $category->parent->id ? 'selected' : ''}} value="{{$row->id}}">{{$row->name}}</option>
                     @endforeach
 
                 </select>
