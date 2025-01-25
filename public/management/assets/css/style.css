@@ -191,3 +191,42 @@ div#filteredData {
 .layout-dark .pagination select#per_page {
     background: #1E1E1E;
 }
+ .input-group {
+    align-items: center;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-bottom: 0;
+}
+
+.input-group label {
+    background: #d9d9d9;
+    height: 100%;
+    padding-inline: 11px;
+    display: flex;
+    margin: 0  !important;
+    align-items: center;
+}
+ .input-group input {
+border-radius: 0 !important;
+}
+
+.remove-donation, .remove-financial {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    border-radius: 0;
+}
+#areas .form-group {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+
+/* .nav-tabs .nav-link {
+    color: white;
+}
+.nav-tabs .nav-link.active {
+    border-bottom: 0 !important;
+    background: linear-gradient(135deg, #d3d3d3 0%, #264eab 100%);
+    border-radius: 5px;
+    color: white;
+} */

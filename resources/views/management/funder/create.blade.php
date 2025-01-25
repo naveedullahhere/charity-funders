@@ -47,7 +47,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="company_name">Company Name *</label>
-                                <input type="text" name="company_name" id="company_name" class="form-control">
+                                <input type="text" name="name" id="name" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="charity_no">Charity No *</label>

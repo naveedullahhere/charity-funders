@@ -14,10 +14,10 @@
                 </div>
             </div>
             <div class="row w-100 mx-auto">
-                <div class="col-8 mx-auto">
+                <div class="col-md-8 ">
                     <form id="formSteps">
                         @csrf
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <ul class="nav nav-tabs my-3" id="myTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="general-tab" data-toggle="tab" href="#general"
                                     role="tab">General
@@ -53,7 +53,7 @@
                                     <select name="category_id" id="category_id" class="form-control" required>
                                         <option value="">--Select a Category--</option>
                                         @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            <option {{$funder->category_id == $category->id ? 'selected' : ''}}  value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -62,41 +62,43 @@
                                     <select name="sub_category_id" id="sub_category_id" class="form-control">
                                         <option value="">--- Select Sub Category ---</option>
                                         @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            <option {{$funder->sub_category_id == $category->id ? 'selected' : ''}}  value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
+                             
                                 <div class="form-group">
                                     <label for="type_id">Group *</label>
                                     <select name="type_id" id="type_id" class="form-control" required>
                                         <option value="">--Select a Group--</option>
                                         @foreach ($types as $type)
-                                            <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                            <option {{$funder->type_id == $type->id ? 'selected' : ''}} value="{{ $type->id }}">{{ $type->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
+                                {{-- @dd($funder) --}}
                                 <div class="form-group">
                                     <label for="company_name">Company Name *</label>
-                                    <input type="text" name="company_name" id="company_name" class="form-control"
+                                    <input type="text" value="{{$funder->name}}" name="name" id="name" class="form-control"
                                         required>
                                 </div>
                                 <div class="form-group">
                                     <label for="charity_no">Charity No *</label>
-                                    <input type="text" name="charity_no" id="charity_no" class="form-control" required>
+                                    <input type="text" name="charity_no" value="{{$funder->charity_no}}" id="charity_no" class="form-control" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="phone">Phone Number *</label>
-                                    <input type="text" name="phone" id="phone" class="form-control" required>
+                                    <input type="text" name="phone" value="{{$funder->phone}}"  id="phone" class="form-control" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email *</label>
-                                    <input type="email" name="email" id="email" class="form-control" required>
+                                    <input type="email" name="email" value="{{$funder->email}}"  id="email" class="form-control" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="status">Status *</label>
                                     <select name="status" id="status" class="form-control" required>
-                                        <option value="Publish">Publish</option>
-                                        <option value="Draft">Draft</option>
+                                        <option {{$funder->status == 'Publish' ? 'selected' : ''}} value="Publish">Publish</option>
+                                        <option {{$funder->status == 'Draft' ? 'selected' : ''}}  value="Draft">Draft</option>
                                     </select>
                                 </div>
                                 <button type="button" class="btn btn-primary" id="save-general">Save General
@@ -188,23 +190,23 @@
                             </div>
                             <div class="tab-pane fade" id="financials" role="tabpanel">
                                 <div id="financials-container">
-                                    <div class="financial-row">
-                                        <div class="form-group">
+                                    <div class="financial-row  row w-100 mx-auto mb-3">
+                                        <div class="input-group col-md-3">
                                             <label for="financials[0][year]">Year</label>
-                                            <input type="number" name="financials[0][year]" class="form-control"
+                                            <input type="text" onkeypress="return DegitOnly(event);"  name="financials[0][year]" class="form-control"
                                                 required>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="input-group col-md-3">
                                             <label for="financials[0][income]">Income (million)</label>
-                                            <input type="number" step="0.01" name="financials[0][income]"
+                                            <input type="text" step="0.01" onkeypress="return DegitOnly(event);"  name="financials[0][income]"
                                                 class="form-control" required>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="input-group col-md-3">
                                             <label for="financials[0][spend]">Spend (million)</label>
-                                            <input type="number" step="0.01" name="financials[0][spend]"
+                                            <input type="text" step="0.01" onkeypress="return DegitOnly(event);"  name="financials[0][spend]"
                                                 class="form-control" required>
                                         </div>
-                                        <button type="button" class="btn btn-danger remove-financial">Remove</button>
+                                        <button type="button" class="btn btn-danger remove-financial ">Remove</button>
                                     </div>
                                 </div>
                                 <button type="button" class="btn btn-primary" id="add-financial">Add New
@@ -214,28 +216,34 @@
                             </div>
                             <div class="tab-pane fade" id="donations" role="tabpanel">
                                 <div id="donations-container">
-                                    <div class="donation-row">
-                                        <div class="form-group">
+                                    <div class="donation-row row w-100 mx-auto mb-3">
+                                    <div class="col-11">
+                                        <div class="row">
+                                        <div class="input-group col-md-3">
                                             <label for="donation_applications[0][year]">Year</label>
-                                            <input type="number" name="donation_applications[0][year]"
+                                            <input type="text" onkeypress="return DegitOnly(event);" name="donation_applications[0][year]"
                                                 class="form-control" required>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="input-group col-md-3">
                                             <label for="donation_applications[0][received]">Received</label>
-                                            <input type="number" name="donation_applications[0][received]"
+                                            <input type="text" onkeypress="return DegitOnly(event);" name="donation_applications[0][received]"
                                                 class="form-control received" required>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="input-group col-md-3">
                                             <label for="donation_applications[0][successful]">Successful</label>
-                                            <input type="number" name="donation_applications[0][successful]"
+                                            <input type="text" onkeypress="return DegitOnly(event);" name="donation_applications[0][successful]"
                                                 class="form-control successful" required>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="input-group col-md-3">
                                             <label for="donation_applications[0][rate]">Rate (%)</label>
                                             <input type="number" name="donation_applications[0][rate]"
                                                 class="form-control rate" readonly>
                                         </div>
+                                        </div>
+                                    </div>
+                                        <div class="col-1">
                                         <button type="button" class="btn btn-danger remove-donation">Remove</button>
+                                        </div>
                                     </div>
                                 </div>
                                 <button type="button" class="btn btn-primary" id="add-donation">Add New Donation
@@ -271,10 +279,10 @@
                                 <button type="button" class="btn btn-primary" id="save-people">Save People Info</button>
                             </div>
                             <div class="tab-pane fade" id="areas" role="tabpanel">
-                                <h3>Select your work area/ who are the beneficiary ?</h3>
+                                <h3 class="mb-3">Select your work area/ who are the beneficiary ?</h3>
                                 <div class="form-group">
                                     @foreach ($workAreas as $area)
-                                        <div class="form-check">
+                                        <div class="form-check mb-2">
                                             <input class="form-check-input" type="checkbox" name="work_areas[]"
                                                 value="{{ $area->id }}" id="area{{ $area->id }}">
                                             <label class="form-check-label" for="area{{ $area->id }}">
@@ -287,11 +295,7 @@
                                     Works</button>
                             </div>
                         </div>
-                        <div class="form-group mt-3">
-                            {{-- <button type="submit" class="btn btn-primary">Save</button> --}}
-                            <button type="button" class="btn btn-secondary" id="preview-btn">Preview</button>
-                            <button type="button" class="btn btn-danger" id="delete-btn">Delete</button>
-                        </div>
+                       
                     </form>
                 </div>
             </div>

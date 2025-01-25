@@ -135,7 +135,7 @@ class FunderController extends Controller
             'category_id' => 'required|exists:categories,id',
             'sub_category_id' => 'nullable|exists:categories,id',
             'type_id' => 'required|exists:types,id',
-            'company_name' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'charity_no' => 'required|string|max:255',
             'phone' => 'required|string|max:255',
             'email' => 'required|email|max:255',
