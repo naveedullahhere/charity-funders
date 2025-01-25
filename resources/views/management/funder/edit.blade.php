@@ -90,6 +90,8 @@
             }
 
             function handleAjaxRequest(url, method, data, successMessage, nextTab) {
+                console.log("asdasdasd");
+
                 fetch(url, {
                         method: method,
                         headers: {
@@ -98,9 +100,25 @@
                         },
                         body: new URLSearchParams(data)
                     })
-                    .then(response => response.json())
                     .then(response => {
-                        Swal.fire('Success!', successMessage, 'success');
+                        if (!response.ok) {
+                            if (response.status === 422) {
+                                return response.json().then(errorData => {
+                                    console.error('Validation error:', errorData);
+                                    displayErrors(errorData.errors ||
+                                        errorData);
+                                });
+                            } else {
+                                throw new Error(`Request failed with status ${response.status}`);
+                            }
+                        }
+
+                        return response.json();
+                    })
+                    .then(response => {
+                        if (response) {
+                            Swal.fire('Success!', successMessage, 'success');
+                        }
                         // if (nextTab) document.querySelector(nextTab).click();
                     })
                     .catch(error => {
@@ -287,7 +305,8 @@
                 if (e.target.classList.contains('remove-trustee')) {
                     if (document.querySelectorAll('.trustee-row').length > 1) {
                         e.target.closest('.trustee-row').remove();
-                        document.querySelector('[name="trustee_board_man_power"]').value = document.querySelectorAll('.trustee-row').length-1;
+                        document.querySelector('[name="trustee_board_man_power"]').value = document
+                            .querySelectorAll('.trustee-row').length - 1;
                     }
                 }
                 // if (e.target.classList.contains('received') || e.target.classList.contains('successful')) {
