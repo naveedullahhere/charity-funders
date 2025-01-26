@@ -2,9 +2,9 @@
     <div>{{ count($funders) }} results</div>
     <div class="d-flex align-items-center gap-3">
         <div>Sort:</div>
-        <select name="" id="" class="form-select text-left">
+        {{-- <select name="" id="" class="form-select text-left">
             <option value="">Relevance</option>
-        </select>
+        </select> --}}
 
 
         <select name="per_page" id="per_page" class="form-select text-left">
@@ -30,7 +30,7 @@
                         <p class="mb-2 fs-6 d-block">
                             {{ Str::words(strip_tags($funder->company_description), 20, '') }}
                         </p>
-                        <a href="#" class="read-more">
+                        <a href="{{url('funder',$funder->slug)}}" class="read-more">
                             Read more
                             <i class="fas fa-arrow-up txt-primary btn-ico"></i>
                         </a>

@@ -150,6 +150,7 @@
 </style>
 <form id="filterForm" class="form">
     <input type="hidden" name="page" value="{{ request('page', 1) }}">
+    <input type="hidden" name="per_page" value="{{ request('per_page', 25) }}">
 
 
     <section class="Filter-Banner">
@@ -229,7 +230,7 @@
                                 </ul>
                             </div>
                             <!-- Beneficiary Group -->
-                            <div class="filter-group d-none">
+                            {{-- <div class="filter-group d-none">
                                 <h4 class="fw-bold">Beneficiary Group</h4>
                                 <ul class="list-unstyled">
                                     <li><input type="checkbox" id="children" /> <label for="children">Children, young
@@ -251,8 +252,8 @@
                                             seekers</label></li>
                                 </ul>
                             </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 col-12">
+                        </div> --}}
+                        {{-- <div class="col-md-3 col-sm-6 col-12">
                             <!-- Geographic Preferences -->
                             <div class="filter-group">
                                 <h4 class="fw-bold">Geographic Preferences</h4>
@@ -282,8 +283,8 @@
                                             for="northern-ireland">Northern Ireland</label></li>
                                 </ul>
                             </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 col-12">
+                        </div> --}}
+                        {{-- <div class="col-md-3 col-sm-6 col-12">
                             <!-- Expenditure -->
                             <div class="filter-group">
                                 <h4 class="fw-bold">Expenditure</h4>
@@ -305,7 +306,7 @@
                                             costs</label></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-12 align-items-center justify-content-end d-flex">
                             <button class="primaryBtn">Search <i class="fas fa-arrow-up"></i></button>
                             <a class="text-muted decoration-none ms-3">Reset </a>

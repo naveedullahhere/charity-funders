@@ -63,6 +63,7 @@ Route::get('/contact-us', [FrontHomeController::class, 'contact']);
 Route::post('/contact-us', [ContactController::class, 'store'])->name('contact-us.store');
 Route::get('/search', [FrontHomeController::class, 'search']);
 Route::get('/search-funders', [FrontHomeController::class, 'searchFunders']);
+Route::get('/funder/{slug}', [FrontHomeController::class, 'showFunder']);
 Route::post('/get-funders-search', [FrontHomeController::class, 'searchFundersList'])->name('get.searchFundersList');
 Route::get('/funder', [FrontHomeController::class, 'showFunder']);
 

@@ -93,12 +93,12 @@
             <div class="col-md-8 col-sm-12 nav-1">
                 <div class="nav">
                     <ul class="m-0">
-                        <li><a href="about">About us</a></li>
+                        <li><a href="{{url('about')}}">About us</a></li>
                         <li><a href="">Subscriptions</a></li>
-                        <li><a href="faqs">FAQs</a></li>
-                        <li><a href="contact">Contact us</a></li>
+                        <li><a href="{{url('faqs')}}">FAQs</a></li>
+                        <li><a href="{{url('contact-us')}}">Contact us</a></li>
                     </ul>
-                    <button><a href="">Login</a><i class="fas fa-arrow-up"></i></button>
+                    <button><a href="{{url('my-account')}}">Login</a><i class="fas fa-arrow-up"></i></button>
                 </div>
             </div>
         </div>

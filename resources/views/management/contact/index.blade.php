@@ -29,6 +29,7 @@ Contact (Inquiry)
                                         <div class="col-md-2">
                                             <label for="search" class="form-label">Search</label>
                                             <input type="hidden" name="page" value="{{ request('page', 1) }}">
+                                            <input type="hidden" name="per_page" value="{{ request('per_page', 25) }}">
 
                                             <input type="text" class="form-control" id="search" name="search"
                                                 placeholder="Search here" value="{{ request('search', '') }}">
