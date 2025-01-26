@@ -54,7 +54,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('management/assets/css/style.css') }}">
     <!-- END: Custom CSS-->
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlWLuEzszKgldMmuo9JjtKLxe9MGk75_k&libraries=places&callback=initAutocomplete"
+        src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_KEY') }}&libraries=places&callback=initAutocomplete"
         defer></script>
 </head>
 
