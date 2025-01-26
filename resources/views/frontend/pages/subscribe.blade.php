@@ -321,8 +321,13 @@
                 </div>
                 <div class="row justify-content-center mt-4">
                     <div class="col-md-10 text-center">
-                        <button type="button" class="btnNext" onclick="submitForm()">Submit <i
-                                class="fas fa-arrow-up"></i></button>
+                        <button type="button" class="btnNext" id="submitButton" onclick="submitForm()">
+                            <span id="buttonText">Submit</span>
+                            <span id="buttonSpinner" style="display: none;">
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </span>
+                            <i class="fas fa-arrow-up"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -386,7 +391,6 @@
         }
 
         function submitForm() {
-
             const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
             if (!paymentMethod) {
                 Swal.fire({
@@ -425,6 +429,14 @@
             document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
             document.querySelectorAll('.form-control').forEach(el => el.classList.remove('error'));
 
+            const submitButton = document.getElementById('submitButton');
+            const buttonText = document.getElementById('buttonText');
+            const buttonSpinner = document.getElementById('buttonSpinner');
+
+            submitButton.disabled = true;
+            buttonText.style.display = 'none';
+            buttonSpinner.style.display = 'inline-block';
+
             $.ajax({
                 url: '{{ route('subscription.store') }}',
                 method: 'POST',
@@ -460,10 +472,15 @@
                         }
                     }
                     goToStep(2);
+                },
+                complete: function() {
+                    // Re-enable the button and hide the spinner
+                    submitButton.disabled = false;
+                    buttonText.style.display = 'inline-block';
+                    buttonSpinner.style.display = 'none';
                 }
             });
         }
-
         goToStep(1);
     </script>
 

@@ -77,7 +77,7 @@ class FrontHomeController extends Controller
                 return $q->whereHas('workAreas', function ($wq) use ($request) {
                     $wq->whereIn('work_areas.id', $request->workarea); // Filter by workarea IDs
                 });
-            })->paginate(1);
+            })->paginate(10);
 
 
 

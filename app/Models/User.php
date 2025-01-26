@@ -50,6 +50,12 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function favorites()
+    {
+        return $this->belongsToMany(Funder::class, 'favorites', 'user_id', 'funder_id');
+    }
+
     public function loginHistories()
     {
         return $this->hasMany(LoginHistory::class, 'user_id')->orderBy('id', 'desc');

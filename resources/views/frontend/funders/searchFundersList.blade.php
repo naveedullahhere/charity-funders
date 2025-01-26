@@ -1,5 +1,5 @@
 <div class="searchHeader d-flex justify-content-between align-items-center">
-    <div>{{count($funders)}} results</div>
+    <div>{{ count($funders) }} results</div>
     <div class="d-flex align-items-center gap-3">
         <div>Sort:</div>
         <select name="" id="" class="form-select text-left">
@@ -25,8 +25,8 @@
                     <div class="col-md-3">
                         <h3 class="h5 mb-4 fw-bold">Prospect</h3>
 
-                        <h2 class="h5 mb-0">{{$funder->name ?? 'Unknown'}}</h2>
-                        <div class="charity-number">Charity no: {{$funder->charity_no}}</div>
+                        <h2 class="h5 mb-0">{{ $funder->name ?? 'Unknown' }}</h2>
+                        <div class="charity-number">Charity no: {{ $funder->charity_no }}</div>
                         <p class="mb-2 fs-6 d-block">
                             {{ Str::words(strip_tags($funder->company_description), 20, '') }}
                         </p>
@@ -49,7 +49,8 @@
 
                                 @if ($funder->workAreas->count() > 3)
                                     <li class="link">
-                                        <a href="#" class="more-link">{{ $funder->workAreas->count() - 3 }} more...</a>
+                                        <a href="#" class="more-link">{{ $funder->workAreas->count() - 3 }}
+                                            more...</a>
                                     </li>
                                 @endif
                             @else
@@ -71,8 +72,19 @@
                             <div class="h5 mb-0">£279,800</div>
                             <div class="text-muted">(2021/22)</div>
                             <div class="mt-3">
+                                {{-- <button class="primaryBtn">Add to favourites <i class="fas fa-arrow-up"></i></button> --}}
+                                @if (Auth::check() && $funder->favoritedBy->contains(Auth::user()))
+                                                                                <button class="primaryBtn remove-favorite" data-funder-id="{{ $funder->id }}">
+                                        Remove              from favorites <i class="fas fa-arrow-up"></i>
+                                    </button>
+                                                  @else
+                                    <button class="primaryBtn add-favorite" data-funder-id="{{ $funder->id }}">
+                                                                    Add to favorites <i class="fas fa-arrow-up"></i>
 
-                                <button class="primaryBtn">Add to favourites <i class="fas fa-arrow-up"></i></button>
+
+
+                                                                </button>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -80,7 +92,6 @@
             </div>
         @endforeach
     @else
-
         <div class="my-5 py-5 text-center">
             <svg width="150" height="150" viewBox="0 0 64 41" xmlns="http://www.w3.org/2000/svg">
                 <g transform="translate(0 1)" fill="none" fill-rule="evenodd">
@@ -104,14 +115,56 @@
 
 
 
-<div class="row d-flex w-100 mx-auto" id="paginationLinks" style="background: #f3f3f3;">
 
-    <div class="col-md-12 text-right">
-        <div id="">
-            {{ $funders->links() }}
-        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="row d-flex w-100 mx-auto" id="paginationLinks" style="background: #f3f3f3;">
+
+        <div class="col-md-12 text-right">
+            <div id="">
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+                                                                  {{ $funders->links() }}
+            </div>
+                                                                                                      </div>
     </div>
-</div>
 
 
 </div>

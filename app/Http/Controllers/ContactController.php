@@ -54,7 +54,7 @@ class ContactController extends Controller
         $data = $request->validated();
         $contact = Contact::create($data);
 
-        \Mail::to('wearekodrz@gmail.com')->send(new ContactMail($data));
+        \Mail::to(env('ADMIN_MAIL'))->send(new ContactMail($data));
 
         return response()->json(['success' => 'Contact created successfully.', 'data' => $contact], 201);
     }
