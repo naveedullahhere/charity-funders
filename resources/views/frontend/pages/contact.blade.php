@@ -122,10 +122,12 @@
                                     </button>
                                 </div>
                             </div>
+                            <div class="col-12">
+                                <div id="successMessage" class="alert alert-success mt-3" style="display: none;"></div>
+                            </div>
                         </div>
                     </div>
 
-                    <div id="successMessage" class="alert alert-success mt-3" style="display: none;"></div>
                 </form>
             </div>
             <div class="col-lg-6 icon-box-container">
