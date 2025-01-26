@@ -18,15 +18,42 @@
             margin-top: 5px;
         }
 
-        .loading {
-            display: none;
-            font-size: 16px;
-            color: #129793;
-        }
-
         input.error,
         textarea.error {
-            border-color: 2px solid red;
+            border-color: red;
+        }
+
+        .btn-contact.loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .btn-contact .spinner {
+            display: none;
+            margin-left: 10px;
+        }
+
+        .btn-contact.loading .spinner {
+            display: inline-block;
+        }
+
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        .alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
         }
     </style>
     <section class="Contact-Banner">
@@ -48,7 +75,7 @@
                 <form id="contactForm">
                     @csrf
                     <div class="form d-flex flex-row flex-wrap gap-4">
-                        <div class="row mx-auto w-100">
+                        <div class="row mx-auto w-100 pe-lg-4">
                             <div class="my-2 col-md-6">
                                 <div class="form-group">
                                     <input type="text" id="first_name" name="first_name" class="w-100"
@@ -81,26 +108,24 @@
                                     <span class="error-message" id="messageError"></span>
                                 </div>
                             </div>
+                            <div class="col-12 d-flex justify-content-between align-items-center mt-3">
+                                <div class="d-flex gap-3">
+                                    <input class="form-check-input mt-0" type="checkbox" name="privacy_policy"
+                                        id="privacy_policy">
+                                    <p class="mb-0">I Accept Privacy Policy</p>
+                                    <span class="error-message" id="privacy_policyError"></span>
+                                </div>
+                                <div class="check-box">
+                                    <button type="submit" class="btn-contact">
+                                        Submit <i class="fas fa-arrow-up"></i>
+                                        <span class="spinner"><i class="fas fa-spinner fa-spin"></i></span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row col-lg-12 d-flex align-items-center check-box pt-4 w-100 mx-auto">
-                        <div class="col-lg-6 d-flex gap-2 col-md-6 col-sm-12">
-                            <input class="form-check-input mt-0" type="checkbox" name="privacy_policy" id="privacy_policy">
-                            <p class="mb-0">I Accept Privacy Policy</p>
-                            <span class="error-message" id="privacy_policyError"></span>
-                        </div>
-                        <div class="col-lg-6 col-md-6 justify-content-end d-flex col-sm-12">
-                            <button type="submit" class="btn-contact">
-                                Submit <i class="fas fa-arrow-up"></i>
 
-
-                                
-                            </button>
-                        </div>
-                    </div>
-                    <div class="loading" id="loading">Sending...</div>
-                    <div class="alert alert-success success-message m-3" style="display: none;"  id="successMessage"></div>
-                    {{-- <div class="success-message" id="successMessage" style="display: none; color: green;"></div> --}}
+                    <div id="successMessage" class="alert alert-success mt-3" style="display: none;"></div>
                 </form>
             </div>
             <div class="col-lg-6 icon-box-container">
@@ -161,54 +186,33 @@
         $('#contactForm').on('submit', function(e) {
             e.preventDefault();
 
-            // Clear previous error messages
-            $('.error-message').text('');
-            $('.alert-danger').hide(); // Hide error alert initially
+                $('.error-message').text('');
+                $('input, textarea').removeClass('error');
+                $('#successMessage').hide();
 
-            // Disable the submit button and append a loading spinner
-            const submitButton = $('.btn-contact');
-            submitButton.prop('disabled', true);
-            submitButton.html(
-                `Submit <i class="fas fa-arrow-up"></i><div class="spinner-grow" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>`
-            );
+                const submitButton = $('.btn-contact');
+                submitButton.addClass('loading');
 
-            // Perform AJAX request
-            $.ajax({
-                url: '{{ route('contact-us.store') }}',
-                method: 'POST',
-                data: $(this).serialize(),
-                success: function(response) {
-                    // Reset the button and form on success
-                    submitButton.prop('disabled', false);
-                    submitButton.html('Submit');
-                    $('#contactForm')[0].reset();
-
-                    // Show success message
-                    $('#successMessage').text(response.success).show();
-                },
-                error: function(xhr) {
-                    // Reset the button on error
-                    submitButton.prop('disabled', false);
-                submitButton.html(
-                `Submit <i class="fas fa-arrow-up"></i>`
-            );
-
-                    // Display errors in the alert div
-                    const errors = xhr.responseJSON.errors;
-                    let errorMessages = '';
-                    for (let error in errors) {
-                        errorMessages += `<p>${errors[error][0]}</p>`;
-                        $(`#${error}Error`).text(errors[error][0]); // Show field-specific errors
+                $.ajax({
+                    url: '{{ route('contact-us.store') }}',
+                    method: 'POST',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        submitButton.removeClass('loading');
+                        $('#successMessage').text(response.success).show();
+                        $('#contactForm')[0].reset();
+                    },
+                    error: function(xhr) {
+                        submitButton.removeClass('loading');
+                        const errors = xhr.responseJSON.errors;
+                        for (let error in errors) {
+                            $(`#${error}Error`).text(errors[error][0]);
+                            $(`[name="${error}"]`).addClass('error');
+                        }
                     }
-
-                    // Show error messages in the alert div
-                    $('.alert-danger').html(errorMessages).show();
-                }
+                });
             });
         });
-    });
-</script>
+    </script>
 
 @endsection

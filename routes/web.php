@@ -3,7 +3,7 @@
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FrontHomeController;
 
-use App\Http\Controllers\{FunderController, TypeController, CategoryController, SubscriptionController, WorkAreaController};
+use App\Http\Controllers\{FunderController, TypeController, CategoryController, FavoriteController, SubscriptionController, WorkAreaController};
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -70,7 +70,8 @@ Route::get('/funder', [FrontHomeController::class, 'showFunder']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
-
+Route::post('/favorites/add', [FavoriteController::class, 'add'])->name('favorites.add');
+Route::post('/favorites/remove', [FavoriteController::class, 'remove'])->name('favorites.remove');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::prefix('funders')->group(function () {

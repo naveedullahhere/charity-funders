@@ -60,6 +60,11 @@ class Funder extends Model
         return $this->belongsTo(Category::class, 'sub_category_id');
     }
 
+    public function favoritedBy()
+    {
+        return $this->belongsToMany(User::class, 'favorites', 'funder_id', 'user_id');
+    }
+
     public function country()
     {
         return $this->belongsTo(Countries::class, 'country_id');
