@@ -83,7 +83,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row col-lg-12 d-flex align-items-center check-box pt-4">
+                    <div class="row col-lg-12 d-flex align-items-center check-box pt-4 w-100 mx-auto">
                         <div class="col-lg-6 d-flex gap-2 col-md-6 col-sm-12">
                             <input class="form-check-input mt-0" type="checkbox" name="privacy_policy" id="privacy_policy">
                             <p class="mb-0">I Accept Privacy Policy</p>
@@ -92,11 +92,15 @@
                         <div class="col-lg-6 col-md-6 justify-content-end d-flex col-sm-12">
                             <button type="submit" class="btn-contact">
                                 Submit <i class="fas fa-arrow-up"></i>
+
+
+                                
                             </button>
                         </div>
                     </div>
                     <div class="loading" id="loading">Sending...</div>
-                    <div class="success-message" id="successMessage" style="display: none; color: green;"></div>
+                    <div class="alert alert-success success-message m-3" style="display: none;"  id="successMessage"></div>
+                    {{-- <div class="success-message" id="successMessage" style="display: none; color: green;"></div> --}}
                 </form>
             </div>
             <div class="col-lg-6 icon-box-container">
@@ -152,39 +156,59 @@
     </section>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#contactForm').on('submit', function(e) {
-                e.preventDefault();
+<script>
+    $(document).ready(function() {
+        $('#contactForm').on('submit', function(e) {
+            e.preventDefault();
 
-                $('.error-message').text('');
-                $('#loading').show();
-                $('#successMessage').hide();
+            // Clear previous error messages
+            $('.error-message').text('');
+            $('.alert-danger').hide(); // Hide error alert initially
 
-                $.ajax({
-                    url: '{{ route('contact-us.store') }}',
-                    method: 'POST',
-                    data: $(this).serialize(),
-                    success: function(response) {
-                        $('#loading').hide();
-                        $('#successMessage').text(response.message).show();
-                        $('#contactForm')[0].reset();
-                    },
-                    error: function(xhr) {
-                        $('#loading').hide();
-                        const errors = xhr.responseJSON.errors;
-                        for (let error in errors) {
-                            $(`#${error}Error`).text(errors[error][0]);
-                            const inputField = document.querySelector(`[name="${error}"]`);
+            // Disable the submit button and append a loading spinner
+            const submitButton = $('.btn-contact');
+            submitButton.prop('disabled', true);
+            submitButton.html(
+                `Submit <i class="fas fa-arrow-up"></i><div class="spinner-grow" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>`
+            );
 
-                            if (inputField) {
-                                inputField.classList.add('error');
-                            }
-                        }
+            // Perform AJAX request
+            $.ajax({
+                url: '{{ route('contact-us.store') }}',
+                method: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    // Reset the button and form on success
+                    submitButton.prop('disabled', false);
+                    submitButton.html('Submit');
+                    $('#contactForm')[0].reset();
+
+                    // Show success message
+                    $('#successMessage').text(response.success).show();
+                },
+                error: function(xhr) {
+                    // Reset the button on error
+                    submitButton.prop('disabled', false);
+                submitButton.html(
+                `Submit <i class="fas fa-arrow-up"></i>`
+            );
+
+                    // Display errors in the alert div
+                    const errors = xhr.responseJSON.errors;
+                    let errorMessages = '';
+                    for (let error in errors) {
+                        errorMessages += `<p>${errors[error][0]}</p>`;
+                        $(`#${error}Error`).text(errors[error][0]); // Show field-specific errors
                     }
-                });
+
+                    // Show error messages in the alert div
+                    $('.alert-danger').html(errorMessages).show();
+                }
             });
         });
-    </script>
+    });
+</script>
 
 @endsection

@@ -193,7 +193,7 @@ class FunderController extends Controller
             'region' => 'nullable|string|max:255',
             'city' => 'nullable|string|max:255',
             'postcode' => 'nullable|string|max:255',
-            'website' => 'nullable|url',
+            'web' => 'nullable|url',
             'location' => 'required|string',
             'contact_person_name' => 'nullable|string|max:255',
             'contact_person_designation' => 'nullable|string|max:255',

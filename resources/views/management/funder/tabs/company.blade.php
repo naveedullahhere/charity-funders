@@ -24,7 +24,7 @@
     </div>
     <div class="form-group">
         <label for="website">Company Website</label>
-        <input type="url" name="website" id="website" value="{{ $funder->web }}" class="form-control"
+        <input type="url" name="web" id="web" value="{{ $funder->web }}" class="form-control"
             placeholder="https://www.example.com/">
     </div>
     <div class="form-group">
@@ -79,7 +79,7 @@
     </div>
     <div class="form-group">
         <label for="application_procedure">Application Procedure</label>
-        <textarea name="application_procedure" id="application_procedure" class="form-control" rows="5">{{ $funder->application_procedure }}</textarea>
+        <textarea name="application_procedure" id="content" class="form-control" rows="5">{{ $funder->application_procedure }}</textarea>
     </div>
     <div class="form-group">
         <label for="charity_url">Charity URL (charitycommission.gov.uk)</label>
