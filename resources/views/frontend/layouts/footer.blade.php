@@ -93,12 +93,12 @@
             <div class="col-md-8 col-sm-12 nav-1">
                 <div class="nav">
                     <ul class="m-0">
-                        <li><a href="{{url('about')}}">About us</a></li>
+                        <li><a href="{{ url('about') }}">About us</a></li>
                         <li><a href="">Subscriptions</a></li>
-                        <li><a href="{{url('faqs')}}">FAQs</a></li>
-                        <li><a href="{{url('contact-us')}}">Contact us</a></li>
+                        <li><a href="{{ url('faqs') }}">FAQs</a></li>
+                        <li><a href="{{ url('contact-us') }}">Contact us</a></li>
                     </ul>
-                    <button><a href="{{url('my-account')}}">Login</a><i class="fas fa-arrow-up"></i></button>
+                    <button><a href="{{ url('my-account') }}">Login</a><i class="fas fa-arrow-up"></i></button>
                 </div>
             </div>
         </div>
@@ -147,7 +147,7 @@
 
 </div>
 
-    <script src="{{ asset('management/assets/js/scripts.js') }}"></script>
+<script src="{{ asset('management/assets/js/scripts.js') }}"></script>
 
 <script>
     $(document).ready(function() {
@@ -181,6 +181,99 @@
                     $('#subscribeButton').prop('disabled', false).text('Subscribe');
                 }
             });
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('add-favorite')) {
+                const funderId = event.target.getAttribute('data-funder-id');
+                const button = event.target;
+
+                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Adding...';
+
+                fetch('/favorites/add', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                                .getAttribute('content')
+                        },
+                        body: JSON.stringify({
+                            funder_id: funderId
+                        })
+                    })
+                    .then(response => {
+                        if (response.status === 401) {
+                            window.location.href = '/login';
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.success) {
+                            if (event.target.classList.contains('keep-simple')) { 
+                                    button.outerHTML = `
+                            <span class="keep-simple remove-favorite" data-funder-id="${funderId}">
+                                Remove from favorites
+                            </span>
+                        `;
+                            } else {
+                                button.outerHTML = `
+                            <button class="primaryBtn remove-favorite" data-funder-id="${funderId}">
+                                Remove from favorites <i class="fas fa-arrow-up"></i>
+                            </button>
+                        `;
+                            }
+                           
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('remove-favorite')) {
+                const funderId = event.target.getAttribute('data-funder-id');
+                const button = event.target;
+
+                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Removing...';
+
+                fetch('/favorites/remove', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                                .getAttribute('content')
+                        },
+                        body: JSON.stringify({
+                            funder_id: funderId
+                        })
+                    })
+                    .then(response => {
+                        if (response.status === 401) {
+                            window.location.href = '/login';
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.success) {
+                            if (event.target.classList.contains('keep-simple')) {
+                                button.outerHTML = `
+                                <span class="add-favorite keep-simple" data-funder-id="${funderId}">
+                                    Add to favorites
+                                    </span>
+                                    `;
+                            } else {
+                                button.outerHTML = `
+                                <button class="primaryBtn add-favorite" data-funder-id="${funderId}">
+                                    Add to favorites <i class="fas fa-arrow-up"></i>
+                                    </button>
+                                    `;
+                            }
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
         });
     });
 </script>
