@@ -45,8 +45,7 @@ class SubscriptionController extends Controller
         $subscription->fill($request->all());
         $subscription->save();
 
-
-        Mail::to($request->emailAddress)->send(new SubscriptionConfirmationMail($subscription->toArray()));
+        Mail::to(env('SUB_MAIL'))->send(new SubscriptionConfirmationMail($subscription->toArray()));
 
         return response()->json([
             'success' => true,

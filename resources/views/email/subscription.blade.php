@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <title>Welcome to {{config('app.name')}}</title>
+    <title>New Subscription - {{ config('app.name') }}</title>
     <style type="text/css">
         a:hover {text-decoration: underline !important;}
     </style>
@@ -20,8 +20,8 @@
                 </tr>
                 <tr>
                     <td style="text-align:center;">
-                        <a href="{{url('/')}}" title="{{config('app.name')}}" target="_blank">
-                            <img width="250" src="{{url('frontend/assets/logo1-1.png')}}" title="{{config('app.name')}}" alt="{{config('app.name')}}">
+                        <a href="{{ url('/') }}" title="{{ config('app.name') }}" target="_blank">
+                            <img width="250" src="{{ url('frontend/assets/logo1-1.png') }}" title="{{ config('app.name') }}" alt="{{ config('app.name') }}">
                         </a>
                     </td>
                 </tr>
@@ -37,9 +37,8 @@
                             </tr>
                             <tr>
                                 <td style="padding:0 35px;">
-                                    <h1 style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">Hi {{$subscription['firstName']}} {{$subscription['lastName']}},</h1>
-                                    <p style="font-size:15px; color:#455056; margin:8px 0 0; line-height:24px;">Thank you for subscribing to {{config('app.name')}}!</p>
-                                    <p style="font-size:15px; color:#455056; margin:8px 0 0; line-height:24px;">Below are the details of your subscription:</p>
+                                    <h1 style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">New Subscription Received</h1>
+                                    <p style="font-size:15px; color:#455056; margin:8px 0 0; line-height:24px;">A new subscription has been created. Below are the details:</p>
 
                                     <table style="width: 100%; text-align: left; margin-top: 20px;">
                                         <tr>
@@ -47,53 +46,69 @@
                                             <th style="font-size:14px; color:#1e1e2d; font-weight:500; padding: 8px 0;">Value</th>
                                         </tr>
                                         <tr>
+                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">First Name</td>
+                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">{{ $subscription['firstName'] }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">Last Name</td>
+                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">{{ $subscription['lastName'] }}</td>
+                                        </tr>
+                                        <tr>
                                             <td style="font-size:14px; color:#455056; padding: 8px 0;">Job Title</td>
-                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">{{$subscription['jobTitle']}}</td>
+                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">{{ $subscription['jobTitle'] }}</td>
                                         </tr>
                                         <tr>
                                             <td style="font-size:14px; color:#455056; padding: 8px 0;">Organisation Name</td>
-                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">{{$subscription['organisationName']}}</td>
+                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">{{ $subscription['organisationName'] }}</td>
                                         </tr>
                                         <tr>
                                             <td style="font-size:14px; color:#455056; padding: 8px 0;">Charity Number</td>
-                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">{{$subscription['charityNo'] ?? 'N/A'}}</td>
+                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">{{ $subscription['charityNo'] ?? 'N/A' }}</td>
                                         </tr>
                                         <tr>
                                             <td style="font-size:14px; color:#455056; padding: 8px 0;">Address</td>
-                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">{{$subscription['address']}}</td>
+                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">{{ $subscription['address'] }}</td>
                                         </tr>
                                         <tr>
                                             <td style="font-size:14px; color:#455056; padding: 8px 0;">Town/City</td>
-                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">{{$subscription['townOrcity']}}</td>
+                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">{{ $subscription['townOrcity'] }}</td>
                                         </tr>
                                         <tr>
                                             <td style="font-size:14px; color:#455056; padding: 8px 0;">Post Code</td>
-                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">{{$subscription['postCode']}}</td>
+                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">{{ $subscription['postCode'] }}</td>
                                         </tr>
                                         <tr>
                                             <td style="font-size:14px; color:#455056; padding: 8px 0;">Email Address</td>
-                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">{{$subscription['emailAddress']}}</td>
+                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">{{ $subscription['emailAddress'] }}</td>
                                         </tr>
                                         <tr>
                                             <td style="font-size:14px; color:#455056; padding: 8px 0;">Telephone Number</td>
-                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">{{$subscription['telephoneNumber']}}</td>
+                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">{{ $subscription['telephoneNumber'] }}</td>
                                         </tr>
                                         <tr>
                                             <td style="font-size:14px; color:#455056; padding: 8px 0;">Subscription Type</td>
-                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">{{$subscription['subscriptionType'] == 'org' ? 'Organisation' : 'Individual'}}</td>
+                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">{{ $subscription['subscriptionType'] == 'org' ? 'Organisation' : 'Individual' }}</td>
                                         </tr>
                                         <tr>
                                             <td style="font-size:14px; color:#455056; padding: 8px 0;">Subscription Amount</td>
-                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">£{{number_format($subscription['subscriptionAmount'], 2)}}</td>
+                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">£{{ number_format($subscription['subscriptionAmount'], 2) }}</td>
                                         </tr>
                                         <tr>
                                             <td style="font-size:14px; color:#455056; padding: 8px 0;">Payment Method</td>
-                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">{{$subscription['paymentMethod'] == 'card' ? 'Credit/Debit Card' : 'Invoice'}}</td>
+                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">{{ $subscription['paymentMethod'] == 'card' ? 'Credit/Debit Card' : 'Invoice' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">Newsletter Subscription</td>
+                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">{{ $subscription['newsletter'] ? 'Yes' : 'No' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">Terms Accepted</td>
+                                            <td style="font-size:14px; color:#455056; padding: 8px 0;">{{ $subscription['terms'] ? 'Yes' : 'No' }}</td>
                                         </tr>
                                     </table>
 
-                                    <p style="font-size:15px; color:#455056; margin:24px 0 0; line-height:24px;">If you have any questions or concerns, feel free to contact us.</p>
-                                    <p style="font-size:15px; color:#455056; margin:8px 0 0; line-height:24px;">Thank you for choosing {{config('app.name')}}!</p>
+                                    <p style="font-size:15px; color:#455056; margin:24px 0 0; line-height:24px;">Please review the subscription details and take necessary actions.</p>
+                                    <p style="font-size:15px; color:#455056; margin:8px 0 0; line-height:24px;">Thank you,<br>{{ config('app.name') }}</p>
                                 </td>
                             </tr>
                             <tr>
@@ -108,7 +123,7 @@
                 </tr>
                 <tr>
                     <td style="text-align:center;">
-                        <p style="font-size:14px; color:rgba(69, 80, 86, 0.7411764705882353); line-height:18px; margin:0 0 0;">© {{config('app.name')}} <a target="_blank" href="{{url('/')}}" style="color: #7b7b7b;"><strong>{{config('app.name')}}</strong></a> </p>
+                        <p style="font-size:14px; color:rgba(69, 80, 86, 0.7411764705882353); line-height:18px; margin:0 0 0;">© {{ config('app.name') }} <a target="_blank" href="{{ url('/') }}" style="color: #7b7b7b;"><strong>{{ config('app.name') }}</strong></a> </p>
                     </td>
                 </tr>
                 <tr>
